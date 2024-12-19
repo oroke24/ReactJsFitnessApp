@@ -1,0 +1,13 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow read and write access to authenticated users
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+    // Allow users to delete their own account
+    match /users/{userId} {
+      allow delete: if request.auth.uid == userId;
+    }
+}
