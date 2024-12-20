@@ -16,7 +16,15 @@ export const login = (email, password) => {
 };
 
 export const register = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password);
+    return createUserWithEmailAndPassword(auth, email, password)
+    .then (()=>{
+        alert(`Welcome ${email}!`);
+        console.log("success registering ", email, " in.");
+    })
+    .catch((e)=>{
+        alert(`Incorrect email/password combo!`);
+        console.error("Error signing in, e: ", e);
+    });
 };
 
 export const logout = () => {

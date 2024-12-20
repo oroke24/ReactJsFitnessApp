@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { login } from '../../firebase/firebaseAuth';
+import { register } from '../../firebase/firebaseAuth';
 
 const Login = ({ onmessage }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
+    //Binding//////////////////////////////////////////////////
     const handleLogin = async () => {
        try{
             await login(email, password);
@@ -13,10 +14,18 @@ const Login = ({ onmessage }) => {
         onmessage(error.message);
        }
     };
+    const handleRegister = async () => {
+       try{
+            await register(email, password);
+            onmessage('Registered successfully');
+       } catch (error){
+        onmessage(error.message);
+       }
+    };
 
+    //Exporting//////////////////////////////////////////////////
     return(
         <div>
-            <h3>Login</h3>
             <input
                 type='email'
                 placeholder='Email'
@@ -30,6 +39,7 @@ const Login = ({ onmessage }) => {
                 onChange={(e) => setPassword(e.target.value)}
             />
             <button onClick={handleLogin}>Login</button>
+            <button onClick={handleRegister}>Register</button>
         </div>
     );
 };
