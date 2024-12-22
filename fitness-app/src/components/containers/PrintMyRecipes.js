@@ -14,7 +14,7 @@ const PrintMyRecipes = ({path}) => {
         <h3>Recipes</h3>
         <ul>
             {docs.map(doc => (
-                <li className="recipe-card">{doc.id}
+                <li className="recipe-card-list-item">{doc.id}
                 {doc.imgUrl}
                 {doc.ingredients}
                 {doc.name}</li>

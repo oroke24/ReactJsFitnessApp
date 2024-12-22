@@ -56,18 +56,9 @@ function App() {
         ):(
           <p>must be logged in.</p>
         )}
-          <button
-          className="absolute top-0 right-0"
-          onClick={handleCloseMainModal}
-          >
-            close
-          </button>
-        <div className="text-center">
-          <h3 className="text-xl font-semibold">Modal Content</h3>
-          <p className="text-gray-600 mt-4">You can put anything here</p>
-        </div>
       </StandardModal>
       {/*End Testing Modal */}
+      
       {/* <Login onmessage={setMessage} /> */} 
       <StandardModal></StandardModal>
     </div>

@@ -7,11 +7,19 @@ const StandardModal = ({isOpen, onClose, children}) =>{
             onClick={onClose}
         >
             <div
-            className="bg-white rounded-lg w-11/12 p-6 shadow-xl transform transition-all duration-300 sm:w-1/3 overflow-y-auto-y"
+            className="bg-white rounded-lg w-11/12 max-h-[90vh] p-6 shadow-xl transform transition-all duration-300 overflow-hidden"
             onClick={(e) => e.stopPropagation()}
             >
-                {/*Content pass as children will be rendered here */}
-                {children}
+                <button
+                className="absolute top-0 right-0"
+                onClick = {onClose}
+                >
+                    close
+                </button>
+                <div className="overflow-y-auto max-h-[75vh]">
+                    {/*Content pass as children will be rendered here */}
+                    {children}
+                </div>
             </div>
         </div>
     );
