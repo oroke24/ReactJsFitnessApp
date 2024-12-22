@@ -6,7 +6,6 @@ const auth = getAuth(app);
 export const login = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password)
     .then (()=>{
-        alert(`Welcome ${email}!`);
         console.log("success signing ", email, " in.");
     })
     .catch((e)=>{

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { login } from '../../firebase/firebaseAuth';
 
-const Login = ({ onmessage }) => {
+const Login = ({ onmessage, onClose }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -9,6 +9,7 @@ const Login = ({ onmessage }) => {
        try{
             await login(email, password);
             onmessage('Logged in successfully');
+            onClose();
        } catch (error){
         onmessage(error.message);
        }
