@@ -2,7 +2,14 @@ import {getFirestore, collection, addDoc, getDocs, query, where} from 'firebase/
 import app from './firebaseConfig';
 
 const db = getFirestore(app);
-
+/*
+export const testAddDocument = async () =>{
+    const dataObject = {
+        email:'myNewEmail',
+    }
+    addDocument("users", dataObject);
+}
+*/
 export const addDocument = async (collectionName, data) => {
     try{
         const docRef = await addDoc(collection(db, collectionName), data);
@@ -13,8 +20,11 @@ export const addDocument = async (collectionName, data) => {
 };
 
 export const getDocuments = async (collectionName) =>{
-    const querySnapshot = await getDocs(collection(db, collectionName));
-    return querySnapshot.docs.map(doc => doc.data());
+    const snapshot = await getDocs(collection(db, collectionName));
+    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data()}));
+            
+   // const querySnapshot = await getDocs(collection(db, collectionName));
+   // return querySnapshot.docs.map(doc => doc.data());
 };
 
 export const queryDocuments = async (collectionName, field, value) => {

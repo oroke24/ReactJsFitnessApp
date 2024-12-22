@@ -1,0 +1,8 @@
+.recipe-card{
+    width: 100%;
+    background-color: orange;
+    border: 5 solid black;
+    margin: 5px;
+    padding: 5px;
+    word-wrap: break-word;
+}
