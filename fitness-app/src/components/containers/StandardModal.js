@@ -7,7 +7,7 @@ const StandardModal = ({isOpen, onClose, children}) =>{
             onClick={onClose}
         >
             <div
-            className="bg-white rounded-lg w-11/12 md:w-1/3 p-6 shadow-xl transform transition-all duration-300"
+            className="bg-white rounded-lg w-11/12 p-6 shadow-xl transform transition-all duration-300 sm:w-1/3 overflow-y-auto-y"
             onClick={(e) => e.stopPropagation()}
             >
                 {/*Content pass as children will be rendered here */}
