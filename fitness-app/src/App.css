@@ -36,12 +36,3 @@
     transform: rotate(360deg);
   }
 }
-.recipe-button{
-  border-color: orange;
-}
-.exercise-button{
-  border-color: indigo;
-}
-.outline{
-  border-color: #FFFFFF;
-}

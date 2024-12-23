@@ -35,7 +35,10 @@ const PrintMyRecipes = ({path}) => {
             ))}
         </ul>
         <div className='flex justify-center'>
-            <button className='w-11/12 h-20 text-2xl orange-outline'>
+            <button 
+            className='w-11/12 h-20 text-2xl orange-outline'
+            onClick={() => handleRecipeClick({id: '', name: 'New Item', ingredients: 'Some ingredients..', instructions: 'Some instructions..', imgUrl: 'imgUrl'})}
+            >
                 New Recipe
             </button>
         </div>
