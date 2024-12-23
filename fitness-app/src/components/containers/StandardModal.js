@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const StandardModal = ({isOpen, onClose, children}) =>{
     return (
         <div
-            className={`fixed inset-0 z-50 flex items-center justify-center be-grey-800 bg-opacity-50 transition-opacity duration-300 ${isOpen? `opacity-100`:`opacity-0 pointer-events-none` }`}
+            className={`color-white fixed inset-0 z-50 flex items-center justify-center be-grey-800 bg-opacity-50 transition-opacity duration-300 ${isOpen? `opacity-100`:`opacity-0 pointer-events-none` }`}
             onClick={onClose}
         >
             <div

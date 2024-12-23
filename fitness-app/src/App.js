@@ -35,13 +35,15 @@ function App() {
     <div className="flex flex-col items-center justify-normal min-h-screen bg-zinc-800" >
       <button className="absolute top-5 right-5 "><FaUser className=" w-5 h-5 center fill-white" onClick={handleOpenAccountModal}></FaUser></button>
 
-      <h1 className="text-neutral-100">Completed:</h1>
-      <h1 className="text-neutral-100">Login, Registration, modals, addDoc, printUsers, printMyRecipes</h1>
-      <h1 className="text-4xl font-bold text-neutral-100">Testing Modals</h1>
-      <div>
-      <button className="recipe-button text-xl m-5" onClick={handleOpenRecipeModal}>recipes </button>
-      <button className="exercise-button text-xl m-5" onClick={handleOpenExerciseModal}>exercises </button>
+      <h1 className="text-4xl font-bold text-neutral-100">FitnessApp</h1>
+      <div className="row max-w-[80vh] text-center overflow-auto">
+        <button className="recipe-button text-3xl m-5 p-10" onClick={handleOpenRecipeModal}>recipes </button>
+        <button className="exercise-button text-3xl m-5 p-10" onClick={handleOpenExerciseModal}>exercises </button>
       </div>
+
+      {/*Testing Modal*/}
+      {/*End Testing Modal */}
+
       {/*Handle Login Logic*/}
       <StandardModal 
       isOpen={isAccountModalOpen} 
@@ -55,7 +57,7 @@ function App() {
       </StandardModal>
       {/*End Handle Login Logic */}
 
-      {/*Testing Modal */}
+      {/*Modals */}
       <StandardModal isOpen={isRecipeModalOpen} onClose={handleCloseRecipeModal}>
         {auth?.currentUser ? (
           <PrintMyRecipes path={userCollection}></PrintMyRecipes>
@@ -70,31 +72,11 @@ function App() {
           <p>must be logged in.</p>
         )}
       </StandardModal>
-      {/*End Testing Modal */}
+      {/*End Modals */}
 
-      {/* <Login onmessage={setMessage} /> */} 
       <StandardModal></StandardModal>
     </div>
   );
 }
 
 export default App;
-
-/* //template code (comes with create-react-app)
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-*/

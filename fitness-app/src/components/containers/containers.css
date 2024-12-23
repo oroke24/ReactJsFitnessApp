@@ -10,11 +10,10 @@
     padding: 10px;
     word-wrap: break-word;
     overflow: hidden;
-
+    cursor: pointer;
 }
 .exercise-card-list-item{
     width: auto;
-    height:100px;
     color: white;
     background-color: #222222DD;
     border-color: indigo;
@@ -24,5 +23,20 @@
     padding: 10px;
     word-wrap: break-word;
     overflow: hidden;
-
+    cursor: pointer;
+}
+.item-expanded{
+    height:fit-content;
+}
+.item-closed{
+    height:100px;
+}
+.color-white{
+    color: white;
+}
+.color-orange{
+    color: orange;
+}
+.color-indigo{
+    color: indigo;
 }

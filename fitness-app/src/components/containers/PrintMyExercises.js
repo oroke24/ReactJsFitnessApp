@@ -11,7 +11,7 @@ const PrintMyExercises = ({path}) => {
 
     return (
     <div>
-        <h1>Exercises</h1>
+        <h1 className="text-4xl text-center mb-5 color-indigo"><strong>Exercises</strong></h1>
         <ul>
             {docs.map(doc => (
                 <li className="exercise-card-list-item">
