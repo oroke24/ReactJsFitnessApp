@@ -37,9 +37,11 @@ function App() {
 
       <h1 className="text-neutral-100">Completed:</h1>
       <h1 className="text-neutral-100">Login, Registration, modals, addDoc, printUsers, printMyRecipes</h1>
-      <h1 className="text-4xl font-bold text-neutral-100">Testing Modal</h1>
-      <button className="recipe-button" onClick={handleOpenRecipeModal}>recipes </button>
-      <button className="exercise-button" onClick={handleOpenExerciseModal}>exercises </button>
+      <h1 className="text-4xl font-bold text-neutral-100">Testing Modals</h1>
+      <div>
+      <button className="recipe-button text-xl m-5" onClick={handleOpenRecipeModal}>recipes </button>
+      <button className="exercise-button text-xl m-5" onClick={handleOpenExerciseModal}>exercises </button>
+      </div>
       {/*Handle Login Logic*/}
       <StandardModal 
       isOpen={isAccountModalOpen} 
