@@ -11,7 +11,7 @@ const PrintMyExercises = ({path}) => {
 
     return (
     <div>
-        <h1 className="text-4xl text-center mb-5 color-indigo"><strong>Exercises</strong></h1>
+        <h1 className="text-4xl text-center mb-5">Exercises</h1>
         <ul>
             {docs.map(doc => (
                 <li className="exercise-card-list-item">
@@ -23,6 +23,11 @@ const PrintMyExercises = ({path}) => {
                 </li>
             ))}
         </ul>
+        <div className='flex justify-center'>
+            <button className='w-11/12 h-20 text-2xl indigo-outline'>
+                New Exercise
+            </button>
+        </div>
     </div>
     );
 };

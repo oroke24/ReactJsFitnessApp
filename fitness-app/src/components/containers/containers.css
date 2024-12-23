@@ -1,6 +1,5 @@
 .recipe-card-list-item{
     width: auto;
-    height:100px;
     color: white;
     background-color: #222222DD;
     border-color: orange;
@@ -39,4 +38,10 @@
 }
 .color-indigo{
     color: indigo;
+}
+.orange-outline{
+    border-color: orange;
+}
+.indigo-outline{
+    border-color: indigo;
 }

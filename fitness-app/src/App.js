@@ -44,7 +44,7 @@ function App() {
       {/*Testing Modal*/}
       {/*End Testing Modal */}
 
-      {/*Handle Login Logic*/}
+      {/*Login Logic*/}
       <StandardModal 
       isOpen={isAccountModalOpen} 
       onClose={handleCloseAccountModal}
@@ -55,22 +55,14 @@ function App() {
           <Login onmessage={setMessage} onClose={handleCloseAccountModal}></Login>
         )}
       </StandardModal>
-      {/*End Handle Login Logic */}
+      {/*End Login Logic */}
 
       {/*Modals */}
       <StandardModal isOpen={isRecipeModalOpen} onClose={handleCloseRecipeModal}>
-        {auth?.currentUser ? (
-          <PrintMyRecipes path={userCollection}></PrintMyRecipes>
-        ):(
-          <p>must be logged in.</p>
-        )}
+        <PrintMyRecipes path={userCollection} onClose={handleCloseRecipeModal}></PrintMyRecipes>
       </StandardModal>
       <StandardModal isOpen={isExerciseModalOpen} onClose={handleCloseExerciseModal}>
-        {auth?.currentUser ? (
           <PrintMyExercises path={userCollection}></PrintMyExercises>
-        ):(
-          <p>must be logged in.</p>
-        )}
       </StandardModal>
       {/*End Modals */}
 
