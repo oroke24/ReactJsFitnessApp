@@ -4,7 +4,7 @@ import './containers.css';
 
 const PrintMyRecipes = ({path}) => {
     const {docs, loading, error} = useGetDocs(`${path}/recipes`);
-    console.log(path)
+    //console.log(path)
 
     const handleRecipeClick = (doc) =>{
         //BreakPoint!! Learn how to manage states
@@ -17,7 +17,7 @@ const PrintMyRecipes = ({path}) => {
     if(error) return <p>Error: {error}</p>;
 
     return (
-    <div className='relative '>
+    <div>
         <h1 className="text-4xl text-center mb-5">Recipes</h1>
         <ul>
             {docs.map(doc => (
