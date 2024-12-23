@@ -7,11 +7,11 @@ const StandardModal = ({isOpen, onClose, children}) =>{
             onClick={onClose}
         >
             <div
-            className="bg-white rounded-lg w-11/12 max-h-[90vh] p-6 shadow-xl transform transition-all duration-300 overflow-hidden"
+            className="bg-gray-700 bg-opacity-95 rounded-lg w-11/12 max-h-[90vh] p-6 shadow-xl transform transition-all duration-300 overflow-hidden"
             onClick={(e) => e.stopPropagation()}
             >
                 <button
-                className="absolute top-0 right-0"
+                className="absolute top-3 right-3"
                 onClick = {onClose}
                 >
                     close
