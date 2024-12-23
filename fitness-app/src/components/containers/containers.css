@@ -12,3 +12,17 @@
     overflow: hidden;
 
 }
+.exercise-card-list-item{
+    width: auto;
+    height:100px;
+    color: white;
+    background-color: #222222DD;
+    border-color: indigo;
+    border-width: 3px;
+    border-radius: 15px;
+    margin: 5px;
+    padding: 10px;
+    word-wrap: break-word;
+    overflow: hidden;
+
+}

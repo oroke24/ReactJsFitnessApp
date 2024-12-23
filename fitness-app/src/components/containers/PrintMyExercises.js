@@ -2,8 +2,8 @@ import React from 'react';
 import useGetDocs from '../../hooks/useGetDocs';
 import './containers.css';
 
-const PrintMyRecipes = ({path}) => {
-    const {docs, loading, error} = useGetDocs(`${path}/recipes`);
+const PrintMyExercises = ({path}) => {
+    const {docs, loading, error} = useGetDocs(`${path}/exercises`);
     console.log(path)
 
     if(loading) return <p>Loading...</p>;
@@ -11,13 +11,13 @@ const PrintMyRecipes = ({path}) => {
 
     return (
     <div>
-        <h1 className="text-4xl text-center mb-5">Recipes</h1>
+        <h1>Exercises</h1>
         <ul>
             {docs.map(doc => (
-                <li className="recipe-card-list-item">
+                <li className="exercise-card-list-item">
                 <strong className='text-xl'>{doc.name}</strong><br/>
-                <strong>Ingredients: </strong>
-                {doc.ingredients}<br/>
+                <strong>Muscle Group: </strong>
+                {doc.muscleGroup}<br/>
                 <strong>Instructions: </strong>
                 {doc.instructions}<br/>
                 </li>
@@ -26,4 +26,5 @@ const PrintMyRecipes = ({path}) => {
     </div>
     );
 };
-export default PrintMyRecipes;
+export default PrintMyExercises;
+
