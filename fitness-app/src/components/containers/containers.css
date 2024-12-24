@@ -54,9 +54,31 @@
 .outline{
   border-color: #FFFFFF;
 }
-.editInstructions{
-    height: fit-content;
+.edit-card-background{
+    background:radial-gradient(circle, #FF0000, #FFFF00);
+    overflow: auto;
 }
-textArea{
-    min-height:auto;
+.recipe-name-textarea{
+    background-color: #222222DD;
+    color: wheat;
+    resize:none;
+    min-height:80px;
+    width: 83%;
+    height: auto;
+    margin:10px;
+    padding: 10px;
+    border: 5px solid #ccc;
+    font-size: 1rem;
+}
+.recipe-textarea{
+    background-color: #222222DD;
+    color: wheat;
+    resize:none;
+    min-height:200px;
+    width: 83%;
+    height: auto;
+    margin:10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
 }

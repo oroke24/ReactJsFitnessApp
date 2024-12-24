@@ -1,5 +1,6 @@
-import {getFirestore, collection, addDoc, getDocs, query, where} from 'firebase/firestore';
+import {getFirestore, collection, addDoc, getDocs, query, where, doc, deleteDoc} from 'firebase/firestore';
 import app from './firebaseConfig';
+import auth from './firebaseAuth';
 
 const db = getFirestore(app);
 /*
@@ -32,5 +33,22 @@ export const queryDocuments = async (collectionName, field, value) => {
     const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map(doc => doc.data());
 };
+export const deleteDocument = async (collectionName, documentName) => {
+    try{
+        if(!auth?.currentUser){
+            console.log("user not authenticated.");
+            return;
+        }
+        console.log("Full path to document:", `users/${auth.currentUser.email}/${collectionName}/${documentName}`);
 
+        const path = `users/${auth?.currentUser.email}/${collectionName}`;
+        console.log("path", path);
+        const docRef = doc(db, path, documentName);
+        console.log("doc to delete: ", docRef);
+        await deleteDoc(docRef);
+        console.log(`Doc with id: "${documentName}" deleted successfully.`);
+    }catch(error){
+        console.error("Error Deleting Doc: ", error);
+    }
+};
 export default db;

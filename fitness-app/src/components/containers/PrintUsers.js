@@ -3,7 +3,7 @@ import useGetDocs from '../../hooks/useGetDocs';
 
 const PrintUsers = ({path}) => {
     const {docs, loading, error} = useGetDocs("users");
-    console.log(path)
+    console.log(path);
 
     if(loading) return <p>Loading...</p>;
     if(error) return <p>Error: {error}</p>;
