@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import { FaArrowAltCircleLeft, FaCheck, FaPlus, FaTrash, FaXing } from "react-icons/fa";
-import { useLocation, useParams, Link } from "react-router-dom";
+import { useLocation, useParams, Link, useNavigate} from "react-router-dom";
 import './containers.css';
-import { deleteDocument } from "../../firebase/firebaseFirestore";
+import { deleteDocument, addDocument2 } from "../../firebase/firebaseFirestore";
 
 const EditRecipe = () => {
     const {id} = useParams();
     const location = useLocation();
     const {doc} = location.state || {};
+    const navigate = useNavigate();
 
-    const [nameValue, setNameValue] = useState(doc.name || '');
-    const [ingredientsValue, setIngredientsValue] = useState(doc.ingredients||'');
-    const [instructionsValue, setInstructionsValue] = useState(doc.instructions || '');
+    const [nameValue, setNameValue] = useState(doc?.name || '');
+    const [ingredientsValue, setIngredientsValue] = useState(doc?.ingredients||'');
+    const [instructionsValue, setInstructionsValue] = useState(doc?.instructions || '');
 
     const handleNameChange = (event) => {
         setNameValue(event.target.value);
@@ -22,13 +23,29 @@ const EditRecipe = () => {
     const handleInstructionsChange = (event) => {
         setInstructionsValue(event.target.value);
     }
+    const handleAddRecipe =() =>{
+        try{
+            const recipe = {id: nameValue, name: nameValue, ingredients: ingredientsValue, instructions: instructionsValue};
+            //console.log("recipe: ", recipe)
+            //usage('path', 'docObj')
+            addDocument2('recipes', recipe);
+            //handleClose();
+        }catch(error){
+            console.error("Error adding recipe: ", error);
+        }
+    }
     const handleDeleteRecipe = (recipeName) => {
         try{
-            deleteDocument('recipes', recipeName);
-            console.log("Recipe to delete: ", recipeName);
+            //usage('path', 'docId')
+            deleteDocument(`recipes`, recipeName);
+            //console.log("Recipe to delete: ", recipeName);
+            handleClose();
         }catch(error){
             console.error("Error Deleting doc: ", error);
         }
+    }
+    const handleClose = () => {
+        navigate(-1);
     }
 
     const handleTextAreaResize = (e) => {
@@ -37,8 +54,8 @@ const EditRecipe = () => {
     }
 
 
-    console.log("In EditItem, id: ", {id} );
-    console.log("In EditItem, doc: ", doc );
+    //console.log("In EditItem, id: ", {id} );
+    //console.log("In EditItem, doc: ", doc );
 
     return(
         <div className="edit-card-background flex flex-col items-center h-screen">
@@ -82,7 +99,7 @@ const EditRecipe = () => {
                 <button 
                     className="flex">
                         <Link 
-                            to='../' 
+                            onClick= {() => handleAddRecipe()}
                             className="text-3xl m-2">
                                 <FaCheck></FaCheck>
                         </Link>
@@ -90,10 +107,13 @@ const EditRecipe = () => {
                 </div>
                 <button 
                     className="mt-10 flex bg-red-600"
-                    onClick={() => handleDeleteRecipe(`${doc.name}`)}
+                    onClick={() => handleDeleteRecipe(`${doc.id}`)}
                     >
                         <FaTrash></FaTrash>
                 </button>
+                <br></br>
+                <br></br>
+                <br></br>
                 <br></br>
                 <br></br>
                 <br></br>
