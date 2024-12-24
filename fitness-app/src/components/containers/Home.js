@@ -10,7 +10,7 @@ import auth from '../../firebase/firebaseAuth';
 import {testAddDocument} from '../../firebase/firebaseFirestore';
 import PrintMyExercises from './PrintMyExercises';
 
-const MainBody = () => {
+const Home = () => {
     //BINDING///////////////////////////////////
     const userCollection = auth?.currentUser ? `users/${auth.currentUser.email}` : "users/guest";
     const [message, setMessage] = useState('Empty');
@@ -109,4 +109,4 @@ const MainBody = () => {
     );
 };
 
-export default MainBody;
+export default Home;

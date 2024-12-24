@@ -54,3 +54,9 @@
 .outline{
   border-color: #FFFFFF;
 }
+.editInstructions{
+    height: fit-content;
+}
+textArea{
+    min-height:auto;
+}

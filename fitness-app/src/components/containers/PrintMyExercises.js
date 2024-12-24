@@ -4,7 +4,7 @@ import './containers.css';
 
 const PrintMyExercises = ({path}) => {
     const {docs, loading, error} = useGetDocs(`${path}/exercises`);
-    console.log(path)
+    //console.log(path)
 
     if(loading) return <p>Loading...</p>;
     if(error) return <p>Error: {error}</p>;

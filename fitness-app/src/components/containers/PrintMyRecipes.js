@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {Link} from 'react-router-dom';
 import useGetDocs from '../../hooks/useGetDocs';
 import './containers.css';
 
@@ -16,22 +17,24 @@ const PrintMyRecipes = ({path}) => {
     if(loading) return <p>Loading...</p>;
     if(error) return <p>Error: {error}</p>;
 
+                    //{/*onClick={() => handleRecipeClick(doc)}*/} 
     return (
     <div>
         <h1 className="text-4xl text-center mb-5">Recipes</h1>
         <ul>
             {docs.map(doc => (
-                <li 
-                    key={doc.name}
-                    onClick={() => handleRecipeClick(doc)} 
-                    className={`recipe-card-list-item`}
-                >
-                    <strong className='text-xl'>{doc.name}</strong><br/>
-                    <strong>Ingredients: </strong>
-                    {doc.ingredients}<br/>
-                    <strong>Instructions: </strong>
-                    {doc.instructions}<br/>
-                </li>
+                <Link to={`/editRecipe/${doc.name}`} state={{doc}}>
+                    <li 
+                        key={doc.name}
+                        className={`recipe-card-list-item`}
+                    >
+                        <strong className='text-xl'>{doc.name}</strong><br/>
+                        <strong>Ingredients: </strong>
+                        {doc.ingredients}<br/>
+                        <strong>Instructions: </strong>
+                        {doc.instructions}<br/>
+                    </li>
+                </Link>
             ))}
         </ul>
         <div className='flex justify-center'>
