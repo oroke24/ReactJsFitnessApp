@@ -45,7 +45,7 @@ const Home = () => {
           <h1 className="text-4xl font-bold text-neutral-100">FitnessApp</h1>
           
           {/*Buttons Container*/}
-          <div className="row w-[90vh] text-center overflow-auto">
+          <div className="mt-20 row w-[90vh] text-center overflow-auto">
             {/*Recipe Button*/}
             <button
               className="recipe-button text-3xl m-5 p-10"
