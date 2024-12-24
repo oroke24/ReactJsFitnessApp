@@ -69,7 +69,7 @@ const EditRecipe = () => {
     return(
         <div className="recipe-gradient edit-card-background flex flex-col items-center h-screen">
             {/*Back Button */}
-            <Link to='../' className="text-4xl m-2"><FaArrowAltCircleLeft></FaArrowAltCircleLeft></Link>
+            <Link to='../' className="text-7xl m-2"><FaArrowAltCircleLeft></FaArrowAltCircleLeft></Link>
             {/*Name area*/}
             <h1 className="text-2xl" 
                 onChange={handleNameChange}>
@@ -92,7 +92,7 @@ const EditRecipe = () => {
             {/*Instructions area*/}
             <h1 className="text-2xl"><strong>Instructions</strong></h1>
                 <textarea 
-                    className="card-textarea" 
+                    className="instructions-textarea" 
                     type="text" 
                     value={instructionsValue} 
                     onChange={handleInstructionsChange}

@@ -11,7 +11,8 @@ const EditExercise = () => {
     const navigate = useNavigate();
 
     const [nameValue, setNameValue] = useState(doc?.name || '');
-    const [ingredientsValue, setIngredientsValue] = useState(doc?.ingredients||'');
+    const [ingredientsValue, setIngredientsValue] = useState(doc?.muscleGroup||'');
+
     const [instructionsValue, setInstructionsValue] = useState(doc?.instructions || '');
 
     const handleNameChange = (event) => {
@@ -69,7 +70,7 @@ const EditExercise = () => {
     return(
         <div className="exercise-gradient edit-card-background flex flex-col items-center h-screen">
             {/*Back Button */}
-            <Link to='../' className="text-4xl m-2"><FaArrowAltCircleLeft></FaArrowAltCircleLeft></Link>
+            <Link to='../' className="text-7xl m-2"><FaArrowAltCircleLeft></FaArrowAltCircleLeft></Link>
             {/*Name area*/}
             <h1 className="text-2xl" 
                 onChange={handleNameChange}>
@@ -80,8 +81,8 @@ const EditExercise = () => {
                 onChange={handleNameChange}
                 onInput={handleTextAreaResize}>
             </textarea>
-            {/*Ingredients area*/}
-            <h1 className="text-2xl"><strong>Ingredients</strong></h1>
+            {/*Muscle Group area*/}
+            <h1 className="text-2xl"><strong>Muscle Group</strong></h1>
                 <textarea  
                     className="card-textarea" 
                     type="text" 
@@ -92,7 +93,7 @@ const EditExercise = () => {
             {/*Instructions area*/}
             <h1 className="text-2xl"><strong>Instructions</strong></h1>
                 <textarea 
-                    className="card-textarea" 
+                    className="instructions-textarea" 
                     type="text" 
                     value={instructionsValue} 
                     onChange={handleInstructionsChange}
