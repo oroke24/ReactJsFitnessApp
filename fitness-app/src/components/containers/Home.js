@@ -34,6 +34,7 @@ const Home = () => {
     return (
       <div>
         <div className="flex flex-col items-center justify-normal min-h-screen bg-zinc-800">
+          {/*User Button */}
           <button className="absolute top-5 right-5 ">
             <FaUser
               className=" w-5 h-5 center fill-white"
@@ -42,13 +43,17 @@ const Home = () => {
           </button>
 
           <h1 className="text-4xl font-bold text-neutral-100">FitnessApp</h1>
-          <div className="row max-w-[80vh] text-center overflow-auto">
+          
+          {/*Buttons Container*/}
+          <div className="row w-[90vh] text-center overflow-auto">
+            {/*Recipe Button*/}
             <button
               className="recipe-button text-3xl m-5 p-10"
               onClick={handleOpenRecipeModal}
             >
               recipes{" "}
             </button>
+            {/*Exercise Button*/}
             <button
               className="exercise-button text-3xl m-5 p-10"
               onClick={handleOpenExerciseModal}
@@ -56,6 +61,7 @@ const Home = () => {
               exercises{" "}
             </button>
           </div>
+          {/*End Buttons*/}
 
           {/*Testing Modal*/}
           {/*End Testing Modal */}

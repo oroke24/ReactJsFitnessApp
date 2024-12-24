@@ -4,7 +4,7 @@ import { useLocation, useParams, Link, useNavigate} from "react-router-dom";
 import './containers.css';
 import { deleteDocument, addDocument2, saveAsNew, updateDocument } from "../../firebase/firebaseFirestore";
 
-const EditRecipe = () => {
+const EditExercise = () => {
     const {id} = useParams();
     const location = useLocation();
     const {doc} = location.state || {};
@@ -25,29 +25,29 @@ const EditRecipe = () => {
     }
     const handleSaveAsNew =() =>{
         try{
-            const recipe = {id: nameValue, name: nameValue, ingredients: ingredientsValue, instructions: instructionsValue};
+            const exercise = {id: nameValue, name: nameValue, ingredients: ingredientsValue, instructions: instructionsValue};
             //usage('path', 'docObj')
-            saveAsNew('recipes', recipe);
+            saveAsNew('exercises', exercise);
             handleClose();
         }catch(error){
-            console.error("Error adding recipe: ", error);
+            console.error("Error adding exercise: ", error);
         }
     }
     const handleUpdateThisCard =() =>{
         try{
-            const recipe = {id: doc.id, name: nameValue, ingredients: ingredientsValue, instructions: instructionsValue};
+            const exercise = {id: doc.id, name: nameValue, ingredients: ingredientsValue, instructions: instructionsValue};
             //usage('path', 'docObj')
-            updateDocument('recipes', recipe);
+            updateDocument('exercises', exercise);
             handleClose();
         }catch(error){
-            console.error("Error adding recipe: ", error);
+            console.error("Error adding exercise: ", error);
         }
     }
-    const handleDeleteRecipe = (recipeName) => {
+    const handleDeleteExercise = (exerciseName) => {
         try{
             //usage('path', 'docId')
-            deleteDocument(`recipes`, recipeName);
-            //console.log("Recipe to delete: ", recipeName);
+            deleteDocument(`exercises`, exerciseName);
+            //console.log("exercise to delete: ", exerciseName);
             handleClose();
         }catch(error){
             console.error("Error Deleting doc: ", error);
@@ -67,7 +67,7 @@ const EditRecipe = () => {
     //console.log("In EditItem, doc: ", doc );
 
     return(
-        <div className="recipe-gradient edit-card-background flex flex-col items-center h-screen">
+        <div className="exercise-gradient edit-card-background flex flex-col items-center h-screen">
             {/*Back Button */}
             <Link to='../' className="text-4xl m-2"><FaArrowAltCircleLeft></FaArrowAltCircleLeft></Link>
             {/*Name area*/}
@@ -123,7 +123,7 @@ const EditRecipe = () => {
                 {/*Delete Button */}
                 <button 
                     className="p-3 mt-10 flex bg-red-600 text-2xl"
-                    onClick={() => handleDeleteRecipe(`${doc.name}`)}
+                    onClick={() => handleDeleteExercise(`${doc.name}`)}
                     >
                         <FaTrash></FaTrash>
                 </button>
@@ -137,4 +137,4 @@ const EditRecipe = () => {
     );
 };
 
-export default EditRecipe;
+export default EditExercise;

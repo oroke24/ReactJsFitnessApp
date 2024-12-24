@@ -46,19 +46,28 @@
     border-color: indigo;
 }
 .recipe-button{
-  border-color: orange;
+    border-color: orange;
+    width: 50%;
 }
 .exercise-button{
   border-color: indigo;
+  width: 49%;
 }
 .outline{
   border-color: #FFFFFF;
 }
 .edit-card-background{
-    background:radial-gradient(circle, #FF0000, #FFFF00);
+    border: 10px solid #222222;
+    border-radius: 8px;
     overflow: auto;
 }
-.recipe-name-textarea{
+.recipe-gradient{
+    background:radial-gradient(circle, #FF0000, #FFFF00);
+}
+.exercise-gradient{
+    background:radial-gradient(circle, #992299, #9999FF);
+}
+.name-textarea{
     background-color: #222222DD;
     color: wheat;
     resize:none;
@@ -70,7 +79,7 @@
     border: 5px solid #ccc;
     font-size: 1rem;
 }
-.recipe-textarea{
+.card-textarea{
     background-color: #222222DD;
     color: wheat;
     resize:none;
@@ -79,6 +88,6 @@
     height: auto;
     margin:10px;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 5px solid #ccc;
     font-size: 1rem;
 }

@@ -12,31 +12,38 @@ export const testAddDocument = async () =>{
     addDocument("users", dataObject);
 }
 */
-export const addDocument = async (collectionName, data) => {
+export const updateDocument = async (collectionName, data) => {
     try{
-        const docRef = await addDoc(collection(db, collectionName), data);
-        console.log("Doc written with ID: ", docRef.id);
+        const path = `users/${auth?.currentUser.email}/${collectionName}`;
+        const oldId = data.id;
+        var docRef = doc(db, path, data.id);
+        await deleteDoc(docRef);
+        data.id = data.name;
+        docRef = doc(db, path, data.id);
+    
+
+        await setDoc(docRef, data);
+        alert(`Successfully updated ${oldId} to ${data.name}`);
     } catch (e) {
         console.error("Error adding doc: ", e);
     }
 };
-export const addDocument2 = async (collectionName, data) => {
+export const saveAsNew = async (collectionName, data) => {
     try{
-        const q = query(collection(db, collectionName), where("name", "==", data.name));
-        const qSnapShot = await getDocs(q);
+        const path = `users/${auth?.currentUser.email}/${collectionName}`;
+        var q = query(collection(db, path), where("id", "==", data.name));
+        var qSnapShot = await getDocs(q);
 
-        var docRef = doc(collection(db, collectionName), data.name);
-       // var docSnap = await getDoc(docRef);
-
-        console.log(qSnapShot," === ", data.id );
         if(!qSnapShot.empty){
+            //console.log("qSnapShot is not empty", qSnapShot.docs );
             data.id = data.id + "+";
             data.name = data.name + "+";
         }
-        const path = `users/${auth?.currentUser.email}/${collectionName}`;
         await setDoc(doc(db, path, data.id), data);
+        alert(`Successfully added ${data.id}`);
         console.log("Doc written with ID: ", data.id);
     } catch (e) {
+        alert(`Error adding ${data.id}: ${e}`);
         console.error("Error adding doc: ", e);
     }
 };
