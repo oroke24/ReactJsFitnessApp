@@ -27,9 +27,11 @@ const PrintMyExercises = ({path}) => {
             ))}
         </ul>
         <div className='flex justify-center'>
+            <Link to ={`editExercise/NewItem`}>
             <button className='w-11/12 h-20 text-2xl indigo-outline'>
                 New Exercise
             </button>
+            </Link>
         </div>
     </div>
     );

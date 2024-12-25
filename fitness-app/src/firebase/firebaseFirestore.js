@@ -65,6 +65,7 @@ export const saveAsNew = async (collectionName, data) => {
         console.log("Doc written with ID: ", data.id);
     } catch (e) {
         //alert(`Error adding ${data.id}: ${e}`);
+        alert(`Name can't be blank.`);
         console.error("Error adding doc: ", e);
     }
 };

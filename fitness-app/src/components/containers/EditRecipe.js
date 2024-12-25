@@ -26,8 +26,13 @@ const EditRecipe = () => {
     const handleSaveAsNew =() =>{
         try{
             const recipe = {id: nameValue, name: nameValue, ingredients: ingredientsValue, instructions: instructionsValue};
+            if(recipe.name.trim() === ""){
+                alert("Name cannot be empty.");
+                return;
+            }
             //usage('path', 'docObj')
             saveAsNew('recipes', recipe);
+            alert(`Saved ${recipe.name} as a new card`)
             handleClose();
         }catch(error){
             console.error("Error adding recipe: ", error);
@@ -36,8 +41,13 @@ const EditRecipe = () => {
     const handleUpdateThisCard =() =>{
         try{
             const recipe = {id: doc.id, name: nameValue, ingredients: ingredientsValue, instructions: instructionsValue};
+            if(recipe.name.trim() === ""){
+                alert("Name cannot be empty.");
+                return;
+            }
             //usage('path', 'docObj')
             updateDocument('recipes', recipe);
+            alert(`Updated ${recipe.id} to ${recipe.name}`);
             handleClose();
         }catch(error){
             console.error("Error adding recipe: ", error);

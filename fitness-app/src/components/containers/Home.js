@@ -40,7 +40,7 @@ const Home = () => {
                 </FaUser>
           </button>
 
-          <h1 className="text-4xl font-bold text-neutral-100">FitnessApp</h1>
+          <h1 className="mt-2 text-5xl font-bold text-neutral-100">FitnessApp</h1>
           
           {/*Buttons Container*/}
           <div className="mt-20 row w-[90vh] text-center overflow-auto">

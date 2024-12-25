@@ -27,8 +27,13 @@ const EditExercise = () => {
     const handleSaveAsNew =() =>{
         try{
             const exercise = {id: nameValue, name: nameValue, ingredients: ingredientsValue, instructions: instructionsValue};
+            if(exercise.name.trim() === ""){
+                alert("Name cannot be empty.");
+                return;
+            }
             //usage('path', 'docObj')
             saveAsNew('exercises', exercise);
+            alert(`Saved ${exercise.name} as a new card`);
             handleClose();
         }catch(error){
             console.error("Error adding exercise: ", error);
@@ -36,9 +41,15 @@ const EditExercise = () => {
     }
     const handleUpdateThisCard =() =>{
         try{
-            const exercise = {id: doc.id, name: nameValue, ingredients: ingredientsValue, instructions: instructionsValue};
+            const checkNew = doc ? doc.id : "New card";
+            const exercise = {id: checkNew, name: nameValue, ingredients: ingredientsValue, instructions: instructionsValue};
+            if(exercise.name.trim() === ""){
+                alert("Name cannot be empty.");
+                return;
+            }
             //usage('path', 'docObj')
             updateDocument('exercises', exercise);
+            alert(`Updated ${exercise.id} to ${exercise.name}`);
             handleClose();
         }catch(error){
             console.error("Error adding exercise: ", error);

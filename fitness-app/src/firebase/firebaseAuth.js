@@ -36,18 +36,18 @@ export const login = (email, password) => {
 export const register = async (email, password) => {
     const create = await createUserWithEmailAndPassword(auth, email, password)
     .then (() => {
-        alert(`check ${email} for verification link.`);
+        alert(`check ${email} for verification link (might take a few minutes).`);
         sendEmailVerification(auth.currentUser)
         .then(()=>{
             const currentTime = new Date().getTime();
             lastVerificationTime = currentTime;
+            initializeUser();
         })
         .catch((error)=>{console.error("Error sending verification link, ", error)});
     })
     .catch((e)=>{
         alert(`${email} already used.`);
     })
-    await initializeUser();
     return create;
 };
 
