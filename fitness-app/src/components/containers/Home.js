@@ -35,11 +35,11 @@ const Home = () => {
       <div>
         <div className="flex flex-col items-center justify-normal min-h-screen bg-zinc-800">
           {/*User Button */}
-          <button className="absolute top-5 right-5 ">
-            <FaUser
-              className=" w-5 h-5 center fill-white"
-              onClick={handleOpenAccountModal}
-            ></FaUser>
+          <button className="absolute top-5 right-5 "
+              onClick={handleOpenAccountModal}>
+                <FaUser
+                  className=" w-5 h-5 center fill-white">
+                </FaUser>
           </button>
 
           <h1 className="text-4xl font-bold text-neutral-100">FitnessApp</h1>
@@ -66,7 +66,9 @@ const Home = () => {
           {/*Testing Modal*/}
           {/*End Testing Modal */}
 
-          {/*Handle Login Logic*/}
+          {/*Modals */}
+
+          {/*Login modal*/}
           <StandardModal
             isOpen={isAccountModalOpen}
             onClose={handleCloseAccountModal}
@@ -84,9 +86,8 @@ const Home = () => {
               ></Login>
             )}
           </StandardModal>
-          {/*End Handle Login Logic */}
 
-          {/*Modals */}
+          {/*recipes modal */}
           <StandardModal
             isOpen={isRecipeModalOpen}
             onClose={handleCloseRecipeModal}
@@ -97,6 +98,8 @@ const Home = () => {
               <p>must be logged in.</p>
             )}
           </StandardModal>
+
+          {/*exercises modal */}
           <StandardModal
             isOpen={isExerciseModalOpen}
             onClose={handleCloseExerciseModal}
@@ -107,9 +110,9 @@ const Home = () => {
               <p>must be logged in.</p>
             )}
           </StandardModal>
+
           {/*End Modals */}
 
-          <StandardModal></StandardModal>
         </div>
       </div>
     );
