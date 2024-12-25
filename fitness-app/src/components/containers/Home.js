@@ -9,6 +9,7 @@ import StandardModal from './StandardModal';
 import auth from '../../firebase/firebaseAuth';
 import {testAddDocument} from '../../firebase/firebaseFirestore';
 import PrintMyExercises from './PrintMyExercises';
+import loadDefaultProfile from '../../hooks/loadDefaultProfile';
 
 const Home = () => {
     //BINDING///////////////////////////////////

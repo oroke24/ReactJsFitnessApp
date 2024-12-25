@@ -1,5 +1,6 @@
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, sendEmailVerification, sendPasswordResetEmail} from 'firebase/auth';
 import app from './firebaseConfig';
+import loadDefaultProfile from '../hooks/loadDefaultProfile';
 
 const auth = getAuth(app);
 let lastVerificationTime = null;
@@ -13,7 +14,7 @@ export const login = (email, password) => {
             if(lastVerificationTime && currentTime -lastVerificationTime < VERIFICATION_COOLDOWN){
                 alert(`Either accept email link or wait ${Math.floor((VERIFICATION_COOLDOWN - (currentTime - lastVerificationTime))/1000)} seconds to send another link`);
             }else{
-                alert(`Verify Email First (Sending another link to ${email}`);
+                alert(`Verify Email First. Sending another link to ${email}`);
                 sendEmailVerification(auth.currentUser)
                 .then(()=>{
                     lastVerificationTime = currentTime;
@@ -40,13 +41,14 @@ export const register = (email, password) => {
         .then(()=>{
             const currentTime = new Date().getTime();
             lastVerificationTime = currentTime;
+            loadDefaultProfile(email);
         })
         .catch((error)=>{console.error("Error sending verification link, ", error)});
         auth.signOut();
     })
     .catch((e)=>{
         alert(`${email} already used.`);
-    });
+    })
 };
 
 export const logout = () => {
