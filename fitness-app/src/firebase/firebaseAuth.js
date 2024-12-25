@@ -1,6 +1,6 @@
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, sendEmailVerification, sendPasswordResetEmail} from 'firebase/auth';
 import app from './firebaseConfig';
-import loadDefaultProfile from '../hooks/loadDefaultProfile';
+import { initializeUser } from './firebaseFirestore';
 
 const auth = getAuth(app);
 let lastVerificationTime = null;
@@ -33,22 +33,22 @@ export const login = (email, password) => {
     });
 };
 
-export const register = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password)
+export const register = async (email, password) => {
+    const create = await createUserWithEmailAndPassword(auth, email, password)
     .then (() => {
         alert(`check ${email} for verification link.`);
         sendEmailVerification(auth.currentUser)
         .then(()=>{
             const currentTime = new Date().getTime();
             lastVerificationTime = currentTime;
-            loadDefaultProfile(email);
         })
         .catch((error)=>{console.error("Error sending verification link, ", error)});
-        auth.signOut();
     })
     .catch((e)=>{
         alert(`${email} already used.`);
     })
+    await initializeUser();
+    return create;
 };
 
 export const logout = () => {

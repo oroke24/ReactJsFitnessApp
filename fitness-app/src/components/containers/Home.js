@@ -3,13 +3,10 @@ import {FaUser} from 'react-icons/fa'
 import './containers.css';
 import Login from '../auth/Login';
 import Account from '../auth/Account';
-import PrintUsers from './PrintUsers';
 import PrintMyRecipes from './PrintMyRecipes';
 import StandardModal from './StandardModal';
 import auth from '../../firebase/firebaseAuth';
-import {testAddDocument} from '../../firebase/firebaseFirestore';
 import PrintMyExercises from './PrintMyExercises';
-import loadDefaultProfile from '../../hooks/loadDefaultProfile';
 
 const Home = () => {
     //BINDING///////////////////////////////////

@@ -27,23 +27,26 @@ export const updateDocument = async (collectionName, data) => {
         console.error("Error adding doc: ", e);
     }
 };
-export const addToEmail = async (collectionName, data, email) => {
+export const initializeUser = async (email) => {
     try{
-        const path = `users/${email}/${collectionName}`;
-        var q = query(collection(db, path), where("id", "==", data.name));
-        var qSnapShot = await getDocs(q);
+        const guestRecipes = await getDocuments('users/guest/recipes');
+        const guestExercises = await getDocuments('users/guest/exercises');
 
-        if(!qSnapShot.empty){
-            //console.log("qSnapShot is not empty", qSnapShot.docs );
-            data.id = data.id + "+";
-            data.name = data.name + "+";
-        }
-        await setDoc(doc(db, path, data.id), data);
-        alert(`Successfully added ${data.id}`);
-        console.log("Doc written with ID: ", data.id);
+        guestRecipes.forEach((recipe)=>{
+            console.log("users/guest/recipe: ", recipe);
+            saveAsNew('recipes', recipe);
+            //addToEmail('recipes', recipe, email);
+        });
+        guestExercises.forEach((exercise)=>{
+            console.log("users/guest/exercise: ", exercise);
+            saveAsNew('exercises', exercise);
+            //addToEmail('exercise', exercise, email);
+        });
+        alert("all done initializing!");
     } catch (e) {
-        alert(`Error adding ${data.id}: ${e}`);
         console.error("Error adding doc: ", e);
+    } finally {
+    //auth.signOut();
     }
 };
 export const saveAsNew = async (collectionName, data) => {
@@ -58,10 +61,10 @@ export const saveAsNew = async (collectionName, data) => {
             data.name = data.name + "+";
         }
         await setDoc(doc(db, path, data.id), data);
-        alert(`Successfully added ${data.id}`);
+        //alert(`Successfully added ${data.id}`);
         console.log("Doc written with ID: ", data.id);
     } catch (e) {
-        alert(`Error adding ${data.id}: ${e}`);
+        //alert(`Error adding ${data.id}: ${e}`);
         console.error("Error adding doc: ", e);
     }
 };
