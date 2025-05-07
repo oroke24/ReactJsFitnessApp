@@ -32,16 +32,16 @@ const Login = ({ onmessage, onClose }) => {
         <div className='flex-auto'>
             <h3>Login/Register</h3>
             {/*Input Area*/}
-            <div className='mt-3 flex justify-center'>
+            <div className='w-full mt-3 flex justify-center'>
             <input
-                className='w-full'
+                className='w-1/2'
                 type='email'
                 placeholder='Email'
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
             />
             <input
-                className='w-full'
+                className='w-1/2'
                 type='password'
                 placeholder='password'
                 value={password}

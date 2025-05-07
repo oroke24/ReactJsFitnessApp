@@ -1,0 +1,66 @@
+
+textarea{
+    width: 100%;
+    height:auto;
+    background: none;
+    white-space:inherit;
+}
+
+.main-container{
+    height: fit-content;
+    overflow-y: auto;
+    padding-bottom: 50px;
+}
+.exercise-basic-card{
+    display: flex;
+    flex-direction: column;
+    background:radial-gradient(circle, #992299, #9999FF);
+    border: 3px solid wheat;
+    border-radius: 8px;
+    margin: 20px;
+    width: 90%;
+    height: auto;
+    resize: vertical;
+    cursor:pointer;
+}
+.exercise-basic-name{
+    width: 100%;
+    margin: 10px;
+    padding: 3px;
+    padding-left: 3%;
+    font-size: xx-large;
+    font-style:normal;
+    font-family:'Helvetica Neue';
+    color: darkslategray;
+    opacity: 90%;
+}
+.exercise-basic-sub-title{
+    border: 2px solid white;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 5px;
+    padding: 7px;
+    padding-left: 5%;
+    font-size: x-large;
+    font-family:'Helvetica Neue';
+    color: wheat;
+    opacity: 90%;
+}
+.exercise-basic-muscle-group{
+    color: white;
+    font-style: italic;
+    font-size: large;
+    width: 90%;
+    margin: 10px;
+    padding: 5px;
+    flex-shrink: 0;
+}
+.exercise-basic-instructions{
+    color: white;
+    font-style:oblique;
+    width: 90%;
+    margin: 10px;
+    padding: 5px;
+    white-space: pre-line;
+    word-wrap: break-word;
+}

@@ -1,6 +1,11 @@
+body, html {
+    overflow-x: hidden;
+    width: 100%;
+}
 .recipe-card-list-item{
+    height: 100px;
     width: auto;
-    color: white;
+    color: darkslategray; 
     background-color: #222222DD;
     border-color: orange;
     border-width: 3px;
@@ -12,6 +17,7 @@
     cursor: pointer;
 }
 .exercise-card-list-item{
+    height: 100px;
     width: auto;
     color: white;
     background-color: #222222DD;
@@ -39,6 +45,9 @@
 .color-indigo{
     color: indigo;
 }
+.color-darkslategrey{
+    color: darkslategrey;
+}
 .orange-outline{
     border-color: orange;
 }
@@ -47,11 +56,9 @@
 }
 .recipe-button{
     border-color: orange;
-    width: 50%;
 }
 .exercise-button{
   border-color: indigo;
-  width: 49%;
 }
 .outline{
   border-color: #FFFFFF;
@@ -67,6 +74,9 @@
 .exercise-gradient{
     background:radial-gradient(circle, #992299, #9999FF);
 }
+.dark-light-gradient{
+    background:radial-gradient(circle, #AAAAAA 20%, #222222 85%);
+}
 .name-textarea{
     background-color: #222222DD;
     color: wheat;
@@ -79,11 +89,23 @@
     border: 5px solid #ccc;
     font-size: 1rem;
 }
-.card-textarea{
+.muscle-group-textarea{
     background-color: #222222DD;
     color: wheat;
     resize:none;
-    min-height:200px;
+    min-height:100px;
+    width: 83%;
+    height: auto;
+    margin:10px;
+    padding: 10px;
+    border: 5px solid #ccc;
+    font-size: 1rem;
+}
+.ingredients-textarea{
+    background-color: #222222DD;
+    color: wheat;
+    resize:none;
+    min-height:250px;
     width: 83%;
     height: auto;
     margin:10px;

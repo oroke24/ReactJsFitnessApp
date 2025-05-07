@@ -1,0 +1,16 @@
+/* Only show delete button when hovering on desktop */
+@media (hover: hover) and (pointer: fine) {
+  .exercise-card:hover .delete-button {
+    visibility: visible;
+  }
+}
+
+/* Ensure the delete button is hidden on mobile (tapping won't show the button) */
+.delete-button {
+  visibility: hidden; /* Hide the delete button initially */
+}
+
+/* When the delete button is triggered by a swipe, make it visible */
+.delete-button.visible {
+  visibility: visible;
+}
