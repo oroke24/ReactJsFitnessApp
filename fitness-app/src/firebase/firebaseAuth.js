@@ -1,6 +1,7 @@
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, sendEmailVerification, sendPasswordResetEmail} from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, sendEmailVerification, sendPasswordResetEmail, deleteUser} from 'firebase/auth';
 import app from './firebaseConfig';
 import { initializeUser } from './firebaseFirestore';
+import { collection, waitForPendingWrites } from 'firebase/firestore';
 
 const auth = getAuth(app);
 let lastVerificationTime = null;
@@ -61,9 +62,18 @@ export const forgotPassword = (email) => {
         alert(`Password reset email sent to ${email} if it exists.`);
     })
     .catch((error) => {
-        alert(`Error occured, email not recognized`)
+        alert(`Error occured, email not recognized`);
         console.error("Error sending password reset email.");
     });
 };
+export const deleteAccount = async () => {
+    try{
+        console.log("in deleteAccount");
+        await auth.currentUser.delete();
+        alert("Goodbye for now!");
+        await auth.signOut();
+        window.location.reload();
+    }catch(error){console.error("Error Deleting account: ", error)}
+}
 
 export default auth;
