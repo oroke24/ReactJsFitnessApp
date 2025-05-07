@@ -5,11 +5,14 @@
   "dependencies": {
     "cra-template": "1.2.0",
     "firebase": "^11.1.0",
+    "html2canvas": "^1.4.1",
+    "openai": "^4.77.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.4.0",
     "react-router-dom": "^7.1.1",
-    "react-scripts": "^5.0.1"
+    "react-scripts": "^5.0.1",
+    "react-swipeable": "^7.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
