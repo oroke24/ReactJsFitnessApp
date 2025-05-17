@@ -1,22 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import WeeklySummary from './weeklySummary';
 //import '@fullcalendar/daygrid/index.css';
 
-const Calendar = () => {
-    const events = [
-        {title: 'Workout: Cardio', date: '2025-05-20'},
-        {title: 'Recipe: Chicken Bowl', date: '2025-05-20'}
-    ];
+const Calendar = ({userId}) => {
+    const [selectedDate, setSelectedDate] = useState(new Date());
 
     return(
-        <div className="p-4">
+        <div>
             <FullCalendar
             plugins={[dayGridPlugin]}
             initialView="dayGridMonth"
-            events={events}
-            height="auto"
+            dateClick={(info) => setSelectedDate(new Date(info.date))}
+            //more stuff here
             />
+            <WeeklySummary selectedDate={selectedDate} userId={userId}/>
         </div>
     );
 };
