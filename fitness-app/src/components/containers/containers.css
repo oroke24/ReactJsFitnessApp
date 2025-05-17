@@ -74,6 +74,9 @@ body, html {
 .exercise-gradient{
     background:radial-gradient(circle, #992299, #9999FF);
 }
+.calendar-gradient{
+    background:radial-gradient(circle, #22DD22, #99DD99);
+}
 .dark-light-gradient{
     background:radial-gradient(circle, #AAAAAA 20%, #222222 85%);
 }

@@ -6,6 +6,7 @@ import EditRecipe from './components/containers/EditRecipe';
 import EditExercise from './components/containers/EditExercise';
 import RecipeBasic from './components/containers/cardStyles/RecipeBasic';
 import ExerciseBasic from './components/containers/cardStyles/ExerciseBasic';
+import Calendar from './components/containers/calendarStuff/Calendar';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/recipeBasic/:id" element={<RecipeBasic/>}></Route>
         <Route path="/editExercise/:id" element={<EditExercise/>}></Route>
         <Route path="/exerciseBasic/:id" element={<ExerciseBasic/>}></Route>
+        <Route path="/calendar" element={<Calendar/>}></Route>
       </Routes>
     </Router>
   );
