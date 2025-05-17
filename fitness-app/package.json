@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fullcalendar/daygrid": "^6.1.17",
+    "@fullcalendar/react": "^6.1.17",
     "cra-template": "1.2.0",
-    "firebase": "^11.1.0",
+    "firebase": "^11.6.1",
     "html2canvas": "^1.4.1",
     "openai": "^4.77.0",
     "react": "^19.0.0",
