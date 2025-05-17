@@ -7,6 +7,7 @@ import PrintMyRecipes from './PrintMyRecipes';
 import StandardModal from './StandardModal';
 import auth from '../../firebase/firebaseAuth';
 import PrintMyExercises from './PrintMyExercises';
+import { Link } from 'react-router-dom';
 import { initializeUser } from '../../firebase/firebaseFirestore';
 
 const Home = () => {
