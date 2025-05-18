@@ -33,6 +33,7 @@ const Home = () => {
   const handleOpenAboutUsModal = () => setAboutUsModalOpen(true);
   const handleCloseAboutUsModal = () => setAboutUsModalOpen(false);
 
+    console.log("Email in home: ", email);
   //EXPORTING///////////////////////////////////
   return (
     <div>
@@ -89,7 +90,10 @@ const Home = () => {
                 <FaDumbbell></FaDumbbell>
               </div>
             </button>
-            <Link to="/calendar">
+            <Link 
+            to={auth?.currentUser ? "/calendar": "/"}
+            state={{email: email}}
+            >
               <button
                 className="calendar-button w-11/12 calendar-gradient m-5">
                 <div className='color-darkslategrey flex justify-between items-center text-4xl p-10' >
@@ -104,9 +108,6 @@ const Home = () => {
               <div className='text-opacity-50'>
                 Coming Soon
               </div>
-              <button className='bg-white opacity-80 bg-opacity-70 mt-5 w-11/12 p-10'>
-                Calendar for scheduling routines
-              </button>
               <button className='bg-white opacity-60 bg-opacity-60 mt-5 w-11/12 p-10'>
                 A 7 day meal/routine forecast
               </button>
