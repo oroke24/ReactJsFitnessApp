@@ -9,3 +9,7 @@
     width: 80%;
   }
 }
+.fc-daygrid-day.selected-day {
+  background-color: #cce5ff !important;
+  border-radius: 6px;
+}

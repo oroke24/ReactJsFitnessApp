@@ -80,7 +80,7 @@ export class dayDataManager {
   }
 }
 
-
+/*
 export async function fetchWeeklyData(dates, userId) {
     const result ={};
     for(const date of dates) {
@@ -98,3 +98,4 @@ export async function fetchWeeklyData(dates, userId) {
     }
     return result;
 }
+    */

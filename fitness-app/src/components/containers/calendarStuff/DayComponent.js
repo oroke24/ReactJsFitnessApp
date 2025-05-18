@@ -1,15 +1,17 @@
 import React from 'react';
 
 const DayComponent = ({ date, recipes=[], exercises = []}) => {
+    let myDate = new Date(date);
+    myDate = myDate.toDateString();
     return (
         <div className='border p-4 rounded shadow mb-4'>
-            <h3 className='font-bold text-lg mb-2'>{date}</h3>
+            <h3 className='font-bold text-sm mb-2'>{myDate}</h3>
             <div>
-                <p className="font-semibold">Recipes:</p>
+                <p className="text-sm">Recipes:</p>
                 {recipes.map((r, i) => <div key={i}> {r}</div>)}
             </div>
             <div>
-                <p className="font-semibold">Exercises:</p>
+                <p className="text-sm">Exercises:</p>
                 {exercises.map((e, i) => <div key={i}>{e}</div>)}
             </div>
         </div>

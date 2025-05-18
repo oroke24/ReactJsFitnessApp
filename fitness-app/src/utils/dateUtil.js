@@ -8,6 +8,12 @@ export function getWeekDays(baseDate) {
     return d;
   });
 }
+export const getStartOfWeek = (date) =>{
+  const d = new Date(date);
+  const day = d.getDay();
+  const diff = d.getDate() - day;
+  return new Date(d.setDate(diff));
+}
 export const formatDate = (date) =>
   new Intl.DateTimeFormat('sv-SE').format(date).replace(/-/g, '');
 
