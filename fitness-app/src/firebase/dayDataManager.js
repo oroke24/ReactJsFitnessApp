@@ -4,8 +4,11 @@ import db from './firebaseFirestore';
 import { doc, getDoc, setDoc, updateDoc, query, where, collection, getDocs } from 'firebase/firestore';
 
 export class dayDataManager {
-  constructor(userId) {
-    this.daysCollection = collection(db, 'users', userId, 'days');
+  constructor(userEmail) {
+    if(!userEmail){
+      throw new Error("Email is required for dayDataManager.");
+    }
+    this.daysCollection = collection(db, 'users', userEmail, 'days');
   }
 
   async addRecipeToDay(date, recipeId, slot) {

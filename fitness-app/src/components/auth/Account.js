@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { deleteAccount, logout } from '../../firebase/firebaseAuth';
 import '../containers/loading.css'
 import { deleteUser } from '../../firebase/firebaseFirestore';
+import { clearDayDataManagerCache } from '../../firebase/singletonDayManager';
 
 const Account = ({ onmessage, auth, onClose }) => {
     const navigate = useNavigate();
@@ -11,6 +12,7 @@ const Account = ({ onmessage, auth, onClose }) => {
     const handleLogout = async () => {
        try{
             onmessage(`Logged in as ${auth.currentUser.email}`);
+            clearDayDataManagerCache();
             onClose();
             logout(auth);
             window.location.reload();

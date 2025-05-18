@@ -9,15 +9,30 @@ import WeeklySummary from './weeklySummary';
 import useWeeklyData from '../../../hooks/useWeeklyData';
 import { getStartOfWeek } from '../../../utils/dateUtil';
 import DayComponent from './DayComponent';
+import EditDayComponent from './EditDayComponent';
 import { dayDataManager } from '../../../firebase/dayDataManager';
 import useDailyData from '../../../hooks/useDailyData';
+import { FaArrowAltCircleLeft } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import useAuthStatus from '../../../hooks/useAuthStatus';
 
 const Calendar = () => {
+    const location = useLocation();
+    const email = location.state?.email;
+
     const [selectedDate, setSelectedDate] = useState(new Date());
-    const [email, setEmail] = useState(auth?.currentUser?.email)
-    const days = useWeeklyData(email, selectedDate);
+
+    const days = useWeeklyData(selectedDate, email);
     const dayData = useDailyData(selectedDate, email);
+
     return (
+        <div>
+
+        <div style={{display: 'flex', justifyContent: 'center', margin:'15px 0px 25px 0px'}}>
+         <Link to="/" className='text-5xl'><FaArrowAltCircleLeft></FaArrowAltCircleLeft></Link>
+        </div>
+
         <div style={{display: 'flex', justifyContent: 'center'}}>
         <div className='responsive-container'>
             <FullCalendar
@@ -37,11 +52,12 @@ const Calendar = () => {
             }}
             />
             <h3 className='text-xl font-bold mt-5'>Week of {getStartOfWeek(selectedDate).toDateString()}</h3>
-            <WeeklySummary selectedDate={selectedDate.toDateString()} days={days}/>
-            {dayData && (<DayComponent 
+            {days && (<WeeklySummary selectedDate={selectedDate.toDateString()} days={days}/>)}
+            {dayData && (<EditDayComponent 
             date={selectedDate.toDateString()} 
             recipes={dayData.recipes} 
             exercises={dayData.exercises}/>)}
+        </div>
         </div>
         </div>
     );

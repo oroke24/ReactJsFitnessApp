@@ -2,19 +2,19 @@ import {useState, useEffect} from 'react';
 import {dayDataManager} from '../firebase/dayDataManager';
 import { getStartOfWeek } from '../utils/dateUtil';
 
-const useWeeklyData = (userId, selectedDate) => {
+const useWeeklyData = (selectedDate, userEmail) => {
     const [days, setDays] = useState([]);
 
     useEffect(() => {
         if(!selectedDate) return;
 
-        const manager = new dayDataManager(userId);
+        const manager = new dayDataManager(userEmail);
 
         const loadWeek = async () => {
             const weekStart = getStartOfWeek(selectedDate);
             const week = [];
 
-            for (let i = 0; i < 7; i++){
+            for (let i = 1; i <= 7; i++){
                 const date = new Date(weekStart);
                 date.setDate(weekStart.getDate() + i);
                 const iso = date.toISOString().split('T')[0];
@@ -42,7 +42,7 @@ const useWeeklyData = (userId, selectedDate) => {
         };
         loadWeek();
 
-    }, [userId, selectedDate]);
+    }, [selectedDate, userEmail]);
     return days;
 };
 export default useWeeklyData;
