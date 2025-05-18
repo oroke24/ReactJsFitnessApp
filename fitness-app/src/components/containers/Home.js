@@ -13,17 +13,18 @@ import { initializeUser } from '../../firebase/firebaseFirestore';
 const Home = () => {
   //BINDING///////////////////////////////////
   const userCollection = auth?.currentUser ? `users/${auth.currentUser.email}` : "users/guest";
+  const email = auth?.currentUser ? `${auth.currentUser.email}` : "guest";
   const [message, setMessage] = useState('Empty');
   const [isMainModalOpen, setMainModalOpen] = useState(false);
   const [isAccountModalOpen, setAccountModalOpen] = useState(false);
   const [isRecipeModalOpen, setRecipeModalOpen] = useState(false);
   const [isExerciseModalOpen, setExerciseModalOpen] = useState(false);
   const [isAboutUsModalOpen, setAboutUsModalOpen] = useState(false);
-  const [email, setEmail] = useState(auth?.currentUser?.email);
+  //const [email, setEmail] = useState(auth?.currentUser?.email);
 
   const handleOpenAccountModal = () => setAccountModalOpen(true);
   const handleCloseAccountModal = () => setAccountModalOpen(false);
-  const handleSetEmail = () => setEmail(auth?.currentUser?.email);
+  //const handleSetEmail = () => setEmail(auth?.currentUser?.email);
   const handleOpenMainModal = () => setMainModalOpen(true);
   const handleCloseMainModal = () => setMainModalOpen(false);
   const handleOpenRecipeModal = () => setRecipeModalOpen(true);
@@ -33,7 +34,7 @@ const Home = () => {
   const handleOpenAboutUsModal = () => setAboutUsModalOpen(true);
   const handleCloseAboutUsModal = () => setAboutUsModalOpen(false);
 
-    console.log("Email in home: ", email);
+    console.log("Email in from home: ", email);
   //EXPORTING///////////////////////////////////
   return (
     <div>
