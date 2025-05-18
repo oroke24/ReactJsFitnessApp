@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
 import WeeklySummary from './weeklySummary';
 
 //Eventually load days from firebase instead of mockDays
@@ -24,7 +25,7 @@ const Calendar = () => {
         <div style={{display: 'flex', justifyContent: 'center'}}>
         <div className='responsive-container'>
             <FullCalendar
-            plugins={[dayGridPlugin, timeGridPlugin]}
+            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
             initialView="dayGridMonth"
             headerToolbar={{
                 left: 'prev',
@@ -34,7 +35,8 @@ const Calendar = () => {
             dateClick={(info) => setSelectedDate(new Date(info.date))}
             //more stuff here
             />
-            <WeeklySummary days={mockDays}/>
+            <h3 className='text-xl font-bold mt-5'>Week of {selectedDate.toDateString()}</h3>
+            <WeeklySummary selectedDate={selectedDate} days={mockDays}/>
         </div>
         </div>
     );

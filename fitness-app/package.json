@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@fullcalendar/daygrid": "^6.1.17",
+    "@fullcalendar/interaction": "^6.1.17",
     "@fullcalendar/react": "^6.1.17",
     "@fullcalendar/timegrid": "^6.1.17",
     "cra-template": "1.2.0",
