@@ -20,6 +20,7 @@ import useAuthStatus from '../../../hooks/useAuthStatus';
 const Calendar = () => {
     const location = useLocation();
     const email = location.state?.email;
+    console.log("Email in calendar: ", email);
 
     const [selectedDate, setSelectedDate] = useState(new Date());
 
