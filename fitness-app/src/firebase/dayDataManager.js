@@ -20,8 +20,10 @@ export class dayDataManager {
 
     if (existingDoc.exists()) {
       await updateDoc(dayDocRef, update);
+      console.log("Updated Successfully!");
     } else {
       await setDoc(dayDocRef, update);
+      console.log("Updated Successfully!");
     }
   }
 

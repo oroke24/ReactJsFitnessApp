@@ -18,6 +18,7 @@ const useWeeklyData = (selectedDate, userEmail) => {
                 const date = new Date(weekStart);
                 date.setDate(weekStart.getDate() + i);
                 const iso = date.toISOString().split('T')[0];
+                console.log("Date in useWeeklyData: ", iso);
 
                 const dayData = await manager.getDayFromDate(iso);
                 week.push({

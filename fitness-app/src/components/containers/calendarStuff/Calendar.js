@@ -7,7 +7,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import WeeklySummary from './weeklySummary';
 import useWeeklyData from '../../../hooks/useWeeklyData';
-import { getStartOfWeek } from '../../../utils/dateUtil';
+import { formatDate, getStartOfWeek } from '../../../utils/dateUtil';
 import DayComponent from './DayComponent';
 import EditDayComponent from './EditDayComponent';
 import { dayDataManager } from '../../../firebase/dayDataManager';
@@ -55,6 +55,7 @@ const Calendar = () => {
             <h3 className='text-xl font-bold mt-5'>Week of {getStartOfWeek(selectedDate).toDateString()}</h3>
             {days && (<WeeklySummary selectedDate={selectedDate.toDateString()} days={days}/>)}
             {dayData && (<EditDayComponent 
+            email = {email}
             date={selectedDate.toDateString()} 
             recipes={dayData.recipes} 
             exercises={dayData.exercises}/>)}
