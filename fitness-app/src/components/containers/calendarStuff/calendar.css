@@ -1,0 +1,11 @@
+/* styles.css or in your component's CSS module */
+.responsive-container {
+  width: 50%;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .responsive-container {
+    width: 80%;
+  }
+}
