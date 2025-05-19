@@ -125,7 +125,7 @@ const Home = () => {
                 Coming Soon
               </div>
               <button className='bg-white opacity-60 bg-opacity-60 mt-5 w-11/12 p-10'>
-                A 7 day meal/routine forecast
+               Repeating schedule options 
               </button>
               <button className='bg-white opacity-30 bg-opacity-40 mt-5 w-11/12 p-10'>
                 Friends and card sharing
