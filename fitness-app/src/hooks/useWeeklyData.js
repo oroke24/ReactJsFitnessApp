@@ -7,18 +7,17 @@ const useWeeklyData = (selectedDate, userEmail) => {
 
     useEffect(() => {
         if(!selectedDate) return;
-
+        console.log("selectedDate in useWeekData: ", selectedDate);
         const manager = new dayDataManager(userEmail);
 
         const loadWeek = async () => {
-            const weekStart = getStartOfWeek(selectedDate);
+            const weekStart = selectedDate;
             const week = [];
 
             for (let i = 0; i < 7; i++){
-                const date = new Date(weekStart);
+                const date = new Date(selectedDate.getTime());
                 date.setDate(weekStart.getDate() + i);
                 const iso = date.toISOString().split('T')[0];
-                //console.log("Date in useWeeklyData: ", iso);
 
                 const dayData = await manager.getDayFromDate(iso);
                 //console.log("dayData in useWeeklyData", dayData);
