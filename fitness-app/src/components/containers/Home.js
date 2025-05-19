@@ -74,7 +74,6 @@ const Home = () => {
           {/**7 day forcast */}
           {auth?.currentUser ?
             (<WeeklySummary
-              className='mt-25'
               selectedDate={today}
               days={days}
               ></WeeklySummary>
