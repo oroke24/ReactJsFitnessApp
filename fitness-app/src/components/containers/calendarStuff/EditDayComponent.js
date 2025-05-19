@@ -1,5 +1,6 @@
 //New
 import React from 'react';
+import {useState, useEffect} from 'react';
 import { FaUpload } from 'react-icons/fa';
 import { dayDataManager } from '../../../firebase/dayDataManager';
 
@@ -10,12 +11,25 @@ const EditDayComponent = ({
     exercises = [],
     onRecipeChange,
     onExerciseChange,
-    recipeOptions = [],
-    exerciseOptions = []
 }) => {
     const isoDate = new Date(date).toISOString().split('T')[0];
     const formattedDate = new Date(date).toDateString();
     const dayManager = new dayDataManager(email);
+    const [recipeOptions, setRecipeOptions] = useState([]);
+    const [exerciseOptions, setExerciseOptions] = useState([]);
+    useEffect(() => {
+        const fetchOptions = async () => {
+            try{
+                const recipes = await dayManager.getRecipeIds();
+                const exercises = await dayManager.getExerciseIds();
+                setRecipeOptions(recipes);
+                setExerciseOptions(exercises);
+            }catch(err){
+                console.error("Failed to fetch options:", err);
+            }
+        };
+        fetchOptions();
+    }, [])
 
     return (
         <div className='border p-4 rounded shadow mb-4'>
