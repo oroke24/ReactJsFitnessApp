@@ -13,7 +13,9 @@ const EditDayComponent = ({
     onExerciseChange,
 }) => {
     const isoDate = new Date(date).toISOString().split('T')[0];
-    const formattedDate = new Date(date).toDateString();
+    let myDay = new Date(date);//IMPORTANT: For some rease myDay is set to day before
+    myDay.setDate(myDay.getDate())//So, we set it to the next day
+    myDay = myDay.toDateString();// so we actually stringify the correct day.
     const dayManager = new dayDataManager(email);
     const [recipeOptions, setRecipeOptions] = useState([]);
     const [exerciseOptions, setExerciseOptions] = useState([]);
@@ -41,7 +43,7 @@ const EditDayComponent = ({
 
     return (
         <div className='border p-4 rounded shadow mb-4'>
-            <h3 className='font-bold text-sm mb-2'>{formattedDate}</h3>
+            <h3 className='font-bold text-sm mb-2'>{myDay}</h3>
 
             <div>
                 <p className="text-sm font-medium mb-1">Recipes:</p>

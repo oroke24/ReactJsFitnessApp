@@ -6,7 +6,7 @@ const useWeeklyData = (selectedDate, userEmail) => {
     const [days, setDays] = useState([]);
 
     useEffect(() => {
-        if(!selectedDate) return;
+        if(!userEmail) return;
         console.log("selectedDate in useWeekData: ", selectedDate);
         const manager = new dayDataManager(userEmail);
 

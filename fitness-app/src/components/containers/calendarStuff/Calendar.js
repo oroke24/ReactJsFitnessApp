@@ -19,8 +19,6 @@ const Calendar = () => {
 
     const [selectedDate, setSelectedDate] = useState(new Date());
 
-    const days = useWeeklyData(selectedDate, email);
-    //console.log("days:", days);
     const dayData = useDailyData(selectedDate, email);
 
     return (
@@ -40,7 +38,12 @@ const Calendar = () => {
                             center: 'title',
                             right: 'next'
                         }}
-                        dateClick={(info) => setSelectedDate(new Date(info.date))}
+                        dateClick={(info) => {
+                            const newDate = new Date(info.date);
+                            newDate.setHours(0,0,0,0);
+                            setSelectedDate(newDate);
+                            console.log("datestr:", newDate.toISOString().split('T')[0]);
+                        }}
                         //more stuff here
                         dayCellClassNames={(arg) => {
                             const clickedDateStr = selectedDate.toISOString().split('T')[0];
@@ -48,12 +51,6 @@ const Calendar = () => {
                             return cellDateStr === clickedDateStr ? ['selected-day'] : [];
                         }}
                     />
-                    {days && (
-                        <WeeklySummary
-                        selectedDate={selectedDate.toISOString().split('T')[0]}
-                        days={days}
-                        onDayClick={(dateStr) => { setSelectedDate(new Date(dateStr)); console.log("datestr: ", dateStr); }}
-                    />)}
                     {dayData && (<EditDayComponent
                         email={email}
                         date={selectedDate.toDateString()}
@@ -65,3 +62,12 @@ const Calendar = () => {
     );
 };
 export default Calendar;
+/* Removed week view
+                    const days = useWeeklyData(selectedDate, email);
+                    //console.log("days:", days);
+                    {days && (
+                        <WeeklySummary
+                        selectedDate={selectedDate.toISOString().split('T')[0]}
+                        days={days}
+                    />)}
+*/
