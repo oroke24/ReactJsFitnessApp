@@ -51,6 +51,7 @@ const Calendar = () => {
                             return cellDateStr === clickedDateStr ? ['selected-day'] : [];
                         }}
                     />
+                    <div className='m-10'></div>
                     {dayData && (<EditDayComponent
                         email={email}
                         date={selectedDate.toDateString()}
