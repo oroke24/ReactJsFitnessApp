@@ -67,10 +67,8 @@ export const saveAsNew = async (collectionName, data) => {
 export const getDocuments = async (collectionName) =>{
     const snapshot = await getDocs(collection(db, collectionName));
     return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data()}));
-            
-   // const querySnapshot = await getDocs(collection(db, collectionName));
-   // return querySnapshot.docs.map(doc => doc.data());
 };
+
 
 export const queryDocuments = async (collectionName, field, value) => {
     const q = query(collection(db, collectionName), where(field, "==", value));

@@ -9,7 +9,18 @@ export class dayDataManager {
       throw new Error("Email is required for dayDataManager.");
     }
     this.daysCollection = collection(db, 'users', userEmail, 'days');
+    this.recipesCollection = collection(db, 'users', userEmail, 'recipes');
+    this.exercisesCollection = collection(db, 'users', userEmail, 'exercises');
   }
+
+  async getRecipeIds(){
+    const snapshot = await getDocs(collection(db, this.recipesCollection));
+    return snapshot.docs.map(doc => doc.id);
+  };
+  async getExerciseIds(){
+    const snapshot = await getDocs(collection(db, this.exercisesCollection));
+    return snapshot.docs.map(doc => doc.id);
+  };
 
   async addRecipeToDay(date, recipeId, slot) {
     const recipeSlot = `recipe${Math.min(Math.max(slot, 1), 5)}Id`;
