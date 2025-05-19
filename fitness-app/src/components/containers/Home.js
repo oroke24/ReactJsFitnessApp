@@ -9,6 +9,8 @@ import auth from '../../firebase/firebaseAuth';
 import PrintMyExercises from './PrintMyExercises';
 import { Link } from 'react-router-dom';
 import { initializeUser } from '../../firebase/firebaseFirestore';
+import useWeeklyData from '../../hooks/useWeeklyData';
+import WeeklySummary from './calendarStuff/weeklySummary';
 
 const Home = () => {
   //BINDING///////////////////////////////////
@@ -33,8 +35,11 @@ const Home = () => {
   const handleCloseExerciseModal = () => setExerciseModalOpen(false);
   const handleOpenAboutUsModal = () => setAboutUsModalOpen(true);
   const handleCloseAboutUsModal = () => setAboutUsModalOpen(false);
+  const [today] = useState(new Date());
+  const days = useWeeklyData(today, email);
+  //console.log("days:", days);
 
-    console.log("Email in from home: ", email);
+  console.log("Email in from home: ", email);
   //EXPORTING///////////////////////////////////
   return (
     <div>
@@ -60,12 +65,22 @@ const Home = () => {
           </button>
           {/*About Us Button */}
           <button
-            className='mt-5'
+            className='mt-5 mb-10'
             onClick={handleOpenAboutUsModal}
           >
             About Us
           </button>
 
+          {/**7 day forcast */}
+          {auth?.currentUser ?
+            (<WeeklySummary
+              className='mt-25'
+              selectedDate={today}
+              days={days}
+              ></WeeklySummary>
+            ):(
+              ""
+            )}
 
           {/*Buttons Container*/}
           <div className=" mt-20 w-full text-center overflow-auto">
