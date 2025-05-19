@@ -54,7 +54,10 @@ const EditDayComponent = ({
                     </select>
                 ))}
             </div>
-            <button onClick={() => dayManager.addRecipeToDay(isoDate, "cheese", 1)}></button>
+            <button 
+            onClick={() => dayManager.addRecipeToDay(isoDate, "cheese", 1)}>
+                Test button (Should only add cheese in slot 1) for {date}
+            </button>
         </div>
     );
 };

@@ -11,7 +11,7 @@ export function getWeekDays(baseDate) {
 export const getStartOfWeek = (date) =>{
   const d = new Date(date);
   const day = d.getDay();
-  const diff = d.getDate() - day;
+  const diff = d.getDate() - day + 1;
   return new Date(d.setDate(diff));
 }
 export const formatDate = (date) =>
