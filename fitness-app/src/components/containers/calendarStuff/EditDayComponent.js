@@ -17,11 +17,16 @@ const EditDayComponent = ({
     const dayManager = new dayDataManager(email);
     const [recipeOptions, setRecipeOptions] = useState([]);
     const [exerciseOptions, setExerciseOptions] = useState([]);
+    const handleRecipeChange = async  (recipeId, slot) => {
+        dayManager.addRecipeToDay(isoDate, recipeId, slot)
+    };
     useEffect(() => {
         const fetchOptions = async () => {
             try{
                 const recipes = await dayManager.getRecipeIds();
                 const exercises = await dayManager.getExerciseIds();
+                //console.log("Fetched recipes:", recipes);
+                //console.log("Fetched exercises:", exercises);
                 setRecipeOptions(recipes);
                 setExerciseOptions(exercises);
             }catch(err){
@@ -29,7 +34,7 @@ const EditDayComponent = ({
             }
         };
         fetchOptions();
-    }, [])
+    }, [email])
 
     return (
         <div className='border p-4 rounded shadow mb-4'>
@@ -42,7 +47,7 @@ const EditDayComponent = ({
                         key={i}
                         className="w-full border p-1 mb-1 rounded"
                         value={recipes[i] || ''}
-                        onChange={(e) => onRecipeChange(i + 1, e.target.value)}
+                        onChange={(e) => handleRecipeChange(e.target.value, i + 1)}
                     >
                         <option value="">-- Select Recipe --</option>
                         {recipeOptions.map((r) => (
@@ -77,27 +82,3 @@ const EditDayComponent = ({
 };
 
 export default EditDayComponent;
-
-/*old
-import React from 'react';
-
-const EditDayComponent = ({ date, recipes=[], exercises = []}) => {
-    let myDate = new Date(date);
-    myDate = myDate.toDateString();
-    return (
-        <div className='border p-4 rounded shadow mb-4'>
-            <h3 className='font-bold text-sm mb-2'>{myDate}</h3>
-            <div>
-                <p className="text-sm">Recipes:</p>
-                {recipes.map((r, i) => <div key={i}> {r}</div>)}
-            </div>
-            <div>
-                <p className="text-sm">Exercises:</p>
-                {exercises.map((e, i) => <div key={i}>{e}</div>)}
-            </div>
-        </div>
-    );
-};
-
-export default EditDayComponent;
-*/

@@ -18,10 +18,10 @@ const useWeeklyData = (selectedDate, userEmail) => {
                 const date = new Date(weekStart);
                 date.setDate(weekStart.getDate() + i);
                 const iso = date.toISOString().split('T')[0];
-                console.log("Date in useWeeklyData: ", iso);
+                //console.log("Date in useWeeklyData: ", iso);
 
                 const dayData = await manager.getDayFromDate(iso);
-                console.log("dayData in useWeeklyData", dayData);
+                //console.log("dayData in useWeeklyData", dayData);
                 week.push({
                     date: iso,
                     recipes:[

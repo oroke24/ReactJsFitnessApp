@@ -14,11 +14,11 @@ export class dayDataManager {
   }
 
   async getRecipeIds(){
-    const snapshot = await getDocs(collection(db, this.recipesCollection));
+    const snapshot = await getDocs(this.recipesCollection);
     return snapshot.docs.map(doc => doc.id);
   };
   async getExerciseIds(){
-    const snapshot = await getDocs(collection(db, this.exercisesCollection));
+    const snapshot = await getDocs(this.exercisesCollection);
     return snapshot.docs.map(doc => doc.id);
   };
 
@@ -31,10 +31,10 @@ export class dayDataManager {
 
     if (existingDoc.exists()) {
       await updateDoc(dayDocRef, update);
-      console.log("Updated Successfully!");
+      //console.log("Updated Successfully!");
     } else {
       await setDoc(dayDocRef, update);
-      console.log("Updated Successfully!");
+      //console.log("Updated Successfully!");
     }
   }
 

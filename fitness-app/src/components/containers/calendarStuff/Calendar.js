@@ -20,7 +20,7 @@ import useAuthStatus from '../../../hooks/useAuthStatus';
 const Calendar = () => {
     const location = useLocation();
     const email = location.state?.email;
-    console.log("Email in calendar: ", email);
+    //console.log("Email in calendar: ", email);
 
     const [selectedDate, setSelectedDate] = useState(new Date());
 
@@ -53,7 +53,11 @@ const Calendar = () => {
             }}
             />
             <h3 className='text-xl font-bold mt-5'>Week of {getStartOfWeek(selectedDate).toDateString()}</h3>
-            {days && (<WeeklySummary selectedDate={selectedDate.toDateString()} days={days}/>)}
+            {days && (<WeeklySummary 
+            selectedDate={selectedDate.toDateString()} 
+            days={days}
+            onDayClick={(dateStr) => setSelectedDate(new Date(dateStr))}
+            />)}
             {dayData && (<EditDayComponent 
             email = {email}
             date={selectedDate.toDateString()} 
