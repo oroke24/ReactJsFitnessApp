@@ -14,13 +14,14 @@ const useWeeklyData = (selectedDate, userEmail) => {
             const weekStart = getStartOfWeek(selectedDate);
             const week = [];
 
-            for (let i = 1; i <= 7; i++){
+            for (let i = 0; i < 7; i++){
                 const date = new Date(weekStart);
                 date.setDate(weekStart.getDate() + i);
                 const iso = date.toISOString().split('T')[0];
                 console.log("Date in useWeeklyData: ", iso);
 
                 const dayData = await manager.getDayFromDate(iso);
+                console.log("dayData in useWeeklyData", dayData);
                 week.push({
                     date: iso,
                     recipes:[
