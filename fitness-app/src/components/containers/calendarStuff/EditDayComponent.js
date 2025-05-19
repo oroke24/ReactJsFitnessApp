@@ -20,6 +20,9 @@ const EditDayComponent = ({
     const handleRecipeChange = async  (recipeId, slot) => {
         dayManager.addRecipeToDay(isoDate, recipeId, slot)
     };
+    const handleExerciseChange = async  (exerciseId, slot) => {
+        dayManager.addExerciseToDay(isoDate, exerciseId, slot)
+    };
     useEffect(() => {
         const fetchOptions = async () => {
             try{
@@ -64,7 +67,7 @@ const EditDayComponent = ({
                         key={i}
                         className="w-full border p-1 mb-1 rounded"
                         value={exercises[i] || ''}
-                        onChange={(e) => onExerciseChange(i + 1, e.target.value)}
+                        onChange={(e) => handleExerciseChange(e.target.value, i + 1)}
                     >
                         <option value="">-- Select Exercise --</option>
                         {exerciseOptions.map((e) => (
@@ -73,10 +76,6 @@ const EditDayComponent = ({
                     </select>
                 ))}
             </div>
-            <button 
-            onClick={() => dayManager.addRecipeToDay(isoDate, "cheese", 1)}>
-                Test button (Should only add cheese in slot 1) for {date}
-            </button>
         </div>
     );
 };
