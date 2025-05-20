@@ -2,7 +2,9 @@ import React from 'react';
 import DayComponent from './DayComponent';
 
 const WeeklySummary = ({ selectedDate, days, onDayClick }) => {
-    console.log("days in weeklySummary:", days);
+    //console.log("days in weeklySummary:", days);
+    //console.log("days[0] in weeklySummary:", days[0]);
+    
     return (
         <div className='flex pl-40 w-[90vh] overflow-x-auto space-x-4 p-2 m-5'>
             {days.map((day, index) => (

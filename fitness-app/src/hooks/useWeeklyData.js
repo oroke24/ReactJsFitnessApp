@@ -11,12 +11,13 @@ const useWeeklyData = (selectedDate, userEmail) => {
         const manager = new dayDataManager(userEmail);
 
         const loadWeek = async () => {
-            const weekStart = selectedDate;
             const week = [];
 
             for (let i = 0; i < 7; i++){
-                const date = new Date(selectedDate.getTime());
-                date.setDate(weekStart.getDate() + i);
+                let date = new Date(selectedDate);
+                date.setHours(0,0,0,0);
+                date.setDate(date.getDate() + i);
+                //date.setDate(weekStart.getDate() + i);
                 const iso = date.toISOString().split('T')[0];
 
                 const dayData = await manager.getDayFromDate(iso);

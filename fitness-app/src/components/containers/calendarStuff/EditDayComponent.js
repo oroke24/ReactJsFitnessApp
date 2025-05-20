@@ -14,16 +14,32 @@ const EditDayComponent = ({
 }) => {
     const isoDate = new Date(date).toISOString().split('T')[0];
     let myDay = new Date(date);//IMPORTANT: For some rease myDay is set to day before
-    myDay.setDate(myDay.getDate())//So, we set it to the next day
+    //myDay.setDate(myDay.getDate())//So, we set it to the next day
+    myDay.setHours(0,0,0,0);
     myDay = myDay.toDateString();// so we actually stringify the correct day.
     const dayManager = new dayDataManager(email);
     const [recipeOptions, setRecipeOptions] = useState([]);
     const [exerciseOptions, setExerciseOptions] = useState([]);
+    const [localRecipes, setLocalRecipes] = useState(recipes);
+    const [localExercises, setLocalExercises] = useState(exercises);
+    useEffect(()=>{
+        setLocalRecipes(recipes);
+    }, [recipes]);
     const handleRecipeChange = async  (recipeId, slot) => {
         dayManager.addRecipeToDay(isoDate, recipeId, slot)
+        const updated = [...localRecipes]
+        updated[slot - 1] = recipeId;
+        setLocalRecipes(updated);
     };
+
+    useEffect(()=>{
+        setLocalExercises(exercises)
+    },[exercises]);
     const handleExerciseChange = async  (exerciseId, slot) => {
         dayManager.addExerciseToDay(isoDate, exerciseId, slot)
+        const updated = [...localExercises]
+        updated[slot - 1] = exerciseId;
+        setLocalExercises(updated);
     };
     useEffect(() => {
         const fetchOptions = async () => {
@@ -43,7 +59,7 @@ const EditDayComponent = ({
 
     return (
         <div className='border p-4 rounded shadow mb-4'>
-            <h3 className='font-bold text-sm mb-2'>{myDay}</h3>
+            <h3 className='font-bold text-sm mb-2'>{isoDate}</h3>
 
             <div>
                 <p className="text-sm font-medium mb-1">Recipes:</p>
@@ -51,7 +67,7 @@ const EditDayComponent = ({
                     <select
                         key={i}
                         className="w-full border p-1 mb-1 rounded"
-                        value={recipes[i] || ''}
+                        value={localRecipes[i] || ''}
                         onChange={(e) => handleRecipeChange(e.target.value, i + 1)}
                     >
                         <option value="">-- Select Recipe --</option>
@@ -68,7 +84,7 @@ const EditDayComponent = ({
                     <select
                         key={i}
                         className="w-full border p-1 mb-1 rounded"
-                        value={exercises[i] || ''}
+                        value={localExercises[i] || ''}
                         onChange={(e) => handleExerciseChange(e.target.value, i + 1)}
                     >
                         <option value="">-- Select Exercise --</option>
