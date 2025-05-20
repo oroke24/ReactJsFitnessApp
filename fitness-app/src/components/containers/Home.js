@@ -47,44 +47,38 @@ const Home = () => {
       <div className='dark-light-gradient h-screen overflow-auto'>
         <div className="flex flex-col items-center justify-normal w-full min-h-screen overflow-y-auto">
 
-          {/*Title */}
-          <h1 className="mt-5 text-5xl font-bold text-neutral-100">Fit Cards</h1>
 
+          {/*Header Row */}
+        <div className='p-5 w-full flex justify-evenly items-center'>
+            {/*Title */}
+            <h1 className="flex-1 text-4xl font-bold text-neutral-100">Fit Cards</h1>
+            {/*About Us Button */}
+            <button
+              className=''
+              onClick={handleOpenAboutUsModal}
+            >
+              About Us
+            </button>
           {/*User Button */}
-          <button className="mt-10 text-2xl flex items-center justify-center"
+          <button className="text-xl flex items-center justify-center"
             onClick={handleOpenAccountModal}>
-            {auth.currentUser//if logged in
+            {/*auth.currentUser//if logged in
               ?//show email
               auth.currentUser.email
               ://else say...
               "Login/Register"
-            }
+            */}
             <FaUser
-              className="text-6xl center fill-white">
+              className="text-3xl center fill-white">
             </FaUser>
           </button>
-          {/*About Us Button */}
-          <button
-            className='mt-5 mb-10'
-            onClick={handleOpenAboutUsModal}
-          >
-            About Us
-          </button>
+          </div>
 
-          {/**7 day forcast */}
-          {auth?.currentUser ?
-            (<WeeklySummary
-              selectedDate={today}
-              days={days}
-            ></WeeklySummary>
-            ) : (
-              ""
-            )}
 
           {/*Buttons Container*/}
-          <div className="mt-20 container text-center">
+          <div className="mt-5 container text-center">
             {/*Recipe and Exercise Buttons Container*/}
-            <div className='p-5 flex justify-evenly'>
+            <div className='p-5 flex'>
               {/*Recipe Button*/}
               <button
                 className="flex-1 recipe-button recipe-gradient p-4 m-2"
@@ -106,6 +100,15 @@ const Home = () => {
                 </div>
               </button>
             </div>
+            {/**7 day forcast */}
+            {auth?.currentUser ?
+              (<WeeklySummary
+                selectedDate={today}
+                days={days}
+              ></WeeklySummary>
+              ) : (
+                ""
+              )}
             {/*Calendar Button*/}
             <Link
               to={auth?.currentUser ? "/calendar" : "/"}
