@@ -13,3 +13,9 @@
   background-color: #cce5ff !important;
   border-radius: 6px;
 }
+.foggy-background{
+  background-color: #FFFFFF66;
+}
+.day-gradient{
+  background: linear-gradient(90deg, #FFA600,#ffffff11, #800080);
+}
