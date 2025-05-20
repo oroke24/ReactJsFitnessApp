@@ -87,20 +87,20 @@ const Home = () => {
             <div className='p-5 flex justify-evenly'>
               {/*Recipe Button*/}
               <button
-                className="flex-1 recipe-button recipe-gradient"
+                className="flex-1 recipe-button recipe-gradient p-4 m-2"
                 onClick={handleOpenRecipeModal}
               >
-                <div className='color-darkslategrey flex justify-evenly items-center text-3xl p-2 m-2' >
+                <div className='color-darkslategrey flex justify-evenly items-center text-xl' >
                   <FaGasPump></FaGasPump>
                   <strong>Recipes</strong>
                 </div>
               </button>
               {/*Exercise Button*/}
               <button
-                className="flex-1 exercise-button exercise-gradient"
+                className="flex-1 exercise-button exercise-gradient p-4 m-2"
                 onClick={handleOpenExerciseModal}
               >
-                <div className='flex justify-evenly items-center text-3xl p-2 m-2'>
+                <div className='flex justify-evenly items-center text-xl'>
                   <strong>Exercises</strong>
                   <FaFire></FaFire>
                 </div>
@@ -113,7 +113,7 @@ const Home = () => {
             >
               <button
                 className="calendar-button w-11/12 calendar-gradient m-5">
-                <div className='color-darkslategrey flex justify-between items-center text-4xl p-10' >
+                <div className='color-darkslategrey flex justify-between items-center text-2xl p-10' >
                   <FaCalendar></FaCalendar>
                   <strong>Calendar</strong>
                   <FaCalendar></FaCalendar>
