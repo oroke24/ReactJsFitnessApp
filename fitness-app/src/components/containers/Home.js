@@ -76,38 +76,40 @@ const Home = () => {
             (<WeeklySummary
               selectedDate={today}
               days={days}
-              ></WeeklySummary>
-            ):(
+            ></WeeklySummary>
+            ) : (
               ""
             )}
 
           {/*Buttons Container*/}
-          <div className=" mt-20 w-full text-center overflow-auto">
-            {/*Recipe Button*/}
-            <button
-              className="recipe-button w-11/12 recipe-gradient m-5"
-              onClick={handleOpenRecipeModal}
-            >
-              <div className='color-darkslategrey flex justify-between items-center text-4xl p-10' >
-                <FaGasPump></FaGasPump>
-                <strong>Recipes</strong>
-                <FaUtensilSpoon></FaUtensilSpoon>
-              </div>
-            </button>
-            {/*Exercise Button*/}
-            <button
-              className="exercise-button w-11/12 exercise-gradient m-5"
-              onClick={handleOpenExerciseModal}
-            >
-              <div className='flex justify-between items-center text-4xl p-10'>
-                <FaFire></FaFire>
-                <strong>Exercises</strong>
-                <FaDumbbell></FaDumbbell>
-              </div>
-            </button>
-            <Link 
-            to={auth?.currentUser ? "/calendar": "/"}
-            state={{email: email}}
+          <div className="mt-20 container text-center">
+            {/*Recipe and Exercise Buttons Container*/}
+            <div className='p-5 flex justify-evenly'>
+              {/*Recipe Button*/}
+              <button
+                className="flex-1 recipe-button recipe-gradient"
+                onClick={handleOpenRecipeModal}
+              >
+                <div className='color-darkslategrey flex justify-evenly items-center text-3xl p-2 m-2' >
+                  <FaGasPump></FaGasPump>
+                  <strong>Recipes</strong>
+                </div>
+              </button>
+              {/*Exercise Button*/}
+              <button
+                className="flex-1 exercise-button exercise-gradient"
+                onClick={handleOpenExerciseModal}
+              >
+                <div className='flex justify-evenly items-center text-3xl p-2 m-2'>
+                  <strong>Exercises</strong>
+                  <FaFire></FaFire>
+                </div>
+              </button>
+            </div>
+            {/*Calendar Button*/}
+            <Link
+              to={auth?.currentUser ? "/calendar" : "/"}
+              state={{ email: email }}
             >
               <button
                 className="calendar-button w-11/12 calendar-gradient m-5">
@@ -124,7 +126,7 @@ const Home = () => {
                 Coming Soon
               </div>
               <button className='bg-white opacity-60 bg-opacity-60 mt-5 w-11/12 p-10'>
-               Repeating schedule options 
+                Repeating schedule options
               </button>
               <button className='bg-white opacity-30 bg-opacity-40 mt-5 w-11/12 p-10'>
                 Friends and card sharing
