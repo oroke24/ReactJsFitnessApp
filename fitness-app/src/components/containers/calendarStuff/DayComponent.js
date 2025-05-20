@@ -2,7 +2,8 @@ import React from 'react';
 
 const DayComponent = ({ date, recipes=[], exercises = []}) => {
     let myDay = new Date(date);//IMPORTANT: For some rease myDay is set to day before
-    myDay.setDate(myDay.getDate())//So, we set it to the next day
+    myDay.setDate(myDay.getDate() + 1)//So, we set it to the next day
+    myDay.setHours(0,0,0,0);
     myDay = myDay.toDateString();// so we actually stringify the correct day.
 
     return (
