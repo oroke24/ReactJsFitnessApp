@@ -15,11 +15,15 @@ import { useLocation } from 'react-router-dom';
 const Calendar = () => {
     const location = useLocation();
     const email = location.state?.email;
+    const newDate = new Date();
+    //console.log("newDate:", newDate);
+    newDate.setHours(0,0,0,0);
     //console.log("Email in calendar: ", email);
 
-    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [selectedDate, setSelectedDate] = useState(newDate);
 
     const dayData = useDailyData(selectedDate, email);
+    console.log("selecedDate in calendar: ", selectedDate);
 
     return (
         <div>
@@ -40,6 +44,7 @@ const Calendar = () => {
                         }}
                         dateClick={(info) => {
                             const newDate = new Date(info.date);
+                            console.log("newDate:", newDate)
                             newDate.setHours(0,0,0,0);
                             setSelectedDate(newDate);
                             console.log("datestr:", newDate.toISOString().split('T')[0]);
