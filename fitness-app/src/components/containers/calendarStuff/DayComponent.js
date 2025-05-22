@@ -10,15 +10,15 @@ const DayComponent = ({ date, recipes = [], exercises = [] }) => {
     return (
         <div>
             <h3 className='text-xl font-bold mb-3'>{myDay}</h3>
-            <div className='border rounded-lg p-2 pt-1 shadow mb-4 h-[300px] w-[380px] overflow-y-auto day-gradient'>
+            <div className='border rounded-lg p-2 pt-1 shadow mb-4 h-[300px] w-[380px] overflow-y-auto dark-light-gradient-left-right'>
                 <div className='flex'>
                     <div className='flex-1 border-r'>
-                        <p className="text-lg font-bold mb-2 color-darkslategrey">Recipes:</p>
-                        {recipes.map((r, i) => <div className="text-start pl-2 pr-2 text-md color-darkslategrey" key={i}>- {r}</div>)}
+                    <p className="text-lg font-bold mb-2 color-orange">Recipes:</p>
+                        {recipes.map((r, i) => <div className="text-start pl-2 pr-2 text-md color-orange" key={i}>- {r}</div>)}
                     </div>
                     <div className='flex-1 border-l'>
-                        <p className="text-lg font-bold mb-2 color-white">Exercises:</p>
-                        {exercises.map((e, i) => <div className="text-start pl-4 pr-2 text-md color-white" key={i}>- {e}</div>)}
+                        <p className="text-lg font-bold mb-2 color-indigo">Exercises:</p>
+                        {exercises.map((e, i) => <div className="text-start pl-4 pr-2 text-md color-indigo" key={i}>- {e}</div>)}
                     </div>
                 </div>
             </div>

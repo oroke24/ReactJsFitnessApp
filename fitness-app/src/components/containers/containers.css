@@ -80,6 +80,9 @@ body, html {
 .dark-light-gradient{
     background:radial-gradient(circle, #AAAAAA 20%, #222222 85%);
 }
+.dark-light-gradient-left-right{
+    background:linear-gradient(90deg, #222222AA, #AAAAAA88);
+}
 .name-textarea{
     background-color: #222222DD;
     color: wheat;

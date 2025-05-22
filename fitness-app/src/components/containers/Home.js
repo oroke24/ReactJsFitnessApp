@@ -78,7 +78,7 @@ const Home = () => {
           {/*Buttons Container*/}
           <div className="mt-5 container text-center">
             {/*Recipe and Exercise Buttons Container*/}
-            <div className='p-5 flex'>
+            <div className='flex'>
               {/*Recipe Button*/}
               <button
                 className="flex-1 recipe-button recipe-gradient p-4 m-2"
