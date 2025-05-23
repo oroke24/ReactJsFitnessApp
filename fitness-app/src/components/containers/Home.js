@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { FaBurn, FaCalendar, FaCut, FaDumbbell, FaFire, FaGasPump, FaHollyBerry, FaStore, FaSubway, FaUser, FaUtensilSpoon } from 'react-icons/fa'
+import { FaArrowRight, FaBurn, FaCalendar, FaCut, FaDumbbell, FaFire, FaGasPump, FaHollyBerry, FaStore, FaSubway, FaUser, FaUtensilSpoon } from 'react-icons/fa'
 import './containers.css';
 import Login from '../auth/Login';
 import Account from '../auth/Account';
@@ -115,11 +115,11 @@ const Home = () => {
               state={{ email: email }}
             >
               <button
-                className="calendar-button w-11/12 calendar-gradient m-5">
-                <div className='color-darkslategrey flex justify-between items-center text-2xl p-10' >
+                className="calendar-button calendar-gradient m-2 w-1/2">
+                <div className='color-white flex justify-between items-center text-2xl p-5' >
                   <FaCalendar></FaCalendar>
                   <strong>Calendar</strong>
-                  <FaCalendar></FaCalendar>
+                  <FaArrowRight></FaArrowRight>
                 </div>
               </button>
             </Link>

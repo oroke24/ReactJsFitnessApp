@@ -14,8 +14,16 @@
   border-radius: 6px;
 }
 .foggy-background{
-  background-color: #FFFFFF66;
+  background-color: #11111177;
+  border-color: #333333
+}
+.gray-border{
+  border-color: #111111;
 }
 .day-gradient{
-  background: linear-gradient(90deg, #ff9532b0 ,50%,#ffffff, 50%, #a810a8b0);
+  background: linear-gradient(90deg, #22222288, #DDDDDD88);
 }
+.exercise-color{
+  color: #e285f4;
+}
+
