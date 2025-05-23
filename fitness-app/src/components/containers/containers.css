@@ -75,13 +75,13 @@ body, html {
     background:radial-gradient(circle, #992299, #9999FF);
 }
 .calendar-gradient{
-    background:radial-gradient(circle, #22DD22, #99DD99);
+    background:radial-gradient(circle, #AAAAAAAA, #22222222);
 }
 .dark-light-gradient{
     background:radial-gradient(circle, #AAAAAA 20%, #222222 85%);
 }
 .dark-light-gradient-left-right{
-    background:linear-gradient(90deg, #222222AA, #AAAAAA88);
+    background:linear-gradient(90deg, #222222, #666666, #AAAAAA);
 }
 .name-textarea{
     background-color: #222222DD;
