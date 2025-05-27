@@ -7,7 +7,7 @@ const useWeeklyData = (selectedDate, userEmail) => {
 
     useEffect(() => {
         if(!userEmail) return;
-        console.log("selectedDate in useWeekData: ", selectedDate);
+        //console.log("selectedDate in useWeekData: ", selectedDate);
         const manager = new dayDataManager(userEmail);
 
         const loadWeek = async () => {

@@ -9,10 +9,12 @@ const WeeklySummary = ({ selectedDate, days, onDayClick }) => {
         <div className='flex overflow-x-auto space-x-5 mt-5 mb-5 ml-2 mr-2'>
             {days.map((day, index) => (
                 <div
+                    key={index}
                     className={`p-1`}
                     >
                     {index === 0 ? (<h3 className='font-bold text-center'>Today</h3>):(<div className='p-3'></div>)}
                     <DayComponent
+                        key = {index}
                         date={day.date}
                         recipes={day.recipes}
                         exercises={day.exercises}
