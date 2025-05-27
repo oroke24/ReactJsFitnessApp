@@ -9,6 +9,7 @@ const aiRevamp = async (cardType, content) => {
       dangerouslyAllowBrowser: true,
       timeout: 60000,
     });
+    console.log(process.env.REACT_APP_OPENAI_API_KEY);
     let aiRole = "";
     if (cardType === "exercise") {
       aiRole =

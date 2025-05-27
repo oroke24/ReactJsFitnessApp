@@ -3,6 +3,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { FaDumpsterFire, FaHammer, FaPaintBrush, FaPaintRoller, FaUpload, FaWrench } from 'react-icons/fa';
 import { dayDataManager } from '../../../firebase/dayDataManager';
+import RepeatDayComponent from './RepeatDayComponent';
 
 const EditDayComponent = ({
     email,
@@ -59,7 +60,7 @@ const EditDayComponent = ({
 
     return (
         <div className='border p-4 rounded shadow mb-4'>
-            <h3 className='font-bold text-sm mb-2'>{myDay}</h3>
+            <h3 className='font-bold text-2xl mb-2'>{myDay}</h3>
 
             <div>
                 <p className="text-sm font-medium mb-1">Recipes:</p>
@@ -94,47 +95,12 @@ const EditDayComponent = ({
                     </select>
                 ))}
             </div>
-            {/**Repeat Area */}
-            <div
-                className='border text-center rounded-md h-[400px]'
-            >
-                <h3 className='color-grey text-xl m-5'>Repeat Area Under Construction</h3>
-                <div
-                    className='flex border rounded-md justify-around overflow-x-auto'
-
-                >
-                    <div className='w-min border rounded-md m-1 p-1'>
-                        Mon
-                    </div>
-                    <div className='w-min border rounded-md m-1 p-1'>
-                        Tue 
-                    </div>
-                    <div className='w-min border rounded-md m-1 p-1'>
-                        Wed
-                    </div>
-                    <div className='w-min border rounded-md m-1 p-1'>
-                        Thur
-                    </div>
-                    <div className='w-min border rounded-md m-1 p-1'>
-                        Fri
-                    </div>
-                    <div className='w-min border rounded-md m-1 p-1'>
-                        Sat
-                    </div>
-                    <div className='w-min border rounded-md m-1 p-1'>
-                        Sun
-                    </div>
-                </div>
-                {/*Construction Area*/}
-                <div 
-                className='w-full h-[300px] flex justify-around items-center border'>
-                    <FaHammer className='mb-20 center text-5xl'></FaHammer>
-                    <FaPaintRoller className='mt-20 center text-5xl'></FaPaintRoller>
-                    <FaWrench className='mb-20 center text-5xl'></FaWrench>
-                    <FaDumpsterFire className='mt-20 center text-5xl'></FaDumpsterFire>
-                </div>
-
-            </div>
+            <RepeatDayComponent 
+            date={date} 
+            recipes={recipes} 
+            exercises={exercises}
+            dayDataManager={dayManager}
+            ></RepeatDayComponent>
         </div>
     );
 };

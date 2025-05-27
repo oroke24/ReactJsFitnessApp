@@ -38,8 +38,8 @@ const Home = () => {
   const [today] = useState(new Date());
   const days = useWeeklyData(today, email);
   //console.log("days:", days);
+  //console.log("Email in from home: ", email);
 
-  console.log("Email in from home: ", email);
   //EXPORTING///////////////////////////////////
   return (
     <div>
@@ -74,7 +74,6 @@ const Home = () => {
           </button>
           </div>
 
-
           {/*Buttons Container*/}
           <div className="mt-5 container text-center">
             {/*Recipe and Exercise Buttons Container*/}
@@ -100,6 +99,7 @@ const Home = () => {
                 </div>
               </button>
             </div>
+
             {/**7 day forcast */}
             {auth?.currentUser ?
               (<WeeklySummary
@@ -109,6 +109,7 @@ const Home = () => {
               ) : (
                 ""
               )}
+          
             {/*Calendar Button*/}
             <Link
               to={auth?.currentUser ? "/calendar" : "/"}
