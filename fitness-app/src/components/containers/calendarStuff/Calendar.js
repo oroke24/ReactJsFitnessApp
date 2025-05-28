@@ -8,9 +8,10 @@ import WeeklySummary from './weeklySummary';
 import useWeeklyData from '../../../hooks/useWeeklyData';
 import EditDayComponent from './EditDayComponent';
 import useDailyData from '../../../hooks/useDailyData';
-import { FaArrowAltCircleLeft } from 'react-icons/fa';
+import { FaArrowAltCircleLeft, FaArrowCircleLeft, FaArrowCircleRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import { setLogLevel } from 'firebase/app';
 
 const Calendar = () => {
     const location = useLocation();
@@ -18,6 +19,7 @@ const Calendar = () => {
     const newDate = new Date();
     //console.log("newDate:", newDate);
     newDate.setHours(0, 0, 0, 0);
+    const today = newDate;
     //console.log("Email in calendar: ", email);
 
     const [selectedDate, setSelectedDate] = useState(newDate);
@@ -39,6 +41,16 @@ const Calendar = () => {
 
     }, []);
 
+    const handlePreviousDay = () => {
+        const prevDate = new Date(selectedDate);
+        prevDate.setDate(prevDate.getDate() - 1);
+        setSelectedDate(prevDate);
+    }
+    const handleNextDay = () => {
+        const nextDate = new Date(selectedDate);
+        nextDate.setDate(nextDate.getDate() + 1);
+        setSelectedDate(nextDate);
+    }
     return (
         <div>
 
@@ -71,7 +83,13 @@ const Calendar = () => {
                             return cellDateStr === clickedDateStr ? ['selected-day'] : [];
                         }}
                     />
-                    <div className='m-10'></div>
+                    <div className='mt-10 px-10 flex justify-between items-center'>
+                        <FaArrowCircleLeft className='text-6xl' onClick={handlePreviousDay}></FaArrowCircleLeft>
+                        {today.getDate() === selectedDate.getDate() ? <p>Today</p> : ''}
+                        {today.getDate()+1 === selectedDate.getDate() ? <p>Tomorrow</p> : ''}
+                        {console.log("today: ", today, " SelectedDate: ", selectedDate)}
+                        <FaArrowCircleRight  className='text-6xl' onClick={handleNextDay}></FaArrowCircleRight>
+                    </div>
                     {dayData && (<EditDayComponent
                         email={email}
                         date={selectedDate.toDateString()}

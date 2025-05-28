@@ -60,7 +60,7 @@ const EditDayComponent = ({
 
     return (
         <div className='border p-4 rounded shadow mb-4'>
-            <h3 className='font-bold text-2xl mb-2'>{myDay}</h3>
+            <h3 className='text-center font-bold text-2xl mb-2'>{myDay}</h3>
 
             <div>
                 <p className="text-sm font-medium mb-1">Recipes:</p>
