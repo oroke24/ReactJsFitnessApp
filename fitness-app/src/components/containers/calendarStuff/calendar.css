@@ -17,6 +17,12 @@
   background-color: #11111177;
   border-color: #333333
 }
+.calendar-background{
+  background: linear-gradient(135deg, #DDDDDD88, #FFFFFF88) ;
+  border: 5px solid black;
+  border-radius: 8px;
+  padding: 10px;
+}
 .gray-border{
   border-color: #111111;
 }

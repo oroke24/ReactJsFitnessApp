@@ -63,12 +63,12 @@ const EditDayComponent = ({
         <div className='border p-4 rounded shadow mb-4'>
             <h3 className='text-center font-bold text-2xl mb-2'>{myDay}</h3>
 
-            <div>
-                <p className="text-sm font-medium mb-1">Recipes:</p>
+            <div className='py-5 px-10'>
+                <p className="text-center text-xl font-medium mb-1">Recipes:</p>
                 {[...Array(5)].map((_, i) => (
                     <select
                         key={i}
-                        className="w-full border p-1 mb-1 rounded"
+                        className="text-lg w-full border p-2 mb-2 rounded recipe-gradient"
                         value={localRecipes[i] || ''}
                         onChange={(e) => handleRecipeChange(e.target.value, i + 1)}
                     >
@@ -80,12 +80,12 @@ const EditDayComponent = ({
                 ))}
             </div>
 
-            <div>
-                <p className="text-sm font-medium mt-3 mb-1">Exercises:</p>
+            <div className='py-5 px-10'>
+                <p className="text-center text-xl font-medium mt-3 mb-1">Exercises:</p>
                 {[...Array(5)].map((_, i) => (
                     <select
                         key={i}
-                        className="w-full border p-1 mb-1 rounded"
+                        className="text-lg w-full border p-2 mb-2 rounded exercise-gradient color-white"
                         value={localExercises[i] || ''}
                         onChange={(e) => handleExerciseChange(e.target.value, i + 1)}
                     >

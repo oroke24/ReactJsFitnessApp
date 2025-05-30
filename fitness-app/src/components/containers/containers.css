@@ -83,6 +83,9 @@ body, html {
 .dark-light-gradient{
     background:radial-gradient(circle, #AAAAAA 20%, #222222 85%);
 }
+.light-dark-gradient{
+    background:radial-gradient(circle, #333333 15%, #FFFFFF 50%);
+}
 .dark-light-gradient-left-right{
     background:linear-gradient(90deg, #222222, #666666, #AAAAAA);
 }
