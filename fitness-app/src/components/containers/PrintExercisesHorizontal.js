@@ -23,7 +23,7 @@ const PrintMyExercisesHorizontal = ({ path }) => {
                 </div>
             )}
             {docs.map((doc, index) => (
-                <div key={index} className='text-center w-[350px] h-[350px] border rounded-lg shrink-0 exercise-gradient p-5 overflow-y-auto'>
+                <div key={index} className='text-center w-[350px] h-[350px] border-4 rounded-lg shrink-0 exercise-gradient p-5 overflow-y-auto'>
                     <Link to={`/exerciseBasic/${doc.name}`} state={{ doc }}>
                         <strong className="text-xl">{doc.name}</strong>
                         <div className="text-left">
