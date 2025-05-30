@@ -48,6 +48,9 @@ body, html {
 .color-indigo{
     color: indigo;
 }
+.color-grey{
+    color: #EEEEEE;
+}
 .color-darkslategrey{
     color: darkslategrey;
 }
