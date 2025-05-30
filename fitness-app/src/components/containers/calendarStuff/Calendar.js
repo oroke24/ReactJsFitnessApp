@@ -89,8 +89,8 @@ const Calendar = () => {
                     <div className='mt-10 calendar-background'>
                     <div className='mt-10 px-10 flex justify-between items-center'>
                         <FaArrowCircleLeft className='text-6xl' onClick={handlePreviousDay}></FaArrowCircleLeft>
-                        {today.getDate() === selectedDate.getDate() ? <p className='text-4xl'>Today</p> : ''}
-                        {today.getDate()+1 === selectedDate.getDate() ? <p className='text-4xl'>Tomorrow</p> : ''}
+                        {today.getDate() === selectedDate.getDate() ? <p className='text-2xl'>Today</p> : ''}
+                        {today.getDate()+1 === selectedDate.getDate() ? <p className='text-2xl'>Tomorrow</p> : ''}
                         {console.log("today: ", today, " SelectedDate: ", selectedDate)}
                         <FaArrowCircleRight  className='text-6xl' onClick={handleNextDay}></FaArrowCircleRight>
                     </div>
