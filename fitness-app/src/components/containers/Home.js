@@ -100,7 +100,7 @@ const Home = () => {
                 className="flex-1 recipe-button recipe-gradient p-4 m-2"
                 onClick={handleOpenRecipeModal}
               >
-                <div className='color-darkslategrey flex justify-evenly items-center text-xl' >
+                <div className='color-black flex justify-evenly items-center text-xl' >
                   <FaGasPump></FaGasPump>
                   <strong>Recipes</strong>
                   <FaPlus></FaPlus>
@@ -130,7 +130,7 @@ const Home = () => {
                 </div>
               </button>
             </div>
-            <div className="p-2">
+            <div className="color-white p-2">
               {auth?.currentUser ? (
                 <PrintMyExercisesHorizontal
                   path={userCollection}

@@ -6,7 +6,7 @@ const WeeklySummary = ({ selectedDate, days, onDayClick }) => {
     //console.log("days[0] in weeklySummary:", days[0]);
     
     return (
-        <div className='flex overflow-x-auto space-x-5 mt-5 mb-5 ml-2 mr-2'>
+        <div className='flex overflow-x-auto space-x-5 mt-5 mb-5 ml-2 mr-2 color-white'>
             {days.map((day, index) => (
                 <div
                     key={index}

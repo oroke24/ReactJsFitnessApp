@@ -8,7 +8,7 @@ import WeeklySummary from './weeklySummary';
 import useWeeklyData from '../../../hooks/useWeeklyData';
 import EditDayComponent from './EditDayComponent';
 import useDailyData from '../../../hooks/useDailyData';
-import { FaArrowAltCircleLeft, FaArrowCircleLeft, FaArrowCircleRight } from 'react-icons/fa';
+import { FaArrowAltCircleLeft, FaArrowCircleLeft, FaArrowCircleRight, FaHome } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { setLogLevel } from 'firebase/app';
@@ -54,8 +54,8 @@ const Calendar = () => {
     return (
         <div>
 
-            <div style={{ display: 'flex', justifyContent: 'center', margin: '15px 0px 25px 0px' }}>
-                <Link to="/" className='text-5xl'><FaArrowAltCircleLeft></FaArrowAltCircleLeft></Link>
+            <div style={{margin: '30px', marginBottom:'50px', display: 'flex', justifyContent: 'center' }}>
+                <Link to="/" className='text-5xl'><FaHome></FaHome></Link>
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -65,8 +65,8 @@ const Calendar = () => {
                         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                         initialView="dayGridMonth"
                         headerToolbar={{
-                            left: 'prev',
-                            center: 'title',
+                            left: 'title',
+                            center: 'prev',
                             right: 'next'
                         }}
                         dateClick={(info) => {
