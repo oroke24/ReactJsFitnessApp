@@ -51,7 +51,7 @@ const Home = () => {
 
 
           {/*Header Row */}
-        <div className='p-5 w-full flex justify-evenly items-center'>
+          <div className='p-5 w-full flex justify-evenly items-center'>
             {/*Title */}
             <h1 className="flex-1 text-4xl font-bold text-neutral-100">Fit Cards</h1>
             {/*About Us Button */}
@@ -61,41 +61,41 @@ const Home = () => {
             >
               About Us
             </button>
-          {/*User Button */}
-          <button className="text-xl flex items-center justify-center"
-            onClick={handleOpenAccountModal}>
-            {/*auth.currentUser//if logged in
+            {/*User Button */}
+            <button className="text-xl flex items-center justify-center"
+              onClick={handleOpenAccountModal}>
+              {/*auth.currentUser//if logged in
               ?//show email
               auth.currentUser.email
               ://else say...
               "Login/Register"
             */}
-            <FaUser
-              className="text-3xl center fill-white">
-            </FaUser>
-          </button>
+              <FaUser
+                className="text-3xl center fill-white">
+              </FaUser>
+            </button>
           </div>
 
           {/*Buttons Container*/}
           <div className="mt-5 container text-center">
             {/**7 day forcast */}
-              <Link
-                to="/calendar"
-                state={{email: email}}
-              >
-            {auth?.currentUser ?
+            <Link
+              to="/calendar"
+              state={{ email: email }}
+            >
+              {auth?.currentUser ?
                 (<WeeklySummary
-                selectedDate={today}
-                days={days}
-              ></WeeklySummary>
-              ) : (
-                ""
-              )}
-              </Link>
-          
+                  selectedDate={today}
+                  days={days}
+                ></WeeklySummary>
+                ) : (
+                  ""
+                )}
+            </Link>
+
             {/*Recipe and Exercise Buttons Container*/}
-              {/*Recipe Button*/}
-              <div className='flex mt-12'>
+            {/*Recipe Button*/}
+            <div className='flex mt-12'>
               <button
                 className="flex-1 recipe-button recipe-gradient p-4 m-2"
                 onClick={handleOpenRecipeModal}
@@ -106,12 +106,16 @@ const Home = () => {
                   <FaPlus></FaPlus>
                 </div>
               </button>
-              </div>
-              <div className="p-2">
-              <PrintMyRecipesHorizontal
-                path={userCollection}>
-              </PrintMyRecipesHorizontal>
-              </div>
+            </div>
+            <div className="p-2">
+              {auth?.currentUser ? (
+                <PrintMyRecipesHorizontal
+                  path={userCollection}>
+                </PrintMyRecipesHorizontal>
+              ) : (
+                ""
+              )}
+            </div>
 
             {/*Exercise Button*/}
             <div className='flex mt-12'>
@@ -126,11 +130,15 @@ const Home = () => {
                 </div>
               </button>
             </div>
-              <div className="p-2">
-              <PrintMyExercisesHorizontal
-                path={userCollection}
-              ></PrintMyExercisesHorizontal>
-              </div>
+            <div className="p-2">
+              {auth?.currentUser ? (
+                <PrintMyExercisesHorizontal
+                  path={userCollection}
+                ></PrintMyExercisesHorizontal>
+              ) : (
+                ""
+              )}
+            </div>
 
             {/*Calendar Button*/}
             <Link
