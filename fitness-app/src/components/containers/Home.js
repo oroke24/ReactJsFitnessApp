@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { FaArrowRight, FaBurn, FaCalendar, FaCut, FaDumbbell, FaFire, FaGasPump, FaHollyBerry, FaStore, FaSubway, FaUser, FaUtensilSpoon } from 'react-icons/fa'
+import { FaPlus, FaArrowRight, FaBurn, FaCalendar, FaCut, FaDumbbell, FaFire, FaGasPump, FaHollyBerry, FaStore, FaSubway, FaUser, FaUtensilSpoon } from 'react-icons/fa'
 import './containers.css';
 import Login from '../auth/Login';
 import Account from '../auth/Account';
@@ -11,6 +11,8 @@ import { Link } from 'react-router-dom';
 import { initializeUser } from '../../firebase/firebaseFirestore';
 import useWeeklyData from '../../hooks/useWeeklyData';
 import WeeklySummary from './calendarStuff/weeklySummary';
+import PrintMyExercisesHorizontal from './PrintExercisesHorizontal';
+import PrintMyRecipesHorizontal from './PrintRecipesHorizontal'
 
 const Home = () => {
   //BINDING///////////////////////////////////
@@ -76,9 +78,24 @@ const Home = () => {
 
           {/*Buttons Container*/}
           <div className="mt-5 container text-center">
+            {/**7 day forcast */}
+              <Link
+                to="/calendar"
+                state={{email: email}}
+              >
+            {auth?.currentUser ?
+                (<WeeklySummary
+                selectedDate={today}
+                days={days}
+              ></WeeklySummary>
+              ) : (
+                ""
+              )}
+              </Link>
+          
             {/*Recipe and Exercise Buttons Container*/}
-            <div className='flex'>
               {/*Recipe Button*/}
+              <div className='flex mt-12'>
               <button
                 className="flex-1 recipe-button recipe-gradient p-4 m-2"
                 onClick={handleOpenRecipeModal}
@@ -86,30 +103,35 @@ const Home = () => {
                 <div className='color-darkslategrey flex justify-evenly items-center text-xl' >
                   <FaGasPump></FaGasPump>
                   <strong>Recipes</strong>
+                  <FaPlus></FaPlus>
                 </div>
               </button>
-              {/*Exercise Button*/}
+              </div>
+              <div className="p-2">
+              <PrintMyRecipesHorizontal
+                path={userCollection}>
+              </PrintMyRecipesHorizontal>
+              </div>
+
+            {/*Exercise Button*/}
+            <div className='flex mt-12'>
               <button
                 className="flex-1 exercise-button exercise-gradient p-4 m-2"
                 onClick={handleOpenExerciseModal}
               >
                 <div className='flex justify-evenly items-center text-xl'>
-                  <strong>Exercises</strong>
                   <FaFire></FaFire>
+                  <strong>Exercises</strong>
+                  <FaPlus></FaPlus>
                 </div>
               </button>
             </div>
+              <div className="p-2">
+              <PrintMyExercisesHorizontal
+                path={userCollection}
+              ></PrintMyExercisesHorizontal>
+              </div>
 
-            {/**7 day forcast */}
-            {auth?.currentUser ?
-              (<WeeklySummary
-                selectedDate={today}
-                days={days}
-              ></WeeklySummary>
-              ) : (
-                ""
-              )}
-          
             {/*Calendar Button*/}
             <Link
               to={auth?.currentUser ? "/calendar" : "/"}
