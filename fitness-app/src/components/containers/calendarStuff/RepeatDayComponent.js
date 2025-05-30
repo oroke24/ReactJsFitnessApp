@@ -59,7 +59,7 @@ const RepeatDayComponent = ({
             <div
                 className='border text-center rounded-md min-h-[200px]'
             >
-                <h3 className='color-grey text-xl m-5'>Repeat Area</h3>
+                <h3 className='text-xl m-5'>Repeat Area</h3>
                 {/*Construction Area
                 <div
                     className='w-full h-[300px] flex justify-around items-center border'>

@@ -85,7 +85,7 @@ const EditDayComponent = ({
                 {[...Array(5)].map((_, i) => (
                     <select
                         key={i}
-                        className="text-lg w-full border p-2 mb-2 rounded exercise-gradient color-white"
+                        className="text-lg w-full border p-2 mb-2 rounded exercise-gradient"
                         value={localExercises[i] || ''}
                         onChange={(e) => handleExerciseChange(e.target.value, i + 1)}
                     >
