@@ -1,6 +1,6 @@
 import React from 'react';
 import './calendar.css';
-import { FaCloud, FaSun } from 'react-icons/fa';
+import { FaCloud, FaDrumstickBite, FaPepperHot, FaSun, FaWalking } from 'react-icons/fa';
 
 const DayComponent = ({ date, recipes = [], exercises = [] }) => {
     let myDay = new Date(date);//IMPORTANT: For some reason myDay is set to day before
@@ -26,12 +26,16 @@ const DayComponent = ({ date, recipes = [], exercises = [] }) => {
                 :(
                 <div className='flex'>
                     <div className='flex-1 border-r gray-border'>
-                    <p className="text-lg font-bold mb-2 color-orange">Recipes:</p>
-                        {recipes.map((r, i) => <div className="text-start pl-2 pr-2 text-md color-orange" key={i}>- {r}</div>)}
+                        <p className="text-xl font-bold mb-2 exercise-color flex items-center justify-around">Exercises <FaWalking></FaWalking></p>
+                        <div className='mt-5'>
+                        {exercises.map((e, i) => <div className="text-start pl-4 pr-2 text-md exercise-color min-h-10 mb-1" key={i}><p>{e}</p></div>)}
+                        </div>  
                     </div>
                     <div className='flex-1 border-l gray-border'>
-                        <p className="text-lg font-bold mb-2 exercise-color">Exercises:</p>
-                        {exercises.map((e, i) => <div className="text-start pl-4 pr-2 text-md exercise-color" key={i}>- {e}</div>)}
+                    <p className="text-xl font-bold mb-2 color-orange flex items-center justify-around">Recipes <FaPepperHot></FaPepperHot></p>
+                        <div className='mt-5'>
+                        {recipes.map((r, i) => <div className="text-start pl-4 pr-2 text-md color-orange min-h-10 mb-1" key={i}><p>{r}</p></div>)}
+                        </div>
                     </div>
                 </div>
                 )}
