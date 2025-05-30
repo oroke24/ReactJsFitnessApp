@@ -23,7 +23,7 @@ const useDailyData = (selectedDate, userEmail) => {
         day.exercise3Id,
         day.exercise4Id,
         day.exercise5Id,
-      ].filter(Boolean);
+      ];
 
       const recipes = [
         day.recipe1Id,
@@ -31,7 +31,7 @@ const useDailyData = (selectedDate, userEmail) => {
         day.recipe3Id,
         day.recipe4Id,
         day.recipe5Id,
-      ].filter(Boolean);
+      ];
 
       setDayData({
         date: formattedDate,

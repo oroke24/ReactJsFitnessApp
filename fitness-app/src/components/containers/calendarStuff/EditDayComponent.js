@@ -23,9 +23,6 @@ const EditDayComponent = ({
     const [exerciseOptions, setExerciseOptions] = useState([]);
     const [localRecipes, setLocalRecipes] = useState(recipes);
     const [localExercises, setLocalExercises] = useState(exercises);
-    useEffect(() => {
-        setLocalRecipes(recipes);
-    }, [recipes]);
     const handleRecipeChange = async (recipeId, slot) => {
         dayManager.addRecipeToDay(isoDate, recipeId, slot)
         const updated = [...localRecipes]
@@ -34,8 +31,12 @@ const EditDayComponent = ({
     };
 
     useEffect(() => {
+        setLocalRecipes(recipes);
+    }, [recipes]);
+    useEffect(() => {
         setLocalExercises(exercises)
     }, [exercises]);
+
     const handleExerciseChange = async (exerciseId, slot) => {
         dayManager.addExerciseToDay(isoDate, exerciseId, slot)
         const updated = [...localExercises]
@@ -95,11 +96,11 @@ const EditDayComponent = ({
                     </select>
                 ))}
             </div>
-            <RepeatDayComponent 
-            date={date} 
-            recipes={recipes} 
-            exercises={exercises}
-            dayDataManager={dayManager}
+            <RepeatDayComponent
+                date={date}
+                recipes={recipes}
+                exercises={exercises}
+                dayDataManager={dayManager}
             ></RepeatDayComponent>
         </div>
     );
