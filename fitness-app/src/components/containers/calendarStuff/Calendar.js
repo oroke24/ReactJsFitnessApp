@@ -17,10 +17,13 @@ import '../containers.css';
 const Calendar = () => {
     const location = useLocation();
     const email = location.state?.email;
-    const newDate = new Date();
+    const dateFromWeekly = new Date(location.state?.dateFromWeekly);
+    dateFromWeekly.setDate(dateFromWeekly.getDate() + 1);
+    const newDate = new Date(dateFromWeekly || Date.now());
     //console.log("newDate:", newDate);
     newDate.setHours(0, 0, 0, 0);
-    const today = newDate;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
     //console.log("Email in calendar: ", email);
 
     const [selectedDate, setSelectedDate] = useState(newDate);

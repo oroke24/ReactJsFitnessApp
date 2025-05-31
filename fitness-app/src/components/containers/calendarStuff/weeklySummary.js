@@ -1,7 +1,8 @@
 import React from 'react';
 import DayComponent from './DayComponent';
+import { Link } from 'react-router-dom';
 
-const WeeklySummary = ({ selectedDate, days, onDayClick }) => {
+const WeeklySummary = ({ selectedDate, days, onDayClick, email }) => {
     //console.log("days in weeklySummary:", days);
     //console.log("days[0] in weeklySummary:", days[0]);
     
@@ -13,12 +14,16 @@ const WeeklySummary = ({ selectedDate, days, onDayClick }) => {
                     className={`p-1`}
                     >
                     {index === 0 ? (<h3 className='font-bold text-center'>Today</h3>):(<div className='p-3'></div>)}
+                    <Link
+                        to="/calendar"
+                        state={{email: email, dateFromWeekly: new Date(day.date).setHours(0,0,0,0)}}
+                    >
                     <DayComponent
-                        key = {index}
                         date={day.date}
                         recipes={day.recipes}
                         exercises={day.exercises}
                     />
+                    </Link>
                 </div>
             ))}
         </div>
