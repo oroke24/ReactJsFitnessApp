@@ -13,11 +13,13 @@ import useWeeklyData from '../../hooks/useWeeklyData';
 import WeeklySummary from './calendarStuff/weeklySummary';
 import PrintMyExercisesHorizontal from './PrintExercisesHorizontal';
 import PrintMyRecipesHorizontal from './PrintRecipesHorizontal'
+import useAuthStatus from '../../hooks/useAuthStatus';
 
 const Home = () => {
   //BINDING///////////////////////////////////
   const userCollection = auth?.currentUser ? `users/${auth.currentUser.email}` : "users/guest";
   const email = auth?.currentUser ? `${auth.currentUser.email}` : "guest";
+  const [myEmail] = useState(email);
   const [message, setMessage] = useState('Empty');
   const [isMainModalOpen, setMainModalOpen] = useState(false);
   const [isAccountModalOpen, setAccountModalOpen] = useState(false);
@@ -79,19 +81,13 @@ const Home = () => {
           {/*Buttons Container*/}
           <div className="mt-5 container text-center">
             {/**7 day forcast */}
-            <Link
-              to="/calendar"
-              state={{ email: email }}
-            >
-              {auth?.currentUser ?
-                (<WeeklySummary
-                  selectedDate={today}
-                  days={days}
-                ></WeeklySummary>
-                ) : (
-                  ""
-                )}
-            </Link>
+            {auth?.currentUser && email && (
+              <WeeklySummary
+                selectedDate={today}
+                days={days}
+                email={email}
+              />
+            )}
 
             {/*Recipe and Exercise Buttons Container*/}
             {/*Recipe Button*/}

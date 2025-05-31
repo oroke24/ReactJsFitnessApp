@@ -23,12 +23,6 @@ const EditDayComponent = ({
     const [exerciseOptions, setExerciseOptions] = useState([]);
     const [localRecipes, setLocalRecipes] = useState(recipes);
     const [localExercises, setLocalExercises] = useState(exercises);
-    const handleRecipeChange = async (recipeId, slot) => {
-        dayManager.addRecipeToDay(isoDate, recipeId, slot)
-        const updated = [...localRecipes]
-        updated[slot - 1] = recipeId;
-        setLocalRecipes(updated);
-    };
 
     useEffect(() => {
         setLocalRecipes(recipes);
@@ -37,8 +31,16 @@ const EditDayComponent = ({
         setLocalExercises(exercises)
     }, [exercises]);
 
+    const handleRecipeChange = async (recipeId, slot) => {
+        
+        await dayManager.addRecipeToDay(isoDate, recipeId, slot)
+        const updated = [...localRecipes]
+        updated[slot - 1] = recipeId;
+        setLocalRecipes(updated);
+    };
+
     const handleExerciseChange = async (exerciseId, slot) => {
-        dayManager.addExerciseToDay(isoDate, exerciseId, slot)
+        await dayManager.addExerciseToDay(isoDate, exerciseId, slot)
         const updated = [...localExercises]
         updated[slot - 1] = exerciseId;
         setLocalExercises(updated);
