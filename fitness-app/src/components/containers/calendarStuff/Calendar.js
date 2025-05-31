@@ -72,7 +72,7 @@ const Calendar = () => {
                         headerToolbar={{
                             left: 'title',
                             center: '',
-                            right: 'today prev next'
+                            right: 'prev next'
                         }}
                         dateClick={(info) => {
                             const newDate = new Date(info.date);
