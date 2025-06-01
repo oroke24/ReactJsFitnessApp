@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaDumpsterFire, FaHammer, FaPaintRoller, FaWrench } from "react-icons/fa";
-import {Toaster} from 'react-hot-toast';
-import {toast} from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 import '../loading.css';
 
 const RepeatDayComponent = ({
@@ -23,20 +23,20 @@ const RepeatDayComponent = ({
     const handleRepeat = async () => {
         const weeksToRepeat = parseInt(selected);
         //console.log(weeksToRepeat);
-        if(!weeksToRepeat || weeksToRepeat <= 0) return;
+        if (!weeksToRepeat || weeksToRepeat <= 0) return;
 
         setLoading(true);
 
-        for(let i=1; i <= weeksToRepeat; i++){
+        for (let i = 1; i <= weeksToRepeat; i++) {
             const repeatDate = new Date(date);
             repeatDate.setDate(repeatDate.getDate() + i * 7);
             const repeatIsoDate = repeatDate.toISOString().split('T')[0];
 
-            for(let [index, recipe] of recipes.entries()){
+            for (let [index, recipe] of recipes.entries()) {
                 await dayDataManager.addRecipeToDay(repeatIsoDate, recipe, index + 1);
                 console.log("Adding Recipe: ", recipe, "slot: ", index + 1, "Date: ", repeatIsoDate)
             };
-            for(let[index, exercise] of exercises.entries()){
+            for (let [index, exercise] of exercises.entries()) {
                 await dayDataManager.addExerciseToDay(repeatIsoDate, exercise, index + 1)
                 console.log("Adding Exercise: ", exercise, "slot: ", index + 1, "Date: ", repeatIsoDate)
             };
@@ -49,12 +49,7 @@ const RepeatDayComponent = ({
 
     return (
         <div>
-            <Toaster position="bottom-center"/>
-            {loading && (
-                <div className="loading-screen">
-                    <div className= "loading-spinner"></div>
-                </div>
-                )}
+            <Toaster position="bottom-center" />
             {/**Repeat Area */}
             <div
                 className='border text-center rounded-md min-h-[200px]'
@@ -91,7 +86,12 @@ const RepeatDayComponent = ({
                     <button
                         onClick={handleRepeat}
                         className="p-5 m-10 w-full"
-                    >Set Repeat
+                    >
+                        {!loading ? ("Set Repeat") : (
+                            <div className="w-full flex justify-center">
+                                <div className="loading-spinner"></div>
+                            </div>
+                        )}
                     </button>
                 </div>
             </div>
