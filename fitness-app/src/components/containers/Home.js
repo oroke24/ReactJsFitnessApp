@@ -71,7 +71,7 @@ const Home = () => {
               auth.currentUser.email
               ://else say...
               "Login/Register"
-            */}
+              */}
               <FaUser
                 className="text-3xl center fill-white">
               </FaUser>
@@ -136,7 +136,7 @@ const Home = () => {
               )}
             </div>
 
-            {/*Calendar Button*/}
+            {/*Calendar Button
             <Link
               to={auth?.currentUser ? "/calendar" : "/"}
               state={{ email: email }}
@@ -150,6 +150,7 @@ const Home = () => {
                 </div>
               </button>
             </Link>
+            */}
             {/*Coming Soon Section Buttons */}
             <div className='mt-10 color-white text-3xl'>
               <div className='text-opacity-50'>
