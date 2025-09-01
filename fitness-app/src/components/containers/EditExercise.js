@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import { FaArrowAltCircleLeft, FaCheck, FaPlus, FaRobot, FaTrash, FaXing } from "react-icons/fa";
-import { useLocation, useParams, Link, useNavigate} from "react-router-dom";
+import { useLocation, useParams, Link, useNavigate } from "react-router-dom";
 import './containers.css';
 import { deleteDocument, addDocument2, saveAsNew, updateDocument } from "../../firebase/firebaseFirestore";
 import './loading.css';
 import aiRevamp from "../../hooks/aiRevamp";
 
 const EditExercise = () => {
-    const {id} = useParams();
+    const { id } = useParams();
     const location = useLocation();
-    const {doc} = location.state || {};
+    const { doc } = location.state || {};
     const navigate = useNavigate();
 
     const [nameValue, setNameValue] = useState(doc?.name || '');
-    const [muscleGroupValue, setMuscleGroupValue] = useState(doc?.muscleGroup||'');
+    const [muscleGroupValue, setMuscleGroupValue] = useState(doc?.muscleGroup || '');
     const [instructionsValue, setInstructionsValue] = useState(doc?.instructions || '');
     const [loading, setLoading] = useState(false);
 
@@ -26,9 +26,9 @@ const EditExercise = () => {
     const handleInstructionsChange = (event) => {
         setInstructionsValue(event.target.value);
     }
-    const handleAiRevamp = async () =>{
-        try{
-            if(nameValue.trim() === ""){
+    const handleAiRevamp = async () => {
+        try {
+            if (nameValue.trim() === "") {
                 alert("Name cannot be empty.");
                 return;
             }
@@ -38,17 +38,17 @@ const EditExercise = () => {
             const aiCard = await aiRevamp('exercise', content);
             setMuscleGroupValue(aiCard?.group_one.join('\n'));
             setInstructionsValue(aiCard?.group_two.join('\n'));
-        }catch(error){
+        } catch (error) {
             console.error("Error revamping exercise: ", error);
-        }finally{
+        } finally {
             setLoading(false);
         }
     }
-    const handleSaveAsNew = async () =>{
-        try{
+    const handleSaveAsNew = async () => {
+        try {
             setLoading(true);
-            const exercise = {id: nameValue, name: nameValue, muscleGroup: muscleGroupValue, instructions: instructionsValue};
-            if(exercise.name.trim() === ""){
+            const exercise = { id: nameValue, name: nameValue, muscleGroup: muscleGroupValue, instructions: instructionsValue };
+            if (exercise.name.trim() === "") {
                 alert("Name cannot be empty.");
                 return;
             }
@@ -56,18 +56,18 @@ const EditExercise = () => {
             await saveAsNew('exercises', exercise);
             alert(`Saved ${exercise.name} as a new card`);
             handleClose();
-        }catch(error){
+        } catch (error) {
             console.error("Error adding exercise: ", error);
-        }finally{
+        } finally {
             setLoading(false);
         }
     }
-    const handleUpdateThisCard = async () =>{
-        try{
+    const handleUpdateThisCard = async () => {
+        try {
             setLoading(true);
             const checkNew = doc ? doc.id : "New card";
-            const exercise = {id: checkNew, name: nameValue, muscleGroup: muscleGroupValue, instructions: instructionsValue};
-            if(exercise.name.trim() === ""){
+            const exercise = { id: checkNew, name: nameValue, muscleGroup: muscleGroupValue, instructions: instructionsValue };
+            if (exercise.name.trim() === "") {
                 alert("Name cannot be empty.");
                 return;
             }
@@ -75,22 +75,22 @@ const EditExercise = () => {
             await updateDocument('exercises', exercise);
             alert(`Updated ${doc.id} to ${nameValue}`);
             handleClose();
-        }catch(error){
+        } catch (error) {
             console.error("Error adding exercise: ", error);
-        }finally{
+        } finally {
             setLoading(false)
         }
     }
     const handleDeleteExercise = (exerciseName) => {
-        try{
+        try {
             setLoading(true);
             //usage('path', 'docId')
             deleteDocument(`exercises`, exerciseName);
             //console.log("exercise to delete: ", exerciseName);
             handleClose();
-        }catch(error){
+        } catch (error) {
             console.error("Error Deleting doc: ", error);
-        }finally{
+        } finally {
             setLoading(false);
             alert(`${exerciseName} successfully deleted!`);
         }
@@ -108,7 +108,7 @@ const EditExercise = () => {
     //console.log("In EditItem, id: ", {id} );
     //console.log("In EditItem, doc: ", doc );
 
-    return(
+    return (
         <div className="exercise-gradient edit-card-background flex flex-col items-center h-screen">
             {loading && (
                 <div className="loading-screen">
@@ -118,89 +118,89 @@ const EditExercise = () => {
             {/*Back Button */}
             <button className="absolute top-5 right-5"><Link to='../' className="m-2">close</Link></button>
             {/*Name area*/}
-            <h1 className="text-2xl mt-10" 
+            <h1 className="text-2xl mt-10"
                 onChange={handleNameChange}>
-                    <strong>Editing"</strong>{nameValue}<strong>"</strong>
+                <strong>Editing"</strong>{nameValue}<strong>"</strong>
             </h1>
-            <textarea className="name-textarea text-4xl" 
-                value={nameValue} 
+            <textarea className="name-textarea text-4xl"
+                value={nameValue}
                 onChange={handleNameChange}
                 onInput={handleTextAreaResize}>
             </textarea>
             {/*Muscle Group area*/}
             <h1 className="text-2xl mt-10"><strong>Muscle Group</strong></h1>
-                <textarea  
-                    className="muscle-group-textarea" 
-                    type="text" 
-                    value={muscleGroupValue} 
-                    onChange={handleMuscleGroupChange}
-                    onInput={handleTextAreaResize}>
-                </textarea>
+            <textarea
+                className="muscle-group-textarea"
+                type="text"
+                value={muscleGroupValue}
+                onChange={handleMuscleGroupChange}
+                onInput={handleTextAreaResize}>
+            </textarea>
             {/*Instructions area*/}
             <h1 className="text-2xl mt-10"><strong>Instructions</strong></h1>
-                <textarea 
-                    className="instructions-textarea" 
-                    type="text" 
-                    value={instructionsValue} 
-                    onChange={handleInstructionsChange}
-                    onInput={handleTextAreaResize}>
-                </textarea>
-                {/*ai revamp Button */}
-                <button 
-                    className="flex items-center mt-10 w-50">
-                        <Link 
-                            onClick= {() => handleAiRevamp()}
-                            className="flex items-center">
-                                <FaRobot className="text-3xl m-2"></FaRobot>
-                            aiRevamp 
-                        </Link>
-                </button>
-                <div className="row w-11/12 mt-16 flex justify-evenly">
-                    {/*Update Button */}
-                    {id != "NewItem"//if id isn't NewItem
+            <textarea
+                className="instructions-textarea"
+                type="text"
+                value={instructionsValue}
+                onChange={handleInstructionsChange}
+                onInput={handleTextAreaResize}>
+            </textarea>
+            {/*ai revamp Button */}
+            <button
+                className="flex items-center mt-10 w-50">
+                <Link
+                    onClick={() => handleAiRevamp()}
+                    className="flex items-center">
+                    <FaRobot className="text-3xl m-2"></FaRobot>
+                    aiRevamp
+                </Link>
+            </button>
+            <div className="row w-11/12 mt-16 flex justify-evenly">
+                {/*Update Button */}
+                {id != "NewItem"//if id isn't NewItem
                     ?//show update button
-                    <button 
-                        className="flex items-center w-1/2 h-20 justify-center">
-                            <Link 
-                                onClick= {() => handleUpdateThisCard()}
-                                className="flex items-center">
-                                    <FaCheck className="text-3xl m-2"></FaCheck>
-                                update this card 
-                            </Link>
-                    </button>
+                    <Link
+                        onClick={() => handleUpdateThisCard()}
+                        className="flex items-center justify-center w-1/2 h-20">
+                        <button
+                            className="flex items-center w-full h-20 justify-center">
+                            <FaCheck className="text-3xl m-2"></FaCheck>
+                            update this card
+                        </button>
+                    </Link>
                     ://else show nothing`
                     <></>
-                    }
-                    {/*Save as new Button */}
-                    <button 
-                        className="flex items-center justify-center w-1/2 h-20">
-                            <Link 
-                                onClick= {() => handleSaveAsNew()}
-                                className="flex items-center">
-                                    <FaPlus className="text-3xl m-2"></FaPlus>
-                                save as new
-                            </Link>
+                }
+                {/*Save as new Button */}
+                <Link
+                    onClick={() => handleSaveAsNew()}
+                    className="flex items-center justify-center w-1/2 h-20">
+                    <button
+                        className="flex items-center justify-center w-full h-20">
+                        <FaPlus className="text-3xl m-2"></FaPlus>
+                        save as new
                     </button>
-                </div>
-                {/*Delete Button */}
-                {id != "NewItem" //if id isn't NewItem
+                </Link>
+            </div>
+            {/*Delete Button */}
+            {id != "NewItem" //if id isn't NewItem
                 ?//show delete button
-                <button 
+                <button
                     className="mt-32 flex bg-red-600 text-2xl w-max items-center"
                     onClick={() => handleDeleteExercise(`${doc.name}`)}
-                    >
-                        <FaTrash className="m-2"></FaTrash>
-                        Delete Forever?
+                >
+                    <FaTrash className="m-2"></FaTrash>
+                    Delete Forever?
                 </button>
                 ://else show nothing (newItems are already empty, no need to delete)
                 <></>
-                }
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
+            }
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
         </div>
     );
 };
