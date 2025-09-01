@@ -32,14 +32,14 @@ const RepeatDayComponent = ({
             repeatDate.setDate(repeatDate.getDate() + i * 7);
             const repeatIsoDate = repeatDate.toISOString().split('T')[0];
 
-            for (let [index, recipe] of recipes.entries()) {
-                await dayDataManager.addRecipeToDay(repeatIsoDate, recipe, index + 1);
-                console.log("Adding Recipe: ", recipe, "slot: ", index + 1, "Date: ", repeatIsoDate)
-            };
-            for (let [index, exercise] of exercises.entries()) {
-                await dayDataManager.addExerciseToDay(repeatIsoDate, exercise, index + 1)
-                console.log("Adding Exercise: ", exercise, "slot: ", index + 1, "Date: ", repeatIsoDate)
-            };
+            const recipPromises = recipes.map((recipe, index) =>
+                dayDataManager.addRecipeToDay(repeatIsoDate, recipe, index + 1)
+            );
+            const exercisePromises = exercises.map((exercise, index) =>
+                dayDataManager.addExerciseToDay(repeatIsoDate, exercise, index + 1)
+            );
+            await Promise.all([...recipPromises, ...exercisePromises]);
+            console.log(`Week ${i} added successfully: ${repeatIsoDate}`);
         }
         toast.success(`Repeating every ${dayOfWeek} for ${weeksToRepeat} weeks.`);
         //console.log("Date: ", date);
