@@ -25,31 +25,15 @@ export class dayDataManager {
   async addRecipeToDay(date, recipeId, slot) {
     const recipeSlot = `recipe${Math.min(Math.max(slot, 1), 5)}Id`;
     const dayDocRef = doc(this.daysCollection, date);
-    const existingDoc = await getDoc(dayDocRef);
 
-    const update = { [recipeSlot]: recipeId };
-
-    if (existingDoc.exists()) {
-      await updateDoc(dayDocRef, update);
-      //console.log("Updated Successfully!");
-    } else {
-      await setDoc(dayDocRef, update);
-      //console.log("Updated Successfully!");
-    }
+      await setDoc(dayDocRef, {[recipeSlot]: recipeId}, {merge: true});
   }
 
   async addExerciseToDay(date, exerciseId, slot) {
     const exerciseSlot = `exercise${Math.min(Math.max(slot, 1), 5)}Id`;
     const dayDocRef = doc(this.daysCollection, date);
-    const existingDoc = await getDoc(dayDocRef);
 
-    const update = { [exerciseSlot]: exerciseId };
-
-    if (existingDoc.exists()) {
-      await updateDoc(dayDocRef, update);
-    } else {
-      await setDoc(dayDocRef, update);
-    }
+      await setDoc(dayDocRef, {[exerciseSlot]: exerciseId}, {merge:true});
   }
 
   async getDayFromDate(date) {
