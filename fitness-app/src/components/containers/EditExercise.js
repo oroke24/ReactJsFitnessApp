@@ -149,7 +149,10 @@ const EditExercise = () => {
             <button
                 className="flex items-center mt-10 w-50">
                 <Link
-                    onClick={() => handleAiRevamp()}
+                    onClick={() => 
+                        //handleAiRevamp() //temporarily disabled 
+                        alert("AiRevamp temporarily under construction.\n Should be back up by Friday Oct 10th")
+                    }
                     className="flex items-center">
                     <FaRobot className="text-3xl m-2"></FaRobot>
                     aiRevamp
