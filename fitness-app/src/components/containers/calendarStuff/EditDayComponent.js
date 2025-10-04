@@ -100,8 +100,8 @@ const EditDayComponent = ({
             </div>
             <RepeatDayComponent
                 date={date}
-                recipes={recipes}
-                exercises={exercises}
+                recipes={localRecipes}
+                exercises={localExercises}
                 dayDataManager={dayManager}
             ></RepeatDayComponent>
         </div>
