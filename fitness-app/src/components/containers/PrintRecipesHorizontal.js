@@ -15,6 +15,10 @@ const PrintMyRecipesHorizontal = ({ path }) => {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
 
+    const sortedDocs = docs.slice().sort((a, b) =>
+        a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+    );
+
     return (
         <div className='flex overflow-x-auto flex-nowrap w-full space-x-4 '>
             {isLoading && (
@@ -22,7 +26,7 @@ const PrintMyRecipesHorizontal = ({ path }) => {
                     <div className="loading-spinner"></div>
                 </div>
             )}
-            {docs.map((doc, index) => (
+            {sortedDocs.map((doc, index) => (
                 <div key={index} className='text-center w-[350px] h-[350px] border-4 rounded-lg shrink-0 recipe-gradient p-5 overflow-y-auto'>
                     <Link to={`/recipeBasic/${doc.name}`} state={{ doc }}>
                         <strong className="text-xl">{doc.name}</strong>

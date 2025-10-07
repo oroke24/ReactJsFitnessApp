@@ -81,13 +81,23 @@ const Home = () => {
           {/*Buttons Container*/}
           <div className="mt-5 container text-center">
             {/**7 day forcast */}
-            {auth?.currentUser && email && (
+            {auth?.currentUser && email ? (
               <WeeklySummary
                 selectedDate={today}
                 days={days}
                 email={email}
               />
-            )}
+            ) : 
+            <div className="mt-5 container text-center flex overflow-x-auto space-x-4">
+            {Array.from({ length: 7 }).map((_, idx) => (
+              <div key={idx} className="p-7 flex flex-col items-center">
+                <h3 className='text-xl font-bold text-center text-gray-400 mb-1'>Day</h3>
+                <div className="w-[380px] h-[300px] foggy-background rounded-lg shadow animate-pulse"></div>
+              </div>
+            ))}
+          </div>
+          
+            }
 
             {/*Recipe and Exercise Buttons Container*/}
             {/*Recipe Button*/}
@@ -159,9 +169,6 @@ const Home = () => {
               <button className='bg-white opacity-30 bg-opacity-40 mt-5 w-11/12 p-10'>
                 Friends and card sharing
               </button>
-              <button className='bg-white opacity-30 bg-opacity-20 mt-5 w-11/12 p-10'>
-                Customizeable Card preview styles
-              </button>
             </div>
           </div>
         </div>
@@ -221,7 +228,7 @@ const Home = () => {
           isOpen={isAboutUsModalOpen}
           onClose={handleCloseAboutUsModal}
         >
-          <div className='flex justify-center'
+          <div className='flex justify-center p-10'
           >
             <p>
               About Us:
@@ -232,9 +239,7 @@ const Home = () => {
               What makes this different?
               <br /><br />
               Its all FREE! And, you're making (and sharing) your own cards. It's a bottom-up approach, where you create to inspire .
-              So, get started and check out all the cool free features (like aiRevamp in the editing areas)!<br />
-              <br /><br />
-              (Coming Soon: Calendar, Agenda, Groups (for syncing schedules and goals with friends).)
+              So, get started and check out all the cool free features (like aiRevamp in the editing areas and calendar for scheduling a routine)!<br />
             </p>
           </div>
           <div className='p-5 text-4xl w-full flex items-center justify-center'>
