@@ -31,6 +31,10 @@ const PrintMyRecipes = ({path}) => {
     }
 
                     //{/*onClick={() => handleRecipeClick(doc)}*/} 
+    const sortedDocs = docs.slice().sort((a, b) =>
+        a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+    );
+
     return (
     <div>
             {isLoading && (
@@ -49,7 +53,7 @@ const PrintMyRecipes = ({path}) => {
             </button>
             </Link>
         </div>
-            {docs.map(doc => (
+            {sortedDocs.map(doc => (
                 <RecipeSwipable key={doc.name} doc={doc} handleDelete={handleDelete}></RecipeSwipable>
             ))}
         {/*New Card Button */}

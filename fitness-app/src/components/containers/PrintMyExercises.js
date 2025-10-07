@@ -23,6 +23,11 @@ const PrintMyExercises = ({path}) => {
             window.location.reload();
         }
     }
+
+    const sortedDocs = docs.slice().sort((a, b) =>
+        a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+    );
+
     return (
     <div>
             {isLoading && (
@@ -39,7 +44,7 @@ const PrintMyExercises = ({path}) => {
             </button>
             </Link>
         </div>
-            {docs.map(doc => (
+            {sortedDocs.map(doc => (
                 <ExerciseSwipable key={doc.name} doc={doc} handleDelete={handleDelete}/>
             ))}
         {/*New Card Button */}
