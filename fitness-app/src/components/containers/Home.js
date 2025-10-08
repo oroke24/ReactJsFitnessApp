@@ -66,12 +66,12 @@ const Home = () => {
             {/*User Button */}
             <button className="text-xl flex items-center justify-center"
               onClick={handleOpenAccountModal}>
-              {/*auth.currentUser//if logged in
-              ?//show email
-              auth.currentUser.email
-              ://else say...
-              "Login/Register"
-              */}
+              {auth.currentUser//if logged in
+              ?
+              ""
+              :
+              "Login/Register"//attach login text
+              }
               <FaUser
                 className="text-3xl center fill-white">
               </FaUser>
