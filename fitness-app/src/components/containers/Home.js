@@ -56,27 +56,26 @@ const Home = () => {
           <div className='p-5 w-full flex justify-evenly items-center'>
             {/*Title */}
             <h1 className="flex-1 text-4xl font-bold text-neutral-100">Fit Cards</h1>
-            {/*About Us Button */}
-            <button
-              className=''
-              onClick={handleOpenAboutUsModal}
-            >
-              About Us
-            </button>
             {/*User Button */}
             <button className="text-xl flex items-center justify-center"
               onClick={handleOpenAccountModal}>
               {auth.currentUser//if logged in
               ?
-              ""
-              :
-              "Login/Register"//attach login text
-              }
               <FaUser
                 className="text-3xl center fill-white">
               </FaUser>
+              :
+              "Login/Register"//attach login text
+              }
             </button>
           </div>
+            {/*About Us Button */}
+            <button
+              className='center'
+              onClick={handleOpenAboutUsModal}
+            >
+              About Us
+            </button>
 
           {/*Buttons Container*/}
           <div className="mt-5 container text-center">
