@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { FaPlus, FaArrowRight, FaBurn, FaCalendar, FaCut, FaDumbbell, FaFire, FaGasPump, FaHollyBerry, FaStore, FaSubway, FaUser, FaUtensilSpoon } from 'react-icons/fa'
+import { FaPlus, FaArrowRight, FaBurn, FaCalendar, FaCut, FaDumbbell, FaFire, FaGasPump, FaHollyBerry, FaStore, FaSubway, FaUser, FaUtensilSpoon, FaArrowDown, FaQuestionCircle, FaUserPlus } from 'react-icons/fa'
 import './containers.css';
 import Login from '../auth/Login';
 import Account from '../auth/Account';
@@ -53,33 +53,37 @@ const Home = () => {
 
 
           {/*Header Row */}
-          <div className='p-5 w-full flex justify-evenly items-center'>
+          <div className='px-5 pt-2 w-full flex justify-evenly items-center'>
             {/*Title */}
             <h1 className="flex-1 text-4xl font-bold text-neutral-100">Fit Cards</h1>
+            <FaQuestionCircle className='text-3xl text-white me-5' onClick={handleOpenAboutUsModal}/>
             {/*User Button */}
             <button className="text-xl flex items-center justify-center"
               onClick={handleOpenAccountModal}>
               {auth.currentUser//if logged in
               ?
-              <FaUser
-                className="text-3xl center fill-white">
-              </FaUser>
+              <FaUser className="text-3xl center fill-white"/>
               :
-              "Login/Register"//attach login text
+              <div>
+              <FaUserPlus className='text-4xl center fill-white'/>
+              
+              </div>
               }
             </button>
           </div>
-            {/*About Us Button */}
-            <button
-              className='center'
+            {/*About Us Button
+          <div className='w-full text-center'>
+            <FaQuestionCircle
+              className='start text-white text-3xl'
               onClick={handleOpenAboutUsModal}
-            >
-              About Us
-            </button>
+            />
+          </div>
+          */}
 
           {/*Buttons Container*/}
-          <div className="mt-5 container text-center">
+          <div className="mt-10 container text-center">
             {/**7 day forcast */}
+            <h3 className='text-2xl font-bold text-center text-white'>7 Day Snapshot</h3>
             {auth?.currentUser && email ? (
               <WeeklySummary
                 selectedDate={today}
@@ -89,7 +93,7 @@ const Home = () => {
             ) : 
             <div className="mt-5 container text-center flex overflow-x-auto space-x-4">
             {Array.from({ length: 7 }).map((_, idx) => (
-              <div key={idx} className="p-7 flex flex-col items-center">
+              <div key={idx} className="ps-1 pt-7 flex flex-col items-center">
                 <h3 className='text-xl font-bold text-center text-gray-400 mb-1'>Day</h3>
                 <div className="w-[380px] h-[300px] foggy-background rounded-lg shadow animate-pulse"></div>
               </div>

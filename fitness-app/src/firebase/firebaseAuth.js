@@ -37,7 +37,7 @@ export const login = (email, password) => {
 export const register = async (email, password) => {
     const create = await createUserWithEmailAndPassword(auth, email, password)
     .then (() => {
-        alert(`check ${email} for verification link (might take a few minutes).`);
+        alert(`check ${email} for verification link (might take a few minutes). \n*Might go to Junk/Spam folder`);
         sendEmailVerification(auth.currentUser)
         .then(()=>{
             const currentTime = new Date().getTime();
@@ -59,7 +59,7 @@ export const logout = () => {
 export const forgotPassword = (email) => {
     return sendPasswordResetEmail(auth, email)
     .then(() =>{
-        alert(`Password reset email sent to ${email} if it exists.`);
+        alert(`Password reset email sent to ${email} if it exists \n*Might go to Junk/Spam folder.`);
     })
     .catch((error) => {
         alert(`Error occured, email not recognized`);

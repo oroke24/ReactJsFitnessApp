@@ -8,7 +8,7 @@ const WeeklySummary = ({ selectedDate, days, onDayClick, email }) => {
     //console.log("days[0] in weeklySummary:", days[0]);
 
     return (
-        <div className='flex overflow-x-auto space-x-5 mt-5 mb-5 ml-2 mr-2 color-white'>
+        <div className='flex overflow-x-auto space-x-5 mt-5 mb-5 mr-2 color-white'>
             {isLoading ? (
                 Array.from({ length: 7 }).map((_, idx) => (
                     <div key={idx} className="p-1 flex flex-col items-center">
