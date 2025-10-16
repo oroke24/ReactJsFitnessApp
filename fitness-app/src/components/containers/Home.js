@@ -175,13 +175,29 @@ const Home = () => {
               </button>
             </Link>
             */}
-            {/*Coming Soon Section Buttons */}
-            <div className='mt-10 color-white text-3xl'>
+            {/*Coming Soon and Known Bugs Section*/}
+            <div className='my-10 color-white text-3xl'>
+              {/*Coming Soon*/}
               <div className='text-opacity-50'>
                 Coming Soon
               </div>
-              <button className='bg-white opacity-30 bg-opacity-40 mt-5 w-11/12 p-10'>
-                Friends and card sharing
+              <button className='bg-white opacity-80 bg-opacity-40 mt-5 w-11/12 p-10'>
+                Snapshot Grocery List
+              </button>
+              <button className='bg-white opacity-80 bg-opacity-40 mt-5 w-11/12 p-10'>
+                Publicly visible days and cards
+              </button>
+            </div>
+            <div className='my-10 color-white text-2xl'>
+              {/*Known Bugs*/}
+              <div className='mt-5 text-opacity-50'>
+                Known Bugs
+              </div>
+              <button className='bg-red-500 opacity-80 bg-opacity-40 mt-5 w-11/12 p-10'>
+                If you update a card name and that card is already in your routine, you will have to update the card slot in calendar to reflect accurate routine.
+              </button>
+              <button className='bg-red-500 opacity-80 bg-opacity-40 mt-5 w-11/12 p-10'>
+                AiRevamp in card edit area is down until November 1st 
               </button>
             </div>
           </div>
@@ -189,6 +205,7 @@ const Home = () => {
 
         {/*End Buttons*/}
 
+        {/*---------End Main visible area-----------*/}
         {/*Testing Modal*/}
         {/*End Testing Modal */}
 
