@@ -23,36 +23,10 @@ const ExerciseBasic = () => {
         {/**Back/Home Button */}
         <div
             style={{ margin: '30px', marginBottom: '10px', display: 'flex', justifyContent: 'center' }}>
-            <Link to="/" className='p-3 rounded-xl bg-black outline text-5xl'><FaHome className="fill-white"></FaHome></Link>
+            <Link to="/" className='flex justify-center w-3/4 items-center p-3 rounded-3xl foggy-background outline text-5xl'><FaHome className="fill-white"/></Link>
         </div>
         {/**Main Div */}
         <div className="main-container flex flex-col items-center justify-center">
-            {/**Buttons Row Div */}
-            <div className="mt-10 flex flex-row w-full justify-evenly">
-
-                {/**Copy Text Button */}
-                <div className="">
-                    <button
-                        className="flex items-center justify-between w-full p-5"
-                        onClick={() => copyToClipboard(nameValue, "Muscle Group(s):", muscleGroupValue, "Instructions:", instructionsValue)}
-                    >
-                        <FaRegClipboard className="text-2xl"></FaRegClipboard>
-                        {' Copy Text '}
-                        <FaReceipt></FaReceipt>
-                    </button>
-                </div>
-                {/**Upload/Share Card Button */}
-                <div className="">
-                    <button
-                        className="flex items-center justify-between w-full p-5"
-                        onClick={() => copyDivImageToClipboard("exercise-basic-card")}
-                    >
-                        <FaShare className="text-2xl"></FaShare>
-                        {' Share Card'}
-                        <FaSquare></FaSquare>
-                    </button>
-                </div>
-            </div>
 
             {/**Edit Button */}
             <Link
@@ -79,6 +53,32 @@ const ExerciseBasic = () => {
                 <div className="exercise-basic-sub-title">Instructions</div>
                 <div className="exercise-basic-instructions">
                     {instructionsValue}
+                </div>
+            </div>
+            {/**Buttons Row Div */}
+            <div className="mt-10 flex flex-row w-full justify-evenly">
+
+                {/**Copy Text Button */}
+                <div className="">
+                    <button
+                        className="flex items-center justify-between w-full p-5"
+                        onClick={() => copyToClipboard(nameValue, "Muscle Group(s):", muscleGroupValue, "Instructions:", instructionsValue)}
+                    >
+                        <FaRegClipboard className="text-2xl"></FaRegClipboard>
+                        {' Copy Text '}
+                        <FaReceipt></FaReceipt>
+                    </button>
+                </div>
+                {/**Upload/Share Card Button */}
+                <div className="">
+                    <button
+                        className="flex items-center justify-between w-full p-5"
+                        onClick={() => copyDivImageToClipboard("exercise-basic-card")}
+                    >
+                        <FaShare className="text-2xl"></FaShare>
+                        {' Share Card'}
+                        <FaSquare></FaSquare>
+                    </button>
                 </div>
             </div>
             {/**Download Button */}
