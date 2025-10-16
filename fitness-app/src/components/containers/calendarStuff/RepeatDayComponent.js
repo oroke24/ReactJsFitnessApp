@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FaArrowDown } from 'react-icons/fa'
 import { Toaster, toast } from 'react-hot-toast';
 import '../loading.css';
 
@@ -8,11 +9,14 @@ const RepeatDayComponent = ({
     exercises = [],
     dayDataManager
 }) => {
-    const [weeks, setWeeks] = useState(1);          // total weeks ahead
+    const [weeks, setWeeks] = useState(1); // total weeks ahead
     const [frequency, setFrequency] = useState("every");
     const [loading, setLoading] = useState(false);
 
-    const dayOfWeek = date.slice(0, 3);
+    {/** OLD day of week: const dayOfWeek = date.slice(0, 3);*/ }
+    const dayOfWeek = new Date(date).toLocaleDateString('en-US', { weekday: 'long' });
+    const startDate = new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    const endDate = new Date(new Date(date).setDate(new Date(date).getDate() + weeks * 7)).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 
     const handleRepeat = async () => {
         const totalWeeks = parseInt(weeks);
@@ -40,12 +44,14 @@ const RepeatDayComponent = ({
             await Promise.all([...recipPromises, ...exercisePromises]);
             console.log(`Week ${i} added successfully: ${repeatIsoDate}`);
         }
+        const message = 
+            (frequency === "every"
+                ? `Every ${dayOfWeek}`
+                : `Every other ${dayOfWeek}`)+ 
+                `\nFrom ${dayOfWeek} ${startDate} - ${dayOfWeek} ${endDate}` +
+                `\nHas Been Set!`;
+        alert(message);
 
-        alert(
-            `Scheduled ${
-                repeatCount
-            } more ${dayOfWeek}'s, ${frequency.replace("-", " ")} week (spanning ${totalWeeks} weeks)`
-        );
 
         setLoading(false);
     };
@@ -59,7 +65,7 @@ const RepeatDayComponent = ({
 
                 <div className="w-full flex justify-around">
                     <p>
-                        For 
+                        For
                         <select
                             value={weeks}
                             onChange={(e) => setWeeks(e.target.value)}
@@ -71,7 +77,7 @@ const RepeatDayComponent = ({
                                 </option>
                             ))}
                         </select>
-                        week(s) after selected day, <br/>update
+                        week(s) after selected day, <br />update
                         <select
                             value={frequency}
                             onChange={(e) => setFrequency(e.target.value)}
@@ -80,33 +86,36 @@ const RepeatDayComponent = ({
                             <option value="every">every</option>
                             <option value="every-other">every other</option>
                         </select>
-                        {dayOfWeek} 
+                        {dayOfWeek}
                     </p>
                 </div>
-
-<div className="w-full flex justify-center p-5">
-                <p className="w-max rounded-lg outline text-md text-gray-800 mt-2 p-5">
-                    Over the following {weeks} week(s),<br/> 
-                    {frequency === "every" ? (
-                        <> update <strong>{weeks}</strong> {dayOfWeek}(s) <br/>(<strong> every</strong> {dayOfWeek})</>
-                    ) : (
-                        <> update <strong> {Math.floor(weeks/2)}</strong> {dayOfWeek}(s) <br/>(<strong> every other</strong> {dayOfWeek}.) </>
-                    )}
-                </p>
-</div>
-                <div className="flex justify-center">
+                <div className="w-full flex justify-center">
                     <button
+                        className="rounded-2xl outline w-1/2 p-10 mt-10 text-xl bg-gray-500"
                         onClick={handleRepeat}
-                        className="p-5 m-10 w-full"
                     >
                         {!loading ? (
-                            "Set Repeat"
+                            <><strong>Set Repeat</strong></>
                         ) : (
                             <div className="w-full flex justify-center">
                                 <div className="loading-spinner"></div>
                             </div>
                         )}
                     </button>
+                </div>
+                <div className="w-full flex justify-center items-end">
+                    <FaArrowDown className="text-4xl fill-gray-500" />
+                </div>
+
+                <div className="w-full flex justify-center p-5">
+                    <p className="w-max rounded-lg outline text-md text-gray-800 p-5">
+                        {dayOfWeek} <strong>{startDate}</strong> - {dayOfWeek} <strong>{endDate}</strong><br />
+                        {frequency === "every" ? (
+                            <>(<strong> every</strong> {dayOfWeek})</>
+                        ) : (
+                            <>(<strong> every other</strong> {dayOfWeek}.) </>
+                        )}
+                    </p>
                 </div>
             </div>
         </div>
