@@ -23,11 +23,11 @@ const RecipeBasic = () => {
         navigate(`/editRecipe/${doc.name}`, { state: { doc } })
     }
 
-    return (<div className="dark-light-gradient h-screen overflow-auto">
+    return (<div className="dark-light-gradient h-dvh overflow-auto">
         {/**Back/Home Button */}
         <div
             style={{ margin: '30px', marginBottom: '10px', display: 'flex', justifyContent: 'center' }}>
-            <Link to="/" className='flex justify-center w-3/4 items-center p-3 rounded-3xl foggy-background outline text-5xl'><FaHome className="fill-white"/></Link>
+            <Link to="/" className='w-3/4 flex justify-center content-center p-3 rounded-xl foggy-background outline text-5xl'><FaHome className="fill-white"/></Link>
         </div>
         {/**Main Div */}
         <div className="main-container flex flex-col items-center justify-center overflow-y-auto">
