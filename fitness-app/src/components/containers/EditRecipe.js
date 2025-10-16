@@ -158,7 +158,7 @@ const EditRecipe = () => {
                     onClick={() =>
                         //handleAiRevamp() //temporarily disabled
                         alert("AiRevamp should be back up by November 1st.\nWaiting on funding, sorry for the wait.")
-                        }
+                    }
                     className="flex items-center">
                     <FaRobot className="text-3xl m-2"></FaRobot>
                     aiRevamp
