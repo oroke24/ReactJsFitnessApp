@@ -17,11 +17,12 @@ textarea{
     background:radial-gradient(circle, #992299, #9999FF);
     border: 3px solid wheat;
     border-radius: 8px;
-    margin: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
     width: 90%;
     height: auto;
     resize: vertical;
-    cursor:pointer;
 }
 .exercise-basic-name{
     width: 100%;

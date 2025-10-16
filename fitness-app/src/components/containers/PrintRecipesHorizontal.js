@@ -12,7 +12,6 @@ const PrintMyRecipesHorizontal = ({ path }) => {
     var { docs, loading, error } = useGetDocs(`${path}/recipes`);
     //console.log(path)
 
-    if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
 
     const sortedDocs = docs.slice().sort((a, b) =>
@@ -22,9 +21,13 @@ const PrintMyRecipesHorizontal = ({ path }) => {
     return (
         <div className='flex overflow-x-auto flex-nowrap w-full space-x-4 '>
             {isLoading && (
-                <div className="loading-screen">
-                    <div className="loading-spinner"></div>
-                </div>
+              <div className="mt-5 container text-center flex overflow-x-auto space-x-4">
+                {Array.from({ length: 7 }).map((_, idx) => (
+                  <div key={idx} className="ps-1 flex flex-col items-center">
+                    <div className="w-[350px] h-[350px] recipe-gradient rounded-lg shadow animate-pulse"></div>
+                  </div>
+                ))}
+              </div>
             )}
             {sortedDocs.map((doc, index) => (
                 <div key={index} className='text-center w-[350px] h-[350px] border-4 rounded-lg shrink-0 recipe-gradient p-5 overflow-y-auto'>

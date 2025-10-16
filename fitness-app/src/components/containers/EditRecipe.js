@@ -115,7 +115,7 @@ const EditRecipe = () => {
                 </div>
             )}
             {/*Back Button */}
-            <button className="absolute top-5 right-5"><Link to='../' className="m-2">close</Link></button>
+            <button className="absolute top-5 right-5"><Link to='../' className="m-2">cancel</Link></button>
             {/*Name area*/}
             <h1 className="text-2xl mt-10"
                 onChange={handleNameChange}>
