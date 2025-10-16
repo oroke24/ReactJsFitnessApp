@@ -92,6 +92,7 @@ const Calendar = () => {
                     <div className='mt-10 calendar-background'>
                     <div className='mt-5 px-3 flex justify-between items-center'>
                         <FaArrowCircleLeft className='text-6xl' onClick={handlePreviousDay}></FaArrowCircleLeft>
+                        {today.getDate()-1 === selectedDate.getDate() ? <p className='text-2xl'>Yesterday</p> : ''}
                         {today.getDate() === selectedDate.getDate() ? <p className='text-2xl'>Today</p> : ''}
                         {today.getDate()+1 === selectedDate.getDate() ? <p className='text-2xl'>Tomorrow</p> : ''}
                         {console.log("today: ", today, " SelectedDate: ", selectedDate)}
