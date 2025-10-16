@@ -71,7 +71,7 @@ const RepeatDayComponent = ({
                                 </option>
                             ))}
                         </select>
-                        week(s), repeat
+                        week(s) after selected day, <br/>update
                         <select
                             value={frequency}
                             onChange={(e) => setFrequency(e.target.value)}
@@ -84,15 +84,16 @@ const RepeatDayComponent = ({
                     </p>
                 </div>
 
-                <p className="text-md text-gray-800 mt-2">
-                    Over the following {weeks} week(s), 
+<div className="w-full flex justify-center p-5">
+                <p className="w-max rounded-lg outline text-md text-gray-800 mt-2 p-5">
+                    Over the following {weeks} week(s),<br/> 
                     {frequency === "every" ? (
                         <> update <strong>{weeks}</strong> {dayOfWeek}(s) <br/>(<strong> every</strong> {dayOfWeek})</>
                     ) : (
                         <> update <strong> {Math.floor(weeks/2)}</strong> {dayOfWeek}(s) <br/>(<strong> every other</strong> {dayOfWeek}.) </>
                     )}
                 </p>
-
+</div>
                 <div className="flex justify-center">
                     <button
                         onClick={handleRepeat}
