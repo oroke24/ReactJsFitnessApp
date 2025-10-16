@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FaPlus, FaArrowRight, FaBurn, FaCalendar, FaCut, FaDumbbell, FaFire, FaGasPump, FaHollyBerry, FaStore, FaSubway, FaUser, FaUtensilSpoon, FaArrowDown, FaQuestionCircle, FaUserPlus } from 'react-icons/fa'
 import './containers.css';
 import Login from '../auth/Login';
@@ -56,22 +56,22 @@ const Home = () => {
           <div className='px-5 pt-2 w-full flex justify-evenly items-center'>
             {/*Title */}
             <h1 className="flex-1 text-4xl font-bold text-neutral-100">Fit Cards</h1>
-            <FaQuestionCircle className='text-3xl text-white me-5' onClick={handleOpenAboutUsModal}/>
+            <FaQuestionCircle className='text-3xl text-white me-5' onClick={handleOpenAboutUsModal} />
             {/*User Button */}
             <button className="text-xl flex items-center justify-center"
               onClick={handleOpenAccountModal}>
               {auth.currentUser//if logged in
-              ?
-              <FaUser className="text-3xl center fill-white"/>
-              :
-              <div>
-              <FaUserPlus className='text-4xl center fill-white'/>
-              
-              </div>
+                ?
+                <FaUser className="text-3xl center fill-white" />
+                :
+                <div>
+                  <FaUserPlus className='text-4xl center fill-white' />
+
+                </div>
               }
             </button>
           </div>
-            {/*About Us Button
+          {/*About Us Button
           <div className='w-full text-center'>
             <FaQuestionCircle
               className='start text-white text-3xl'
@@ -90,16 +90,15 @@ const Home = () => {
                 days={days}
                 email={email}
               />
-            ) : 
-            <div className="mt-5 container text-center flex overflow-x-auto space-x-4">
-            {Array.from({ length: 7 }).map((_, idx) => (
-              <div key={idx} className="ps-1 pt-7 flex flex-col items-center">
-                <h3 className='text-xl font-bold text-center text-gray-400 mb-1'>Day</h3>
-                <div className="w-[380px] h-[300px] foggy-background rounded-lg shadow animate-pulse"></div>
+            ) :
+              <div className="mt-5 container text-center flex overflow-x-auto space-x-4">
+                {Array.from({ length: 7 }).map((_, idx) => (
+                  <div key={idx} className="ps-1 pt-7 flex flex-col items-center">
+                    <h3 className='text-xl font-bold text-center text-gray-400 mb-1'>Day</h3>
+                    <div className="w-[380px] h-[300px] foggy-background rounded-lg shadow animate-pulse"></div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-          
             }
 
             {/*Recipe and Exercise Buttons Container*/}
@@ -122,7 +121,13 @@ const Home = () => {
                   path={userCollection}>
                 </PrintMyRecipesHorizontal>
               ) : (
-                ""
+              <div className="mt-5 container text-center flex overflow-x-auto space-x-4">
+                {Array.from({ length: 7 }).map((_, idx) => (
+                  <div key={idx} className="ps-1 flex flex-col items-center">
+                    <div className="w-[350px] h-[350px] recipe-gradient rounded-lg shadow animate-pulse"></div>
+                  </div>
+                ))}
+              </div>
               )}
             </div>
 
@@ -145,7 +150,13 @@ const Home = () => {
                   path={userCollection}
                 ></PrintMyExercisesHorizontal>
               ) : (
-                ""
+              <div className="mt-5 container text-center flex overflow-x-auto space-x-4">
+                {Array.from({ length: 7 }).map((_, idx) => (
+                  <div key={idx} className="ps-1 flex flex-col items-center">
+                    <div className="w-[350px] h-[350px] exercise-gradient rounded-lg shadow animate-pulse"></div>
+                  </div>
+                ))}
+              </div>
               )}
             </div>
 
@@ -236,13 +247,14 @@ const Home = () => {
             <p>
               About Us:
               <br /><br />
-              This is a place to store recipes and exercises.<br />
-              The idea is that you get two decks of cards, a recipe deck and an exercise deck.
-              <br /><br /><br />
+              The idea is that you get two decks of cards, a recipe deck and an exercise deck, the cards have options for downloading and sharing.  There is also a calendar that can use the cards.
+              <br /><br />
+              To access the calendar, click on one of the days in the 7 day snapshot. Once in the calendar you can assign up to 5 recipes and 5 exercises per day and then use the repeat area to duplicate that day for the following 1-26 weeks (half year).
+              <br /><br /><br/>
               What makes this different?
               <br /><br />
-              Its all FREE! And, you're making (and sharing) your own cards. It's a bottom-up approach, where you create to inspire .
-              So, get started and check out all the cool free features (like aiRevamp in the editing areas and calendar for scheduling a routine)!<br />
+              Its all FREE! And it's a bottom-up approach, where you create to inspire .
+              So, get started!<br />
             </p>
           </div>
           <div className='p-5 text-4xl w-full flex items-center justify-center'>
