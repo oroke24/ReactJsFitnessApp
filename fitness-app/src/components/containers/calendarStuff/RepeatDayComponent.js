@@ -63,8 +63,21 @@ const RepeatDayComponent = ({
             <div className="border text-center rounded-md min-h-[200px]">
                 <h3 className="text-xl m-5">Repeat Area</h3>
 
-                <div className="w-full flex justify-around">
+                <div className="w-full flex flex-col justify-around">
                     <p>
+                        Update
+                        <select
+                            value={frequency}
+                            onChange={(e) => setFrequency(e.target.value)}
+                            className="text-center border rounded mx-2 px-2 py-2"
+                        >
+                            <option value="every">every</option>
+                            <option value="every-other">every other</option>
+                        </select>
+                        {dayOfWeek}<br/>
+                        </p>
+                        <br/>
+                        <p>
                         For
                         <select
                             value={weeks}
@@ -77,16 +90,7 @@ const RepeatDayComponent = ({
                                 </option>
                             ))}
                         </select>
-                        week(s) after selected day, <br />update
-                        <select
-                            value={frequency}
-                            onChange={(e) => setFrequency(e.target.value)}
-                            className="text-center border rounded mx-2 px-2 py-2"
-                        >
-                            <option value="every">every</option>
-                            <option value="every-other">every other</option>
-                        </select>
-                        {dayOfWeek}
+                        week(s) after selected day, <br />
                     </p>
                 </div>
                 <div className="w-full flex justify-center">
