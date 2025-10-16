@@ -58,10 +58,10 @@ const ExerciseBasic = () => {
             <Link
                 to={`/editExercise/${doc.name}`}
                 state={{ doc }}
-                className="flex mt-10 items-end justify-between text-3xl font-bold"
+                className="flex mt-10 items-end justify-between text-2xl font-bold"
             >
                 Edit
-                <FaEdit className="text-5xl ms-2" />
+                <FaEdit className="text-4xl ms-2" />
             </Link>
 
             {/**Card Background Div */}
