@@ -8,49 +8,48 @@ import { deleteDocument } from '../../firebase/firebaseFirestore';
 import ExerciseSwipable from './ExerciseSwipable';
 
 const PrintMyExercisesHorizontal = ({ path }) => {
-    const [isLoading, setLoading] = useState(false);
-    var { docs, loading, error } = useGetDocs(`${path}/exercises`);
-    //console.log(path)
+  const [isLoading, setLoading] = useState(false);
+  var { docs, loading, error } = useGetDocs(`${path}/exercises`);
+  //console.log(path)
 
-    if (error) return <p>Error: {error}</p>;
+  if (error) return <p>Error: {error}</p>;
 
-    const sortedDocs = docs.slice().sort((a, b) =>
-        a.name.toLowerCase().localeCompare(b.name.toLowerCase())
-    );
+  const sortedDocs = docs.slice().sort((a, b) =>
+    a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+  );
 
-    return (
-        <div className='flex overflow-x-auto flex-nowrap w-full space-x-4 '>
-            {isLoading && (
-              <div className="mt-5 container text-center flex overflow-x-auto space-x-4">
-                {Array.from({ length: 7 }).map((_, idx) => (
-                  <div key={idx} className="ps-1 flex flex-col items-center">
-                    <div className="w-[350px] h-[350px] exercise-gradient rounded-lg shadow animate-pulse"></div>
-                  </div>
-                ))}
-              </div>
-            )}
-            {sortedDocs.map((doc, index) => (
-                <div key={index} className='text-center w-[350px] h-[350px] border-4 rounded-lg shrink-0 exercise-gradient p-5 overflow-y-auto'>
-                    <Link to={`/exerciseBasic/${doc.name}`} state={{ doc }}>
-                        <strong className="text-xl">{doc.name}</strong>
-                        <div className="text-left">
-                            <br />
-                            <strong>Muscle Group: </strong>
-                            <br />
-                            {doc.muscleGroup}
-                            <br /><br />
-                            <strong>Instructions: </strong>
-                            <br />
-                            {doc.instructions}
-                            <br />
-                        </div>
-                    </Link>
-
-                </div>
-                //Put card design here
-            ))}
+  return (
+    <div className='flex overflow-x-auto flex-nowrap w-full space-x-4 '>
+      {isLoading && (
+        <div className="mt-5 container text-center flex overflow-x-auto space-x-4">
+          {Array.from({ length: 7 }).map((_, idx) => (
+            <div key={idx} className="ps-1 flex flex-col items-center">
+              <div className="w-[350px] h-[350px] exercise-gradient rounded-lg shadow animate-pulse"></div>
+            </div>
+          ))}
         </div>
-    );
+      )}
+      {sortedDocs.map((doc, index) => (
+        <Link to={`/exerciseBasic/${doc.name}`} state={{ doc }}>
+          <div key={index} className='text-center w-[350px] h-[350px] border-4 rounded-lg shrink-0 exercise-gradient p-5 overflow-y-auto'>
+            <strong className="text-xl">{doc.name}</strong>
+            <div className="text-left">
+              <br />
+              <strong>Muscle Group: </strong>
+              <br />
+              {doc.muscleGroup}
+              <br /><br />
+              <strong>Instructions: </strong>
+              <br />
+              {doc.instructions}
+              <br />
+            </div>
+          </div>
+        </Link>
+        //Put card design here
+      ))}
+    </div>
+  );
 };
 export default PrintMyExercisesHorizontal;
 

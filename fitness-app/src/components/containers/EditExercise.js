@@ -116,7 +116,11 @@ const EditExercise = () => {
                 </div>
             )}
             {/*Back Button */}
-            <button className="absolute top-5 right-5"><Link to='../' className="m-2">cancel</Link></button>
+            <button className="absolute top-5 right-5"
+                onClick={() => navigate(-1)}
+            >
+                cancel
+            </button>
             {/*Name area*/}
             <h1 className="text-2xl mt-10"
                 onChange={handleNameChange}>
