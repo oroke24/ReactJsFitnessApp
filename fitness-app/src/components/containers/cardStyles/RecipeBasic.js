@@ -27,34 +27,10 @@ const RecipeBasic = () => {
         {/**Back/Home Button */}
         <div
             style={{ margin: '30px', marginBottom: '10px', display: 'flex', justifyContent: 'center' }}>
-            <Link to="/" className='p-3 rounded-xl bg-black outline text-5xl'><FaHome className="fill-white"></FaHome></Link>
+            <Link to="/" className='flex justify-center w-3/4 items-center p-3 rounded-3xl foggy-background outline text-5xl'><FaHome className="fill-white"/></Link>
         </div>
         {/**Main Div */}
         <div className="main-container flex flex-col items-center justify-center overflow-y-auto">
-            {/**Buttons Row Div */}
-            <div className="mt-10 flex flex-row w-full justify-evenly">
-                {/**Copy Text Button */}
-                <div className="">
-                    <button
-                        className="flex items-center p-5 w-full justify-between"
-                        onClick={() => copyToClipboard(nameValue, "Ingredients:", ingredientsValue, "Instructions:", instructionsValue)}>
-                        <FaRegClipboard className="text-2xl"></FaRegClipboard>
-                        {' Copy Text '}
-                        <FaReceipt></FaReceipt>
-                    </button>
-                </div>
-                {/**Copy Button */}
-                <div className="">
-                    <button
-                        className="flex items-center p-5 w-full justify-between"
-                        onClick={() => copyDivImageToClipboard("recipe-basic-card")}
-                    >
-                        <FaShare className="text-2xl"></FaShare>
-                        {' Share Card'}
-                        <FaSquare></FaSquare>
-                    </button>
-                </div>
-            </div>
 
             {/**Edit Button */}
             <Link
@@ -84,6 +60,30 @@ const RecipeBasic = () => {
                 <div className="recipe-basic-sub-title">Instructions</div>
                 <div className="recipe-basic-instructions">
                     {instructionsValue}
+                </div>
+            </div>
+            {/**Buttons Row Div */}
+            <div className="mt-10 flex flex-row w-full justify-evenly">
+                {/**Copy Text Button */}
+                <div className="">
+                    <button
+                        className="flex items-center p-5 w-full justify-between"
+                        onClick={() => copyToClipboard(nameValue, "Ingredients:", ingredientsValue, "Instructions:", instructionsValue)}>
+                        <FaRegClipboard className="text-2xl"></FaRegClipboard>
+                        {' Copy Text '}
+                        <FaReceipt></FaReceipt>
+                    </button>
+                </div>
+                {/**Copy Button */}
+                <div className="">
+                    <button
+                        className="flex items-center p-5 w-full justify-between"
+                        onClick={() => copyDivImageToClipboard("recipe-basic-card")}
+                    >
+                        <FaShare className="text-2xl"></FaShare>
+                        {' Share Card'}
+                        <FaSquare></FaSquare>
+                    </button>
                 </div>
             </div>
             {/**Download Button */}
