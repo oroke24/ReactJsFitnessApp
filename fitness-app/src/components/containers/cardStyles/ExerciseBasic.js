@@ -19,7 +19,7 @@ const ExerciseBasic = () => {
     const [loading, setLoading] = useState(false);
 
 
-    return (<div className="dark-light-gradient h-screen overflow-auto">
+    return (<div className="dark-light-gradient h-dvh overflow-auto">
         {/**Back/Home Button */}
         <div
             style={{ margin: '30px', marginBottom: '10px', display: 'flex', justifyContent: 'center' }}>

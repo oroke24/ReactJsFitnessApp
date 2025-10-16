@@ -48,7 +48,7 @@ const Home = () => {
   return (
     <div>
       {/*Static Background*/}
-      <div className='dark-light-gradient h-screen overflow-auto'>
+      <div className='dark-light-gradient h-dvh overflow-auto'>
         <div className="flex flex-col items-center justify-normal w-full min-h-screen overflow-y-auto">
 
 

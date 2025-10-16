@@ -111,7 +111,7 @@ const EditRecipe = () => {
     //console.log("In EditItem, doc: ", doc );
 
     return (
-        <div className="recipe-gradient edit-card-background flex flex-col items-center h-screen">
+        <div className="recipe-gradient edit-card-background flex flex-col items-center h-dvh">
             {loading && (
                 <div className="loading-screen">
                     <div className="loading-spinner"></div>

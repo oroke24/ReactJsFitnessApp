@@ -56,7 +56,7 @@ const Calendar = () => {
         setSelectedDate(nextDate);
     }
     return (
-        <div className='light-dark-gradient h-screen overflow-y-auto'>
+        <div className='light-dark-gradient h-dvh overflow-y-auto'>
 
             <div style={{margin: '30px', marginBottom:'50px', display: 'flex', justifyContent: 'center' }}>
                 <Link to="/" className='text-5xl'><FaHome></FaHome></Link>

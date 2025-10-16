@@ -109,7 +109,7 @@ const EditExercise = () => {
     //console.log("In EditItem, doc: ", doc );
 
     return (
-        <div className="exercise-gradient edit-card-background flex flex-col items-center h-screen">
+        <div className="exercise-gradient edit-card-background flex flex-col items-center h-dvh">
             {loading && (
                 <div className="loading-screen">
                     <div className="loading-spinner"></div>
