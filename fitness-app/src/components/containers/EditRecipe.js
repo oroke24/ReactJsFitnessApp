@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaArrowAltCircleLeft, FaCheck, FaPlus, FaRobot, FaTrash, FaXing } from "react-icons/fa";
+import { FaArrowAltCircleLeft, FaBan, FaCheck, FaCross, FaPlus, FaRobot, FaTrash, FaXing } from "react-icons/fa";
 import { useLocation, useParams, Link, useNavigate } from "react-router-dom";
 import './containers.css';
 import { deleteDocument, addDocument2, saveAsNew, updateDocument } from "../../firebase/firebaseFirestore";
@@ -118,11 +118,13 @@ const EditRecipe = () => {
                 </div>
             )}
             {/*Back Button */}
-            <button className="absolute top-5 right-5"
-                onClick={() => navigate(-1)}
-            >
-                cancel
-            </button>
+            <div className="w-full flex justify-end">
+                <button className="flex justify-center items-end p-4 m-5 text-xl"
+                    onClick={() => navigate(-1)}
+                >
+                    cancel
+                </button>
+            </div>
             {/*Name area*/}
             <h1 className="text-2xl mt-10"
                 onChange={handleNameChange}>
