@@ -53,7 +53,7 @@ const PrintMyRecipes = ({ path }) => {
                     <button
                         className='w-full flex justify-around items-center h-20 text-2xl orange-outline'
                     >
-                        <FaPlus/> New Recipe <faPlus/>
+                        <FaPepperHot/> New Recipe <FaPlus/>
                     </button>
                 </Link>
             </div>

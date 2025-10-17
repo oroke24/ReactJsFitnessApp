@@ -83,11 +83,13 @@ const EditExercise = () => {
     }
     const handleDeleteExercise = (exerciseName) => {
         try {
+        if (window.confirm(`Are you sure you want to delete ${exerciseName}?`)) {
             setLoading(true);
             //usage('path', 'docId')
             deleteDocument(`exercises`, exerciseName);
             //console.log("exercise to delete: ", exerciseName);
             handleClose();
+        }
         } catch (error) {
             console.error("Error Deleting doc: ", error);
         } finally {

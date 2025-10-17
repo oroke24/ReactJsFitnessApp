@@ -84,11 +84,13 @@ const EditRecipe = () => {
     }
     const handleDeleteRecipe = (recipeName) => {
         try {
-            setLoading(true);
-            //usage('path', 'docId')
-            deleteDocument(`recipes`, recipeName);
-            //console.log("Recipe to delete: ", recipeName);
-            handleClose();
+            if (window.confirm(`Are you sure you want to delete ${recipeName}?`)) {
+                setLoading(true);
+                //usage('path', 'docId')
+                deleteDocument(`recipes`, recipeName);
+                //console.log("Recipe to delete: ", recipeName);
+                handleClose();
+            }
         } catch (error) {
             console.error("Error Deleting doc: ", error);
         } finally {
