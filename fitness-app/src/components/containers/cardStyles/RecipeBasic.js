@@ -27,7 +27,7 @@ const RecipeBasic = () => {
         {/**Back/Home Button */}
         <div
             style={{ margin: '30px', display: 'flex', justifyContent: 'center' }}>
-            <Link to="/" className='w-3/4 flex justify-center content-center p-3 rounded-xl foggy-background outline text-5xl'><FaHome className="fill-white"/></Link>
+            <Link to="/" className='w-3/4 flex justify-center content-center p-3 rounded-3xl foggy-background outline text-5xl'><FaHome className="fill-white"/></Link>
         </div>
         {/**Main Div */}
         <div className="main-container flex flex-col items-center justify-center overflow-y-auto">
