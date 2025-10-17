@@ -184,9 +184,11 @@ const Home = () => {
               <button className='bg-white opacity-80 bg-opacity-40 mt-5 w-11/12 p-10'>
                 Snapshot Grocery List
               </button>
+              {/**
               <button className='bg-white opacity-80 bg-opacity-40 mt-5 w-11/12 p-10'>
                 Publicly visible days and cards
               </button>
+               */}
             </div>
             <div className='my-10 color-white text-2xl'>
               {/*Known Bugs*/}
