@@ -89,12 +89,12 @@ const EditExercise = () => {
             deleteDocument(`exercises`, exerciseName);
             //console.log("exercise to delete: ", exerciseName);
             handleClose();
+            alert(`${exerciseName} successfully deleted!`);
         }
         } catch (error) {
             console.error("Error Deleting doc: ", error);
         } finally {
             setLoading(false);
-            alert(`${exerciseName} successfully deleted!`);
         }
     }
     const handleClose = () => {

@@ -90,12 +90,12 @@ const EditRecipe = () => {
                 deleteDocument(`recipes`, recipeName);
                 //console.log("Recipe to delete: ", recipeName);
                 handleClose();
+                alert(`${recipeName} successfully deleted!`);
             }
         } catch (error) {
             console.error("Error Deleting doc: ", error);
         } finally {
             setLoading(false);
-            alert(`${recipeName} successfully deleted!`);
         }
     }
     const handleClose = () => {
