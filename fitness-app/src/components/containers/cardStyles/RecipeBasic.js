@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import '../containers.css';
 import './recipeCards.css';
-import { FaClipboard, FaDownload, FaEdit, FaReceipt, FaRegClipboard, FaShare, FaSquare, FaUpload, FaHome } from "react-icons/fa";
+import { FaClipboard, FaDownload, FaEdit, FaReceipt, FaRegClipboard, FaShare, FaSquare, FaUpload, FaHome, FaArrowDown, FaLongArrowAltDown, FaCaretDown } from "react-icons/fa";
 import copyToClipboard from "../../../hooks/copyToClipboard";
 import saveDivAsImage from "../../../hooks/saveDivAsImage";
 import copyDivImageToClipboard from "../../../hooks/copyDivImageToClipboard";
@@ -26,21 +26,11 @@ const RecipeBasic = () => {
     return (<div className="dark-light-gradient h-dvh overflow-auto">
         {/**Back/Home Button */}
         <div
-            style={{ margin: '30px', marginBottom: '10px', display: 'flex', justifyContent: 'center' }}>
+            style={{ margin: '30px', display: 'flex', justifyContent: 'center' }}>
             <Link to="/" className='w-3/4 flex justify-center content-center p-3 rounded-xl foggy-background outline text-5xl'><FaHome className="fill-white"/></Link>
         </div>
         {/**Main Div */}
         <div className="main-container flex flex-col items-center justify-center overflow-y-auto">
-
-            {/**Edit Button */}
-            <Link
-                to={`/editRecipe/${doc.name}`}
-                state={{ doc }}
-                className="flex mt-10 items-end justify-between text-2xl font-bold"
-            >
-                Edit
-                <FaEdit className="text-4xl ms-2" />
-            </Link>
 
             {/**Card Background Div */}
             <div className="recipe-basic-card"
@@ -62,6 +52,16 @@ const RecipeBasic = () => {
                     {instructionsValue}
                 </div>
             </div>
+            {/**Edit Button */}
+            <FaCaretDown className="color-white text-5xl"/>
+            <Link
+                to={`/editRecipe/${doc.name}`}
+                state={{ doc }}
+                className="color-white outline bg-gray-500 rounded-2xl p-2 mb-5 flex items-end justify-between text-3xl font-bold"
+            >
+                Edit
+                <FaEdit className="text-5xl ms-2" />
+            </Link>
             {/**Buttons Row Div */}
             <div className="mt-10 flex flex-row w-full justify-evenly">
                 {/**Copy Text Button */}

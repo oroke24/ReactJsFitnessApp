@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import '../containers.css';
 import './exerciseCards.css';
-import { FaBuffer, FaDownload, FaEdit, FaIdCard, FaIdCardAlt, FaReceipt, FaRegCalendar, FaRegClipboard, FaRegIdCard, FaShare, FaSquare, FaUpload, FaHome } from "react-icons/fa";
+import { FaBuffer, FaDownload, FaEdit, FaIdCard, FaIdCardAlt, FaReceipt, FaRegCalendar, FaRegClipboard, FaRegIdCard, FaShare, FaSquare, FaUpload, FaHome, FaCaretDown } from "react-icons/fa";
 import copyToClipboard from "../../../hooks/copyToClipboard";
 import saveDivAsImage from "../../../hooks/saveDivAsImage";
 import copyDivImageToClipboard from "../../../hooks/copyDivImageToClipboard";
@@ -22,21 +22,11 @@ const ExerciseBasic = () => {
     return (<div className="dark-light-gradient h-dvh overflow-auto">
         {/**Back/Home Button */}
         <div
-            style={{ margin: '30px', marginBottom: '10px', display: 'flex', justifyContent: 'center' }}>
+            style={{ margin: '30px', display: 'flex', justifyContent: 'center' }}>
             <Link to="/" className='flex justify-center w-3/4 items-center p-3 rounded-3xl foggy-background outline text-5xl'><FaHome className="fill-white"/></Link>
         </div>
         {/**Main Div */}
         <div className="main-container flex flex-col items-center justify-center">
-
-            {/**Edit Button */}
-            <Link
-                to={`/editExercise/${doc.name}`}
-                state={{ doc }}
-                className="flex mt-10 items-end justify-between text-2xl font-bold"
-            >
-                Edit
-                <FaEdit className="text-4xl ms-2" />
-            </Link>
 
             {/**Card Background Div */}
             <div className="exercise-basic-card">
@@ -55,6 +45,16 @@ const ExerciseBasic = () => {
                     {instructionsValue}
                 </div>
             </div>
+            {/**Edit Button */}
+            <FaCaretDown className="color-white text-5xl"/>
+            <Link
+                to={`/editExercise/${doc.name}`}
+                state={{ doc }}
+                className="color-white outline bg-gray-500 rounded-2xl p-2 mb-5 flex items-end justify-between text-3xl font-bold"
+            >
+                Edit
+                <FaEdit className="text-5xl ms-2" />
+            </Link>
             {/**Buttons Row Div */}
             <div className="mt-10 flex flex-row w-full justify-evenly">
 
