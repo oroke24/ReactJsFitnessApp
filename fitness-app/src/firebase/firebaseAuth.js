@@ -37,7 +37,7 @@ export const login = (email, password) => {
 export const register = async (email, password) => {
     const create = await createUserWithEmailAndPassword(auth, email, password)
     .then (() => {
-        alert(`check ${email} for verification link (might take a few minutes). \n*Might go to Junk/Spam folder`);
+        alert(`Once you click ok: a verification link will be sent to ${email} (might take a few minutes). \n*Might go to Junk/Spam folder, click ok to send link!`);
         sendEmailVerification(auth.currentUser)
         .then(()=>{
             const currentTime = new Date().getTime();

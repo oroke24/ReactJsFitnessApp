@@ -23,7 +23,7 @@ const Account = ({ onmessage, auth, onClose }) => {
     };
     const handleDeleteUser = async () =>{
         try{
-            const confirmDelete = await window.confirm("Delete account forever?");
+            const confirmDelete = window.confirm("Delete account forever?");
             if(confirmDelete){
                 setLoading(true);
                 console.log("deleteUser, in firestore: ");
