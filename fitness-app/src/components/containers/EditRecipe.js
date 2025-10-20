@@ -176,9 +176,9 @@ const EditRecipe = () => {
                 onInput={handleTextAreaResize}>
             </textarea>
             {/**AI revamp section */}
-            <div className="w-3/4 outline rounded-3xl foggy-background">
-                <FaRobot className="w-full text-center color-white text-5xl"/>
-                <div className="w-full mb-5 text-center text-3xl color-white">Ai Revamp Options</div>
+            <div className="w-3/4 mt-5 outline rounded-3xl foggy-background">
+                <FaRobot className="w-full text-center color-white text-2xl"/>
+                <div className="w-full mb-5 text-center text-xl color-white">Ai Revamp Options</div>
                 {/**AI Buttons Row */}
                 <div className="flex flex-row justify-evenly">
                     {/*open ai revamp Button */}
