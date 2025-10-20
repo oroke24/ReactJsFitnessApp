@@ -2,7 +2,7 @@ import OpenAI from "openai";
 import { getOpenAiApiKey } from "../firebase/firebaseFirestore";
 
 
-const aiRevamp = async (cardType, content) => {
+const openAiRevamp = async (cardType, content) => {
   try {
     const openai = new OpenAI({
       apiKey: process.env.REACT_APP_OPENAI_API_KEY,
@@ -47,4 +47,4 @@ const parseJson = (jsonObj) => {
     }catch(error){console.error('Error parsing jsonObj: ', error)}
 };
 
-export default aiRevamp;
+export default openAiRevamp;

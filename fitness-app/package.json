@@ -7,6 +7,8 @@
     "@fullcalendar/interaction": "^6.1.17",
     "@fullcalendar/react": "^6.1.17",
     "@fullcalendar/timegrid": "^6.1.17",
+    "@google/genai": "^1.25.0",
+    "@google/generative-ai": "^0.24.1",
     "cra-template": "1.2.0",
     "firebase": "^11.6.1",
     "html2canvas": "^1.4.1",
