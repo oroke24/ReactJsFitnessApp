@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { FaPlus, FaArrowRight, FaBurn, FaCalendar, FaCut, FaDumbbell, FaFire, FaGasPump, FaHollyBerry, FaStore, FaSubway, FaUser, FaUtensilSpoon, FaArrowDown, FaQuestionCircle, FaUserPlus } from 'react-icons/fa'
+import { FaPlus, FaArrowRight, FaBurn, FaCalendar, FaCut, FaDumbbell, FaFire, FaGasPump, FaHollyBerry, FaStore, FaSubway, FaUser, FaUtensilSpoon, FaArrowDown, FaQuestionCircle, FaUserPlus, FaBug, FaGoogle } from 'react-icons/fa'
 import './containers.css';
 import Login from '../auth/Login';
 import Account from '../auth/Account';
@@ -193,13 +193,12 @@ const Home = () => {
             <div className='my-10 color-white text-2xl'>
               {/*Known Bugs*/}
               <div className='mt-5 text-opacity-50'>
-                Known Bugs
+                <div className='flex flex-row justify-center'>
+                  Known Bugs <FaBug className='ms-3'/>
+                </div>
               </div>
               <button className='bg-red-500 opacity-80 bg-opacity-40 mt-5 w-11/12 p-10'>
                 If you update a card name and that card is already in your routine, you will have to update the card slot in calendar to reflect accurate routine.
-              </button>
-              <button className='bg-red-500 opacity-80 bg-opacity-40 mt-5 w-11/12 p-10'>
-                AiRevamp in card edit area is down until November 1st 
               </button>
             </div>
           </div>

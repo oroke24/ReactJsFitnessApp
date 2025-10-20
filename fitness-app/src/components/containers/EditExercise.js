@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { FaArrowAltCircleLeft, FaCheck, FaPlus, FaRobot, FaTrash, FaXing } from "react-icons/fa";
+import { FaArrowAltCircleLeft, FaBrain, FaCheck, FaConnectdevelop, FaGoogle, FaPlus, FaRobot, FaTrash, FaXing } from "react-icons/fa";
 import { useLocation, useParams, Link, useNavigate } from "react-router-dom";
 import './containers.css';
 import { deleteDocument, addDocument2, saveAsNew, updateDocument } from "../../firebase/firebaseFirestore";
 import './loading.css';
-import aiRevamp from "../../hooks/aiRevamp";
+import openAiRevamp from "../../hooks/openAiRevamp";
+import aiRevampGemini from "../../hooks/geminiAiRevamp";
 
 const EditExercise = () => {
     const { id } = useParams();
@@ -26,6 +27,44 @@ const EditExercise = () => {
     const handleInstructionsChange = (event) => {
         setInstructionsValue(event.target.value);
     }
+    const handleOpenAiRevamp = async () => {
+        try {
+            if (nameValue.trim() === "") {
+                alert("Name cannot be empty.");
+                return;
+            }
+            setLoading(true);
+            const name = `(name: ${nameValue}) `;
+            const content = name + muscleGroupValue + instructionsValue;
+            const aiCard = await openAiRevamp('recipe', content);
+            setMuscleGroupValue(aiCard?.group_one.join('\n'));
+            setInstructionsValue(aiCard?.group_two.join('\n'));
+        } catch (error) {
+            console.error("Error revamping recipe: ", error);
+        } finally {
+            setLoading(false);
+        }
+    }
+    const handleGeminiAiRevamp = async () => {
+        try {
+            if (nameValue.trim() === "") {
+                alert("Name cannot be empty.");
+                return;
+            }
+            setLoading(true);
+            const name = `(name: ${nameValue}) `;
+            const content = name + muscleGroupValue + instructionsValue;
+            //const aiCard = await aiRevamp('recipe', content);
+            const aiCard = await aiRevampGemini('exercise', content);
+            setMuscleGroupValue(aiCard?.group_one.join('\n'));
+            setInstructionsValue(aiCard?.group_two.join('\n'));
+        } catch (error) {
+            console.error("Error revamping exercise: ", error);
+        } finally {
+            setLoading(false);
+        }
+    }
+    {/**
     const handleAiRevamp = async () => {
         try {
             if (nameValue.trim() === "") {
@@ -35,7 +74,7 @@ const EditExercise = () => {
             setLoading(true);
             const name = `(name: ${nameValue}) `
             const content = name + muscleGroupValue + instructionsValue;
-            const aiCard = await aiRevamp('exercise', content);
+            const aiCard = await openAiRevamp('exercise', content);
             setMuscleGroupValue(aiCard?.group_one.join('\n'));
             setInstructionsValue(aiCard?.group_two.join('\n'));
         } catch (error) {
@@ -43,7 +82,8 @@ const EditExercise = () => {
         } finally {
             setLoading(false);
         }
-    }
+    } 
+    */}
     const handleSaveAsNew = async () => {
         try {
             setLoading(true);
@@ -153,19 +193,40 @@ const EditExercise = () => {
                 onChange={handleInstructionsChange}
                 onInput={handleTextAreaResize}>
             </textarea>
-            {/*ai revamp Button */}
-            <button
-                className="flex items-center mt-10 w-50">
-                <Link
-                    onClick={() => 
-                        //handleAiRevamp() //temporarily disabled 
-                        alert("AiRevamp should be back up by November 1st.\nWaiting on funding, sorry for the wait.")
-                    }
-                    className="flex items-center">
-                    <FaRobot className="text-3xl m-2"></FaRobot>
-                    aiRevamp
-                </Link>
-            </button>
+            {/**AI revamp section */}
+            <div className="w-3/4 outline rounded-3xl foggy-background">
+                <FaRobot className="w-full text-center color-white text-5xl"/>
+                <div className="w-full mb-5 text-center text-3xl color-white">Ai Revamp Options</div>
+                {/**AI Buttons Row */}
+                <div className="flex flex-row justify-evenly">
+                    {/*open ai revamp Button */}
+                    <button
+                        className="flex items-center">
+                        <Link
+                            onClick={() =>
+                                //handleOpenAiRevamp() //temporarily disabled
+                                alert("OpenAi ChatGPT should be back up by November 1st.\nWaiting on funding, sorry for the wait.")
+                            }
+                            className="flex items-center">
+                            <FaConnectdevelop className="text-3xl m-2"></FaConnectdevelop>
+                            ChatGPT
+                        </Link>
+                    </button>
+                    {/*gemini ai revamp Button */}
+                    <button
+                        className="flex items-center">
+                        <Link
+                            onClick={() =>
+                                handleGeminiAiRevamp() //temporarily disabled
+                                //alert("AiRevamp should be back up by November 1st.\nWaiting on funding, sorry for the wait.")
+                            }
+                            className="flex items-center">
+                            <FaGoogle className="text-3xl m-2"></FaGoogle>
+                            Gemini
+                        </Link>
+                    </button>
+                </div>
+            </div>
             <div className="row w-11/12 mt-16 flex justify-evenly">
                 {/*Update Button */}
                 {id != "NewItem"//if id isn't NewItem
@@ -174,9 +235,9 @@ const EditExercise = () => {
                         onClick={() => handleUpdateThisCard()}
                         className="flex items-center justify-center w-1/2 h-20">
                         <button
-                            className="flex items-center w-full h-20 justify-center">
+                            className="flex text-2xl items-center w-full h-20 justify-center">
                             <FaCheck className="text-3xl m-2"></FaCheck>
-                            update this card
+                            Update this card
                         </button>
                     </Link>
                     ://else show nothing`
@@ -187,9 +248,9 @@ const EditExercise = () => {
                     onClick={() => handleSaveAsNew()}
                     className="flex items-center justify-center w-1/2 h-20">
                     <button
-                        className="flex items-center justify-center w-full h-20">
+                        className="flex text-2xl items-center justify-center w-full h-20">
                         <FaPlus className="text-3xl m-2"></FaPlus>
-                        save as new
+                        Save as new
                     </button>
                 </Link>
             </div>
