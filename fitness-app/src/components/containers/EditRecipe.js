@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaArrowAltCircleLeft, FaBan, FaBrain, FaCheck, FaConnectdevelop, FaCross, FaFontAwesomeLogoFull, FaGem, FaGoogle, FaPlus, FaRobot, FaTrash, FaXing } from "react-icons/fa";
+import { FaArrowAltCircleLeft, FaArrowRight, FaBan, FaBrain, FaCheck, FaClone, FaConnectdevelop, FaCross, FaFontAwesomeLogoFull, FaGem, FaGoogle, FaPlus, FaRobot, FaTimes, FaTrash, FaXing } from "react-icons/fa";
 import { useLocation, useParams, Link, useNavigate } from "react-router-dom";
 import './containers.css';
 import { deleteDocument, addDocument2, saveAsNew, updateDocument } from "../../firebase/firebaseFirestore";
@@ -87,14 +87,15 @@ const EditRecipe = () => {
     const handleUpdateThisCard = async () => {
         try {
             setLoading(true);
-            const recipe = { id: doc.id, name: nameValue, ingredients: ingredientsValue, instructions: instructionsValue };
+            const checkNew = doc ? doc.id : id;
+            const recipe = { id: checkNew, name: nameValue, ingredients: ingredientsValue, instructions: instructionsValue };
             if (recipe.name.trim() === "") {
                 alert("Name cannot be empty.");
                 return;
             }
             //usage('path', 'docObj')
             await updateDocument('recipes', recipe);
-            alert(`Updated ${doc.id} to ${nameValue}`);
+            alert(`Updated ${id} to ${nameValue}`);
             handleClose();
         } catch (error) {
             console.error("Error adding recipe: ", error);
@@ -141,10 +142,11 @@ const EditRecipe = () => {
             )}
             {/*Back Button */}
             <div className="w-full flex justify-end">
-                <button className="flex justify-center items-end p-4 m-5 text-xl"
+                <button className="bg-gray-500 flex justify-center items-end p-2 m-5"
                     onClick={() => navigate(-1)}
                 >
                     cancel
+                    <FaTimes className="text-2xl"/>
                 </button>
             </div>
             {/*Name area*/}
@@ -176,12 +178,13 @@ const EditRecipe = () => {
                 onInput={handleTextAreaResize}>
             </textarea>
             {/**AI revamp section */}
-            <div className="w-3/4 mt-5 outline rounded-3xl foggy-background">
+            <div className="w-max p-2 mt-5 outline rounded-3xl foggy-background">
                 <FaRobot className="w-full text-center color-white text-2xl"/>
-                <div className="w-full mb-5 text-center text-xl color-white">Ai Revamp Options</div>
+                <div className="w-full mb-5 text-center text-xl color-white">Ai Revamp</div>
                 {/**AI Buttons Row */}
                 <div className="flex flex-row justify-evenly">
                     {/*open ai revamp Button */}
+                    {/**
                     <button
                         className="flex items-center">
                         <Link
@@ -194,6 +197,7 @@ const EditRecipe = () => {
                             ChatGPT
                         </Link>
                     </button>
+                     */}
                     {/*gemini ai revamp Button */}
                     <button
                         className="flex items-center">
@@ -203,8 +207,9 @@ const EditRecipe = () => {
                                 //alert("AiRevamp should be back up by November 1st.\nWaiting on funding, sorry for the wait.")
                             }
                             className="flex items-center">
-                            <FaGoogle className="text-3xl m-2"></FaGoogle>
-                            Gemini
+                            <FaConnectdevelop className="text-3xl m-2"></FaConnectdevelop>
+                            <FaArrowRight className="text-3xl m-2"/>
+                            <FaClone className="text-3xl m-2"/>
                         </Link>
                     </button>
                 </div>
