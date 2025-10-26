@@ -2,6 +2,17 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Environment
+
+This web app calls a secure AI proxy hosted on Firebase Functions.
+
+- Copy `.env.example` to `.env` (do not commit `.env`).
+- Set `REACT_APP_AI_PROXY_URL` to your Firebase Functions base URL (no trailing slash, and without `/revamp`). Example:
+
+	REACT_APP_AI_PROXY_URL="https://us-central1-your-project-id.cloudfunctions.net"
+
+The app will POST to `${REACT_APP_AI_PROXY_URL}/revamp` at runtime. Never place AI provider keys in the client.
+
 ## Available Scripts
 
 In the project directory, you can run:

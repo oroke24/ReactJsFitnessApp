@@ -1,7 +1,7 @@
 //firebase/dayDataManager.js
 // *New
 import db from './firebaseFirestore';
-import { doc, getDoc, setDoc, updateDoc, query, where, collection, getDocs } from 'firebase/firestore';
+import { doc, getDoc, setDoc, updateDoc, query, where, collection, getDocs, documentId } from 'firebase/firestore';
 
 export class dayDataManager {
   constructor(userEmail) {
@@ -77,6 +77,32 @@ export class dayDataManager {
     const snapshot = await getDocs(this.daysCollection);
     const promises = snapshot.docs.map(docSnap => docSnap.ref.delete());
     await Promise.all(promises);
+  }
+
+  /**
+   * Fetch days within an inclusive ISO date range (YYYY-MM-DD) using documentId range.
+   * Returns a map of ISO date -> { hasRecipes: boolean, hasExercises: boolean }
+   */
+  async getDaysInRange(startIso, endIso) {
+    const q = query(
+      this.daysCollection,
+      where(documentId(), '>=', startIso),
+      where(documentId(), '<=', endIso)
+    );
+    const snapshot = await getDocs(q);
+    const map = {};
+    snapshot.forEach((docSnap) => {
+      const id = docSnap.id; // ISO date string
+      const data = docSnap.data() || {};
+      const hasRecipes = Boolean(
+        data.recipe1Id || data.recipe2Id || data.recipe3Id || data.recipe4Id || data.recipe5Id
+      );
+      const hasExercises = Boolean(
+        data.exercise1Id || data.exercise2Id || data.exercise3Id || data.exercise4Id || data.exercise5Id
+      );
+      map[id] = { hasRecipes, hasExercises };
+    });
+    return map;
   }
 }
 

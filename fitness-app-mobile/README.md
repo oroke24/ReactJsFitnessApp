@@ -25,6 +25,18 @@ In the output, you'll find options to open the app in a
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
+## Environment
+
+This app uses Firebase (client-safe config) and a secure AI proxy (server-only secret) via Firebase Functions.
+
+- Copy `.env.example` to `.env` (do not commit `.env`).
+- Fill in the `EXPO_PUBLIC_*` Firebase values from your project settings.
+- Set `EXPO_PUBLIC_AI_PROXY_URL` to your Firebase Functions base URL (no trailing slash, and without `/revamp`). Example:
+
+   EXPO_PUBLIC_AI_PROXY_URL="https://us-central1-your-project-id.cloudfunctions.net"
+
+The app will POST to `${EXPO_PUBLIC_AI_PROXY_URL}/revamp` at runtime. Do not put AI provider keys in the client.
+
 ## Get a fresh project
 
 When you're ready, run:

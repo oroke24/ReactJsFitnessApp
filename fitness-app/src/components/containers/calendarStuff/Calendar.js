@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { setLogLevel } from 'firebase/app';
 import '../containers.css';
+import { dayDataManager } from '../../../firebase/dayDataManager';
 
 const Calendar = () => {
     const location = useLocation();
@@ -27,6 +28,7 @@ const Calendar = () => {
     //console.log("Email in calendar: ", email);
 
     const [selectedDate, setSelectedDate] = useState(newDate);
+    const [markers, setMarkers] = useState({}); // { 'YYYY-MM-DD': { hasRecipes: bool, hasExercises: bool } }
 
     const dayData = useDailyData(selectedDate, email);
     //console.log("selecedDate in calendar: ", selectedDate);
@@ -50,6 +52,27 @@ const Calendar = () => {
         prevDate.setDate(prevDate.getDate() - 1);
         setSelectedDate(prevDate);
     }
+
+    const loadMarkersForRange = async (rangeStart, rangeEnd) => {
+        if (!email) return;
+        try {
+            const mgr = new dayDataManager(email);
+            const start = new Date(rangeStart);
+            start.setHours(0,0,0,0);
+            const end = new Date(rangeEnd);
+            end.setHours(0,0,0,0);
+            // FullCalendar provides end as exclusive; make inclusive ISO for query by subtracting 1 day
+            const endInclusive = new Date(end);
+            endInclusive.setDate(endInclusive.getDate() - 1);
+            const startIso = start.toISOString().split('T')[0];
+            const endIso = endInclusive.toISOString().split('T')[0];
+            const map = await mgr.getDaysInRange(startIso, endIso);
+            setMarkers(map);
+        } catch (e) {
+            console.error('Failed to load calendar markers:', e);
+            setMarkers({});
+        }
+    };
     const handleNextDay = () => {
         const nextDate = new Date(selectedDate);
         nextDate.setDate(nextDate.getDate() + 1);
@@ -74,6 +97,10 @@ const Calendar = () => {
                             center: '',
                             right: 'prev next'
                         }}
+                        datesSet={(arg) => {
+                            // arg.start (inclusive) / arg.end (exclusive)
+                            loadMarkersForRange(arg.start, arg.end);
+                        }}
                         dateClick={(info) => {
                             const newDate = new Date(info.date);
                             //console.log("newDate:", newDate)
@@ -86,6 +113,16 @@ const Calendar = () => {
                             const clickedDateStr = selectedDate.toISOString().split('T')[0];
                             const cellDateStr = arg.date.toISOString().split('T')[0];
                             return cellDateStr === clickedDateStr ? ['selected-day'] : [];
+                        }}
+                        dayCellContent={(arg) => {
+                            const iso = arg.date.toISOString().split('T')[0];
+                            const mark = markers[iso];
+                            const hasR = mark?.hasRecipes;
+                            const hasE = mark?.hasExercises;
+                            const dots = (hasR || hasE)
+                              ? `<div class="fc-dots">${hasR ? '<span class="dot dot-recipe"></span>' : ''}${hasE ? '<span class="dot dot-exercise"></span>' : ''}</div>`
+                              : '';
+                            return { html: `<div class="fc-daygrid-day-number">${arg.dayNumberText}</div>${dots}` };
                         }}
                     />
                     </div>

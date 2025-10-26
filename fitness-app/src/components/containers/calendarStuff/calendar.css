@@ -33,3 +33,25 @@
   color: #e285f4;
 }
 
+
+/* Dots under day numbers in FullCalendar */
+.fc-dots {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4px;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.dot-recipe {
+  background-color: #f59e0b; /* amber-500 */
+}
+.dot-exercise {
+  background-color: #8b5cf6; /* violet-500 */
+}
+
