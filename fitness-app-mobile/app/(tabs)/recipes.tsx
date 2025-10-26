@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text, FlatList, ActivityIndicator, StyleSheet, TouchableOpacity } from 'react-native';
 import { Stack, useRouter } from 'expo-router';
+import { useFocusEffect } from '@react-navigation/native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { getDocuments } from '../../lib/firebase/firebaseFirestore';
 import auth from '../../lib/firebase/firebaseAuth';
@@ -13,21 +14,22 @@ export default function RecipesTab() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const load = async () => {
-      try {
-        const email = auth.currentUser?.email;
-        const path = email ? `users/${email}/recipes` : 'users/guest/recipes';
-        const result = await getDocuments(path);
-        setDocs(result);
-      } catch (e: any) {
-        setError(e?.message || String(e));
-      } finally {
-        setLoading(false);
-      }
-    };
-    load();
+  const load = useCallback(async () => {
+    try {
+      setError(null);
+      const email = auth.currentUser?.email;
+      const path = email ? `users/${email}/recipes` : 'users/guest/recipes';
+      const result = await getDocuments(path);
+      setDocs(result);
+    } catch (e: any) {
+      setError(e?.message || String(e));
+    } finally {
+      setLoading(false);
+    }
   }, []);
+
+  useEffect(() => { load(); }, [load]);
+  useFocusEffect(useCallback(() => { load(); }, [load]));
 
   return (
     <>
@@ -55,6 +57,8 @@ export default function RecipesTab() {
             <FlatList
               data={docs}
               keyExtractor={(item) => String(item.id)}
+              refreshing={loading}
+              onRefresh={load}
               ListHeaderComponent={() => (
                 <TouchableOpacity style={styles.newBtn} onPress={() => router.push('/recipe/NewItem' as any)}>
                   <FontAwesome5 name="plus" size={16} color="#111827" style={{ marginRight: 8 }} />

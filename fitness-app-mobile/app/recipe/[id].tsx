@@ -5,8 +5,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { theme } from '../../lib/theme';
 import { FontAwesome5 } from '@expo/vector-icons';
 import auth from '../../lib/firebase/firebaseAuth';
-import db from '../../lib/firebase/firebaseFirestore';
-import { doc, getDoc, setDoc, deleteDoc } from 'firebase/firestore';
+import db, { deleteDocument as deleteUserDoc } from '../../lib/firebase/firebaseFirestore';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 import aiRevampGemini from '../../hooks/geminiAiRevamp';
 
 export default function RecipeEditScreen() {
@@ -76,10 +76,11 @@ export default function RecipeEditScreen() {
       Alert.alert('Delete Forever?', `Delete ${name}?`, [
         { text: 'Cancel', style: 'cancel' },
         { text: 'Delete', style: 'destructive', onPress: async () => {
-          const ref = doc(db, 'users', email, 'recipes', recipeId);
-          await deleteDoc(ref);
+          // Match web logic: delete by card name under user's recipes
+          await deleteUserDoc('recipes', name);
           Alert.alert('Deleted', `${name} removed`);
-          router.back();
+          // Go to Home to match requested flow and refresh summary/lists
+          router.replace('/' as any);
         }}
       ]);
     } catch (e: any) {
@@ -170,8 +171,11 @@ export default function RecipeEditScreen() {
                   setRevamping(true);
                   const content = `(name: ${name})\n${ingredients}\n${instructions}`;
                   const ai = await aiRevampGemini('recipe', content);
-                  setIngredients((ai.group_one || []).join('\n'));
-                  setInstructions((ai.group_two || []).join('\n'));
+                  const g1 = Array.isArray(ai.group_one) ? ai.group_one : [];
+                  const g2 = Array.isArray(ai.group_two) ? ai.group_two : [];
+                  setIngredients(g1.join('\n'));
+                  setInstructions(g2.join('\n'));
+                  try { Alert.alert('AI filled', `${g1.length} ingredients lines, ${g2.length} instruction lines`); } catch {}
                 } catch (e: any) {
                   Alert.alert('AI Revamp failed', e?.message || String(e));
                 } finally {

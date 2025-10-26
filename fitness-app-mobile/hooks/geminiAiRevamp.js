@@ -1,8 +1,8 @@
 // Mobile-friendly Gemini call using fetch to avoid SDK polyfills.
 // Returns { group_one: string[], group_two: string[] }
 export default async function aiRevamp(type, content) {
-  const apiKey = process.env.EXPO_PUBLIC_GEMINI_API_KEY;
-  if (!apiKey) throw new Error('Missing EXPO_PUBLIC_GEMINI_API_KEY');
+  const proxy = process.env.EXPO_PUBLIC_AI_PROXY_URL;
+  if (!proxy) throw new Error('Missing EXPO_PUBLIC_AI_PROXY_URL');
 
   const system = `You are an expert fitness and cooking assistant.
 Given a ${type} card content, split it into two clear sections:
@@ -12,15 +12,9 @@ Return ONLY JSON with keys group_one and group_two as arrays of strings.`;
 
   const prompt = `${system}\n\nCONTENT:\n${content}`;
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${encodeURIComponent(apiKey)}`;
-  const body = {
-    contents: [
-      {
-        role: 'user',
-        parts: [{ text: prompt }],
-      },
-    ],
-  };
+  const url = `${proxy.replace(/\/$/, '')}/revamp`;
+  // Send raw content; server builds full prompt
+  const body = { type, content };
 
   const res = await fetch(url, {
     method: 'POST',
@@ -35,8 +29,14 @@ Return ONLY JSON with keys group_one and group_two as arrays of strings.`;
     throw new Error(`Gemini request failed (${res.status}): ${errText}`);
   }
   const data = await res.json();
-  const text =
-    data?.candidates?.[0]?.content?.parts?.map((p) => p?.text || '').join('\n') || '';
+  // Preferred: proxy returns already-parsed groups
+  if (Array.isArray(data?.group_one) || Array.isArray(data?.group_two)) {
+    const group_one = Array.isArray(data.group_one) ? data.group_one : [];
+    const group_two = Array.isArray(data.group_two) ? data.group_two : [];
+    return { group_one, group_two };
+  }
+  // Fallback: proxy returns text; try to parse JSON within
+  const text = String(data?.text ?? '');
 
   try {
     const jsonStart = text.indexOf('{');
