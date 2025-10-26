@@ -9,9 +9,13 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+        "supportsTablet": true,
+        "buildNumber": "1",
+        "bundleIdentifier": "org.fitcards.app"
     },
     "android": {
+        "versionCode": 1,
+        "package": "org.fitcards.app",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
