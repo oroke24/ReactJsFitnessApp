@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { View, Text, StyleSheet, ActivityIndicator, TextInput, Button, Alert, ScrollView, Modal, FlatList, Pressable } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { theme } from '../../lib/theme';
 import auth from '../../lib/firebase/firebaseAuth';
 import { dayDataManager } from '../../lib/firebase/dayDataManager';
 import { getDocuments } from '../../lib/firebase/firebaseFirestore';
@@ -165,12 +167,25 @@ export default function DayScreen() {
         <ScrollView contentContainerStyle={styles.container}>
           <Text style={styles.sectionHeader}>Recipes</Text>
           {recipeKeys.map((key, idx) => (
-            <View key={key} style={[styles.itemRow, styles.rowBetween]}>
+            <Pressable key={key} style={[styles.itemRow, styles.rowBetween, styles.slotCard]} onPress={() => openRecipePicker(idx + 1)}>
+              <LinearGradient
+                colors={theme.gradients.recipeCard.colors as any}
+                start={theme.gradients.recipeCard.start as any}
+                end={theme.gradients.recipeCard.end as any}
+                style={[StyleSheet.absoluteFill, { opacity: 0.5, borderRadius: 8 }]}
+                pointerEvents="none"
+              />
               <Text>
                 Slot {idx + 1}: {data[key as RecipeKey] || '-'}
               </Text>
-              <Button title="Change" onPress={() => openRecipePicker(idx + 1)} />
-            </View>
+              <View>
+                <Button title="Clear" onPress={async () => {
+                  const manager = new dayDataManager(email!);
+                  await manager.addRecipeToDay(String(dateParam), '', idx + 1);
+                  await refresh();
+                }} />
+              </View>
+            </Pressable>
           ))}
 
           {/* Manual recipe entry removed to match web calendar behavior */}
@@ -178,12 +193,25 @@ export default function DayScreen() {
           <View style={{ height: 24 }} />
           <Text style={styles.sectionHeader}>Exercises</Text>
           {exerciseKeys.map((key, idx) => (
-            <View key={key} style={[styles.itemRow, styles.rowBetween]}>
+            <Pressable key={key} style={[styles.itemRow, styles.rowBetween, styles.slotCard]} onPress={() => openExercisePicker(idx + 1)}>
+              <LinearGradient
+                colors={theme.gradients.exerciseCard.colors as any}
+                start={theme.gradients.exerciseCard.start as any}
+                end={theme.gradients.exerciseCard.end as any}
+                style={[StyleSheet.absoluteFill, { opacity: 0.5, borderRadius: 8 }]}
+                pointerEvents="none"
+              />
               <Text>
                 Slot {idx + 1}: {data[key as ExerciseKey] || '-'}
               </Text>
-              <Button title="Change" onPress={() => openExercisePicker(idx + 1)} />
-            </View>
+              <View>
+                <Button title="Clear" onPress={async () => {
+                  const manager = new dayDataManager(email!);
+                  await manager.addExerciseToDay(String(dateParam), '', idx + 1);
+                  await refresh();
+                }} />
+              </View>
+            </Pressable>
           ))}
 
           {/* Pickers */}
@@ -232,6 +260,7 @@ const styles = StyleSheet.create({
   center: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   sectionHeader: { fontSize: 18, fontWeight: '700', marginBottom: 8 },
   itemRow: { paddingVertical: 6, fontSize: 16 },
+  slotCard: { position: 'relative', overflow: 'hidden', borderRadius: 8, paddingVertical: 10, paddingHorizontal: 12, borderWidth: StyleSheet.hairlineWidth, borderColor: '#e5e7eb' },
   row: { flexDirection: 'row', alignItems: 'center', marginTop: 8, marginBottom: 8 },
   input: { borderWidth: 1, borderColor: '#ccc', borderRadius: 6, paddingHorizontal: 10, paddingVertical: 8 },
   rowBetween: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },

@@ -286,7 +286,13 @@ export default function CalendarScreen() {
           <View style={[styles.panel, { backgroundColor: '#fff' }]}>
             <Text style={[styles.sectionHeader, { color: '#111827' }]}>Recipes</Text>
             {recipeKeys.map((key, idx) => (
-              <View key={key} style={[styles.itemRow, styles.rowBetween]}>
+              <Pressable key={key} style={[styles.itemRow, styles.rowBetween, styles.slotCard]} onPress={() => openRecipePicker(idx + 1)}>
+                <LinearGradient
+                  colors={theme.gradients.recipeCard.colors as any}
+                  start={theme.gradients.recipeCard.start as any}
+                  end={theme.gradients.recipeCard.end as any}
+                  style={[StyleSheet.absoluteFill, { opacity: 0.5, borderRadius: 8 }]} pointerEvents="none"
+                />
                 <Text>
                   Slot {idx + 1}: {(data as any)[key as RecipeKey] || '-'}
                 </Text>
@@ -294,17 +300,20 @@ export default function CalendarScreen() {
                   <TouchableOpacity style={styles.clearBtn} onPress={() => onClearRecipe(idx + 1)}>
                     <Text style={styles.clearBtnText}>Clear</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.changeBtn} onPress={() => openRecipePicker(idx + 1)}>
-                    <Text style={styles.changeBtnText}>Change</Text>
-                  </TouchableOpacity>
                 </View>
-              </View>
+              </Pressable>
             ))}
 
             <View style={{ height: 24 }} />
             <Text style={[styles.sectionHeader, { color: '#111827' }]}>Exercises</Text>
             {exerciseKeys.map((key, idx) => (
-              <View key={key} style={[styles.itemRow, styles.rowBetween]}>
+              <Pressable key={key} style={[styles.itemRow, styles.rowBetween, styles.slotCard]} onPress={() => openExercisePicker(idx + 1)}>
+                <LinearGradient
+                  colors={theme.gradients.exerciseCard.colors as any}
+                  start={theme.gradients.exerciseCard.start as any}
+                  end={theme.gradients.exerciseCard.end as any}
+                  style={[StyleSheet.absoluteFill, { opacity: 0.5, borderRadius: 8 }]} pointerEvents="none"
+                />
                 <Text>
                   Slot {idx + 1}: {(data as any)[key as ExerciseKey] || '-'}
                 </Text>
@@ -312,11 +321,8 @@ export default function CalendarScreen() {
                   <TouchableOpacity style={styles.clearBtn} onPress={() => onClearExercise(idx + 1)}>
                     <Text style={styles.clearBtnText}>Clear</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.changeBtn} onPress={() => openExercisePicker(idx + 1)}>
-                    <Text style={styles.changeBtnText}>Change</Text>
-                  </TouchableOpacity>
                 </View>
-              </View>
+              </Pressable>
             ))}
           </View>
 
@@ -438,6 +444,7 @@ const styles = StyleSheet.create({
   panel: { borderWidth: 1, borderColor: '#e5e7eb', borderRadius: 10, padding: 12, backgroundColor: '#fff' },
   sectionHeader: { fontSize: 18, fontWeight: '700', marginBottom: 8 },
   itemRow: { paddingVertical: 6 },
+  slotCard: { position: 'relative', overflow: 'hidden', borderRadius: 8, paddingVertical: 10, paddingHorizontal: 12, borderWidth: StyleSheet.hairlineWidth, borderColor: '#e5e7eb' },
   rowBetween: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   btnRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   changeBtn: { paddingHorizontal: 12, paddingVertical: 8, backgroundColor: '#1f2937', borderRadius: 6 },

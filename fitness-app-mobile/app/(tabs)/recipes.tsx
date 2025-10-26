@@ -8,9 +8,11 @@ import auth from '../../lib/firebase/firebaseAuth';
 import { LinearGradient } from 'expo-linear-gradient';
 import { theme } from '../../lib/theme';
 
+type CardItem = { id: string; name?: string; description?: string };
+
 export default function RecipesTab() {
   const router = useRouter();
-  const [docs, setDocs] = useState<any[]>([]);
+  const [docs, setDocs] = useState<CardItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -20,7 +22,12 @@ export default function RecipesTab() {
       const email = auth.currentUser?.email;
       const path = email ? `users/${email}/recipes` : 'users/guest/recipes';
       const result = await getDocuments(path);
-      setDocs(result);
+      const sorted = [...(result as any[])].sort((a: any, b: any) => {
+        const an = String((a?.name ?? a?.id ?? '')).toLowerCase();
+        const bn = String((b?.name ?? b?.id ?? '')).toLowerCase();
+        return an.localeCompare(bn);
+      });
+      setDocs(sorted);
     } catch (e: any) {
       setError(e?.message || String(e));
     } finally {

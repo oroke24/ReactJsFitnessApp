@@ -52,7 +52,9 @@ export default function ExerciseEditScreen() {
       if (!email) return;
       const ref = doc(db, 'users', email, 'exercises', exerciseId);
       await setDoc(ref, { name, muscleGroup, instructions }, { merge: true });
-      Alert.alert('Updated', 'Exercise updated');
+      Alert.alert('Updated', 'Exercise updated', [
+        { text: 'OK', onPress: () => router.replace('/' as any) }
+      ]);
     } catch (e: any) {
       Alert.alert('Save failed', e?.message || String(e));
     }
@@ -64,7 +66,9 @@ export default function ExerciseEditScreen() {
       if (!newId) { Alert.alert('Validation', 'Name cannot be empty.'); return; }
       const ref = doc(db, 'users', email, 'exercises', newId);
       await setDoc(ref, { name: newId, muscleGroup, instructions }, { merge: true });
-      Alert.alert('Saved', `Saved ${newId} as a new card`);
+      Alert.alert('Saved', `Saved ${newId} as a new card`, [
+        { text: 'OK', onPress: () => router.replace('/' as any) }
+      ]);
     } catch (e: any) {
       Alert.alert('Save failed', e?.message || String(e));
     }
@@ -211,7 +215,7 @@ const styles = StyleSheet.create({
   actionRow: { flexDirection: 'row', justifyContent: 'space-evenly', marginTop: 24 },
   actionBtn: { flexDirection: 'row', alignItems: 'center', borderWidth: 1, borderColor: '#e5e7eb', borderRadius: 12, paddingVertical: 16, paddingHorizontal: 16, backgroundColor: '#fff', minWidth: '40%', justifyContent: 'center' },
   actionText: { fontSize: 16, fontWeight: '700' },
-  aiBox: { marginTop: 16, padding: 12, borderWidth: 1, borderColor: '#e5e7eb', borderRadius: 12, backgroundColor: '#f3f4f6' },
+  aiBox: { marginTop: 16, padding: 12, borderWidth: 1, borderColor: '#e5e7eb', borderRadius: 12, backgroundColor: 'rgba(243,244,246,0.5)' },
   deleteBtn: { marginTop: 48, alignSelf: 'center', flexDirection: 'row', alignItems: 'center', backgroundColor: '#dc2626', paddingVertical: 14, paddingHorizontal: 16, borderRadius: 10 },
   deleteText: { color: '#fff', fontWeight: '700' },
 });

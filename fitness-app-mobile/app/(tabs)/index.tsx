@@ -33,8 +33,14 @@ export default function HomeTab() {
           getDocuments(exercisePath),
         ]);
         if (!mounted) return;
-        setRecipes(r);
-        setExercises(e);
+        const sortCaseInsensitive = (arr: any[]) =>
+          [...arr].sort((a: any, b: any) => {
+            const an = String(a?.name ?? a?.id ?? '').toLowerCase();
+            const bn = String(b?.name ?? b?.id ?? '').toLowerCase();
+            return an.localeCompare(bn);
+          });
+        setRecipes(sortCaseInsensitive(r));
+        setExercises(sortCaseInsensitive(e));
       } catch (e) {
         // non-fatal on home
       } finally {
@@ -183,7 +189,7 @@ export default function HomeTab() {
           style={{ marginTop: 6 }}>
           {loadingLists
             ? Array.from({ length: 4 }).map((_, i) => (<View key={`rs-${i}`} style={[styles.miniCard, styles.skeleton]} />))
-            : recipes.slice(0, 12).map((item) => (
+            : recipes.map((item) => (
                 <TouchableOpacity key={item.id} activeOpacity={0.85}
                   onPress={() => router.push((`/recipeBasic/${encodeURIComponent(item.id)}`) as any)}>
                   <View style={[styles.miniCard, { borderColor: theme.colors.recipeBorder, borderWidth: StyleSheet.hairlineWidth }] }>
@@ -194,7 +200,7 @@ export default function HomeTab() {
                       style={[StyleSheet.absoluteFill, { borderRadius: 12 }]}
                       pointerEvents="none"
                     />
-                    <Text numberOfLines={1} style={[styles.miniTitle, { color: 'orange' }]}>{item.name || item.id}</Text>
+                    <Text numberOfLines={1} style={[styles.miniTitle, { color: '#000' }]}>{item.name || item.id}</Text>
                     <ScrollView style={styles.cardInnerScroll} nestedScrollEnabled>
                       {item.ingredients ? (
                         <>
@@ -235,7 +241,7 @@ export default function HomeTab() {
           style={{ marginTop: 6 }}>
           {loadingLists
             ? Array.from({ length: 4 }).map((_, i) => (<View key={`es-${i}`} style={[styles.miniCard, styles.skeleton]} />))
-            : exercises.slice(0, 12).map((item) => (
+            : exercises.map((item) => (
                 <TouchableOpacity key={item.id} activeOpacity={0.85}
                   onPress={() => router.push((`/exerciseBasic/${encodeURIComponent(item.id)}`) as any)}>
                   <View style={[styles.miniCard, { borderColor: theme.colors.exerciseBorder, borderWidth: StyleSheet.hairlineWidth }] }>
@@ -246,7 +252,7 @@ export default function HomeTab() {
                       style={[StyleSheet.absoluteFill, { borderRadius: 12 }]}
                       pointerEvents="none"
                     />
-                    <Text numberOfLines={1} style={[styles.miniTitle, { color: '#e285f4' }]}>{item.name || item.id}</Text>
+                    <Text numberOfLines={1} style={[styles.miniTitle, { color: '#fff' }]}>{item.name || item.id}</Text>
                     <ScrollView style={styles.cardInnerScroll} nestedScrollEnabled>
                       {item.muscleGroup ? (
                         <>
@@ -322,7 +328,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 3 },
     elevation: 4,
   },
-  cardHeader: { fontWeight: '700', marginBottom: 6, color: '#ffffff' },
+  cardHeader: { fontWeight: '700', fontSize: 16, marginBottom: 8, color: '#ffffff', textAlign: 'center', width: '100%' },
   cardBody: { flex: 1, flexDirection: 'row' },
   restBody: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   restTitle: { fontFamily: 'serif', fontSize: 18, textAlign: 'center', color: '#ffffff' },
