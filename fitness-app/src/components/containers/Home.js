@@ -55,7 +55,15 @@ const Home = () => {
           {/*Header Row */}
           <div className='px-5 pt-2 w-full flex justify-evenly items-center'>
             {/*Title */}
-            <h1 className="flex-1 text-4xl font-bold text-neutral-100">Fit Cards</h1>
+            <h1 className="flex-1 text-4xl font-bold text-neutral-100 flex items-center gap-3">
+              Fit Cards
+              <img
+                src="/layer-group-solid.svg"
+                alt="Fit Cards logo"
+                className="inline-block"
+                style={{ width: 36, height: 36 }}
+              />
+            </h1>
             <FaQuestionCircle className='text-3xl text-white me-5' onClick={handleOpenAboutUsModal} />
             {/*User Button */}
             <button className="text-xl flex items-center justify-center"
