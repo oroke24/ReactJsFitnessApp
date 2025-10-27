@@ -51,6 +51,36 @@ const Account = ({ onmessage, auth, onClose }) => {
                 </p>
                 <button className='mt-10 text-3xl'
                 onClick={handleLogout}>Logout</button>
+                {/* Message me section */}
+                <div className="mt-8 w-full max-w-md border border-gray-300 rounded-md p-4 flex flex-col items-center">
+                    <p className="text-2xl mb-3">Message me</p>
+                    <p className="text-center text-gray-300 mb-4">
+                        Have feedback or need help? Send me an email and I’ll get back to you.
+                    </p>
+                    <a
+                        href="mailto:fitcardshelp@gmail.com?subject=Fit%20Cards%20Support"
+                        className="inline-flex items-center px-4 py-2 rounded-md font-bold"
+                        style={{ backgroundColor: '#111827', color: '#ffffff', opacity: 0.95 }}
+                    >
+                        fitcardshelp@gmail
+                    </a>
+                </div>
+                {/* Donate section */}
+                <div className="mt-8 w-full max-w-md border border-gray-300 rounded-md p-4 flex flex-col items-center">
+                    <p className="text-2xl mb-3">Want to donate?</p>
+                    <p className="text-center text-gray-300 mb-4">
+                        I made this app with one promise, no subscriptions, no fees — if you’d like to support it with a donation, I’d be grateful.
+                    </p>
+                    <a
+                        href="https://buymeacoffee.com/fitcards"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center px-4 py-2 rounded-md font-bold"
+                        style={{ backgroundColor: '#FFDD00', color: '#111827', opacity: 0.9 }}
+                    >
+                        ☕ Buy Me a Coffee
+                    </a>
+                </div>
             </div> 
             {/*Danger Zone Div */}
             <div className='mt-20 flex flex-col justify-center items-center'>

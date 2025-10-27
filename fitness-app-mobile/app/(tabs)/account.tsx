@@ -71,6 +71,31 @@ export default function AccountTab() {
           ) : null}
         </View>
 
+        {/* Message me section */}
+        <View style={styles.messageBox}>
+          <Text style={styles.messageTitle}>Message me</Text>
+          <Text style={styles.messageNote}>
+            Have feedback or need help? Send me an email and I’ll get back to you.
+          </Text>
+          <TouchableOpacity
+            style={[styles.messageBtn, { opacity: 0.95 }]}
+            onPress={() => Linking.openURL('mailto:fitcardshelp@gmail.com?subject=Fit%20Cards%20Support')}
+          >
+            <Text style={styles.messageText}>fitcardshelp@gmail</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Donate section */}
+        <View style={styles.donateBox}>
+          <Text style={styles.donateTitle}>Want to donate?</Text>
+          <Text style={styles.donateNote}>
+            I made this app with one promise, no subscriptions, no fees — if you’d like to support it with a donation, I’d be grateful.
+          </Text>
+          <TouchableOpacity style={[styles.donateBtn, { opacity: 0.9 }]} onPress={() => Linking.openURL('https://buymeacoffee.com/fitcards')}>
+            <Text style={styles.donateText}>☕ Buy Me a Coffee</Text>
+          </TouchableOpacity>
+        </View>
+
         {auth.currentUser?.email ? (
           <View style={styles.dangerBox}>
             <Text style={styles.dangerTitle}>Danger Zone</Text>
@@ -103,7 +128,7 @@ const styles = StyleSheet.create({
   panelTitle: { color: '#e5e7eb', fontWeight: '700', marginBottom: 6 },
   emailText: { color: '#fff', fontSize: 16, marginBottom: 10 },
   logoutBtn: {
-    alignSelf: 'flex-start',
+    alignSelf: 'center',
     backgroundColor: '#e5e7eb',
     paddingVertical: 10,
     paddingHorizontal: 14,
@@ -119,6 +144,37 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   linkText: { color: '#fff', fontWeight: '800' },
+  messageBox: {
+    marginTop: 16,
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
+    borderRadius: 12,
+    padding: 16,
+  },
+  messageTitle: { color: '#111827', fontWeight: '800', fontSize: 22, marginBottom: 12, textAlign: 'center' },
+  messageNote: { color: '#d1d5db', textAlign: 'center', marginBottom: 10 },
+  messageBtn: { alignSelf: 'center', backgroundColor: '#111827', paddingVertical: 10, paddingHorizontal: 14, borderRadius: 8 },
+  messageText: { color: '#fff', fontWeight: '800' },
+  donateBtn: {
+    alignSelf: 'center',
+    backgroundColor: '#FFDD00',
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+    borderRadius: 8,
+    marginBottom: 8,
+  },
+  donateText: { color: '#111827', fontWeight: '800' },
+  donateBox: {
+    marginTop: 16,
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
+    borderRadius: 12,
+    padding: 16,
+  },
+  donateTitle: { color: '#111827', fontWeight: '800', fontSize: 22, marginBottom: 12, textAlign: 'center' },
+  donateNote: { color: '#d1d5db', textAlign: 'center', marginBottom: 10 },
   dangerBox: {
     marginTop: 'auto',
     alignItems: 'center',
