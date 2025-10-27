@@ -16,11 +16,17 @@ const useWeeklyData = (selectedDate: Date, userEmail?: string | null) => {
 
     const loadWeek = async () => {
       const week: WeekDay[] = [];
+      const toLocalIso = (d: Date) => {
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${y}-${m}-${day}`;
+      };
       for (let i = 0; i < 7; i++) {
-        let date = new Date(selectedDate);
+        const date = new Date(selectedDate);
         date.setHours(0, 0, 0, 0);
         date.setDate(date.getDate() + i);
-        const iso = date.toISOString().split('T')[0];
+        const iso = toLocalIso(date);
         const dayData = await manager.getDayFromDate(iso);
         week.push({
           date: iso,

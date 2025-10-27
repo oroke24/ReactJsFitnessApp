@@ -25,7 +25,7 @@ export default function AuthLayout() {
         ),
       }}
     >
-      <Stack.Screen name="login" options={{ headerShown: true }} />
+      <Stack.Screen name="login" options={{ headerShown: true, headerLeft: () => null }} />
       <Stack.Screen name="register" options={{ headerShown: true }} />
     </Stack>
   );

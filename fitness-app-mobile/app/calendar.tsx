@@ -24,7 +24,7 @@ type ExerciseKey = typeof exerciseKeys[number];
 export default function CalendarScreen() {
   const router = useRouter();
   const params = useLocalSearchParams<{ date?: string }>();
-  const initialIso = params.date ? String(params.date) : new Date().toISOString().split('T')[0];
+  const initialIso = params.date ? String(params.date) : toLocalIso(new Date());
 
   const email = auth.currentUser?.email ?? null;
   const [selectedIso, setSelectedIso] = useState(initialIso);
@@ -41,15 +41,15 @@ export default function CalendarScreen() {
   const [repeatFrequency, setRepeatFrequency] = useState<'every' | 'every-other'>('every');
   const [repeatLoading, setRepeatLoading] = useState(false);
 
-  const dateLabel = useMemo(() => new Date(selectedIso).toDateString(), [selectedIso]);
+  const dateLabel = useMemo(() => parseIsoLocal(selectedIso).toDateString(), [selectedIso]);
   const today = useMemo(() => {
     const d = new Date(); d.setHours(0,0,0,0); return d;
   }, []);
-  const selectedDateObj = useMemo(() => { const d = new Date(selectedIso); d.setHours(0,0,0,0); return d; }, [selectedIso]);
-  const repeatDayOfWeek = useMemo(() => new Date(selectedIso).toLocaleDateString('en-US', { weekday: 'long' }), [selectedIso]);
-  const repeatStartLabel = useMemo(() => new Date(selectedIso).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }), [selectedIso]);
+  const selectedDateObj = useMemo(() => { const d = parseIsoLocal(selectedIso); d.setHours(0,0,0,0); return d; }, [selectedIso]);
+  const repeatDayOfWeek = useMemo(() => parseIsoLocal(selectedIso).toLocaleDateString('en-US', { weekday: 'long' }), [selectedIso]);
+  const repeatStartLabel = useMemo(() => parseIsoLocal(selectedIso).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }), [selectedIso]);
   const repeatEndLabel = useMemo(() => {
-    const d = new Date(selectedIso);
+    const d = parseIsoLocal(selectedIso);
     d.setDate(d.getDate() + repeatWeeks * 7);
     return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
   }, [selectedIso, repeatWeeks]);
@@ -174,14 +174,14 @@ export default function CalendarScreen() {
   };
 
   const goPrevDay = () => {
-    const d = new Date(selectedIso);
+    const d = parseIsoLocal(selectedIso);
     d.setDate(d.getDate() - 1);
-    setSelectedIso(d.toISOString().split('T')[0]);
+    setSelectedIso(toLocalIso(d));
   };
   const goNextDay = () => {
-    const d = new Date(selectedIso);
+    const d = parseIsoLocal(selectedIso);
     d.setDate(d.getDate() + 1);
-    setSelectedIso(d.toISOString().split('T')[0]);
+    setSelectedIso(toLocalIso(d));
   };
 
   const relLabel = () => {
@@ -206,9 +206,9 @@ export default function CalendarScreen() {
       const repeatCount = repeatFrequency === 'every' ? totalWeeks : Math.floor(totalWeeks / 2);
 
       for (let i = 1; i <= repeatCount; i++) {
-        const d = new Date(selectedIso);
+        const d = parseIsoLocal(selectedIso);
         d.setDate(d.getDate() + i * weekOffset);
-        const iso = d.toISOString().split('T')[0];
+        const iso = toLocalIso(d);
         const recipPromises = recipeIds.map((rid, idx) => manager.addRecipeToDay(iso, rid, idx + 1));
         const exercisePromises = exerciseIds.map((eid, idx) => manager.addExerciseToDay(iso, eid, idx + 1));
         await Promise.all([...recipPromises, ...exercisePromises]);
@@ -283,7 +283,7 @@ export default function CalendarScreen() {
           <Text style={[styles.dateTitle, { color: '#fff' }]}>{dateLabel}</Text>
 
           {/* Editor area akin to EditDayComponent (picker-only, no manual inputs) */}
-          <View style={[styles.panel, { backgroundColor: '#fff' }]}>
+          <View style={[styles.panel, { backgroundColor: '#fff7' }]}>
             <Text style={[styles.sectionHeader, { color: '#111827' }]}>Recipes</Text>
             {recipeKeys.map((key, idx) => (
               <Pressable key={key} style={[styles.itemRow, styles.rowBetween, styles.slotCard]} onPress={() => openRecipePicker(idx + 1)}>
@@ -366,7 +366,7 @@ export default function CalendarScreen() {
           </Modal>
 
           {/* Repeat Day area matching web logic */}
-          <View style={[styles.panel, { marginTop: 12, backgroundColor: '#fff' }]}> 
+          <View style={[styles.panel, { marginTop: 12, backgroundColor: '#fff7' }]}> 
             <Text style={[styles.sectionHeader, { color: '#111827' }]}>Repeat Area</Text>
             <View style={{ alignItems: 'center' }}>
               <Text style={{ marginBottom: 8 }}>Update
@@ -466,6 +466,22 @@ const styles = StyleSheet.create({
   summaryBox: { marginTop: 10, borderWidth: 1, borderColor: '#e5e7eb', borderRadius: 10, padding: 10, backgroundColor: '#f9fafb' },
   summaryText: { color: '#374151', textAlign: 'center' },
 });
+
+// Build a YYYY-MM-DD string using local time (no UTC conversion)
+function toLocalIso(d: Date): string {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
+
+// Parse an ISO-like date string (YYYY-MM-DD) as a local Date (midnight local)
+function parseIsoLocal(iso: string): Date {
+  const [y, m, d] = iso.split('-').map((n) => parseInt(n, 10));
+  const dt = new Date(y, (m || 1) - 1, d || 1);
+  dt.setHours(0, 0, 0, 0);
+  return dt;
+}
 
 function buildMarkedDates(days: any[], selectedIso: string) {
   const marks: Record<string, any> = {};

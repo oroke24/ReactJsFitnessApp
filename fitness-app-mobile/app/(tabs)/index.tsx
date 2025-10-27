@@ -100,9 +100,7 @@ export default function HomeTab() {
       ) : (
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.hRow}>
           {days.map((d, idx) => {
-            const dateObj = new Date(d.date);
-            // match web component date display (+1 day to offset TZ serialization)
-            dateObj.setDate(dateObj.getDate() + 1);
+            const dateObj = parseIsoLocal(d.date);
             const label = dateObj.toDateString();
             return (
               <TouchableOpacity
@@ -261,17 +259,17 @@ export default function HomeTab() {
                       {item.muscleGroup ? (
                         <>
                           <Text style={[styles.cardSectionTitle, { color: '#e285f4' }]}>Muscle Group</Text>
-                          <Text style={styles.cardText}>{String(item.muscleGroup)}</Text>
+                          <Text style={[styles.cardText, { color: '#ffffff' }]}>{String(item.muscleGroup)}</Text>
                         </>
                       ) : null}
                       {item.instructions ? (
                         <>
                           <Text style={[styles.cardSectionTitle, { color: '#e285f4', marginTop: 6 }]}>Instructions</Text>
-                          <Text style={styles.cardText}>{String(item.instructions)}</Text>
+                          <Text style={[styles.cardText, { color: '#ffffff' }]}>{String(item.instructions)}</Text>
                         </>
                       ) : null}
                       {!item.muscleGroup && !item.instructions && item.description ? (
-                        <Text style={styles.cardText}>{item.description}</Text>
+                        <Text style={[styles.cardText, { color: '#ffffff' }]}>{item.description}</Text>
                       ) : null}
                     </ScrollView>
                   </View>
@@ -399,4 +397,12 @@ function SkeletonRow() {
       borderColor: '#e5e7eb',
     }} />
   );
+}
+
+// Local helpers for date-only strings
+function parseIsoLocal(iso: string): Date {
+  const [y, m, d] = iso.split('-').map((n) => parseInt(n, 10));
+  const dt = new Date(y, (m || 1) - 1, d || 1);
+  dt.setHours(0, 0, 0, 0);
+  return dt;
 }
