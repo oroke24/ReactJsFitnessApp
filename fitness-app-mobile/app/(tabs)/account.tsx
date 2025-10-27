@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Alert, ActivityIndicator, Linking } from 'react-native';
 import { useRouter } from 'expo-router';
 import auth, { signOut, deleteAccount } from '../../lib/firebase/firebaseAuth';
 import { deleteUser as deleteUserData } from '../../lib/firebase/firebaseFirestore';
@@ -59,6 +59,11 @@ export default function AccountTab() {
         <View style={styles.panel}>
           <Text style={styles.panelTitle}>Signed in as</Text>
           <Text style={styles.emailText}>{email}</Text>
+          {process.env.EXPO_PUBLIC_PRIVACY_URL ? (
+            <TouchableOpacity style={styles.linkBtn} onPress={() => Linking.openURL(String(process.env.EXPO_PUBLIC_PRIVACY_URL))}>
+              <Text style={styles.linkText}>Privacy Policy</Text>
+            </TouchableOpacity>
+          ) : null}
           {auth.currentUser?.email ? (
             <TouchableOpacity style={styles.logoutBtn} onPress={handleLogout} disabled={loading}>
               <Text style={styles.logoutText}>Logout</Text>
@@ -105,6 +110,15 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   logoutText: { color: '#111827', fontWeight: '800' },
+  linkBtn: {
+    alignSelf: 'flex-start',
+    backgroundColor: '#111827',
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+    borderRadius: 8,
+    marginBottom: 8,
+  },
+  linkText: { color: '#fff', fontWeight: '800' },
   dangerBox: {
     marginTop: 'auto',
     alignItems: 'center',
