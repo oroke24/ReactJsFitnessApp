@@ -1,5 +1,6 @@
 import React, { useMemo, useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import Logo from '../../assets/images/layer-group-solid.svg';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Stack, useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -71,7 +72,10 @@ export default function HomeTab() {
         />
         <ScrollView contentContainerStyle={styles.container}>
           <View style={styles.titleRow}>
-            <Text style={styles.title}>Fit Cards</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Text style={styles.title}>Fit Cards</Text>
+              <Logo width={28} height={28} style={{ marginLeft: 8 }} />
+            </View>
             <TouchableOpacity
               accessibilityRole="button"
               accessibilityLabel="Account"
