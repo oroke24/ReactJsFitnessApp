@@ -21,6 +21,10 @@ const Login = ({ onmessage, onClose }) => {
         onmessage(error.message);
        }
     };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        handleLogin();
+    };
     const handleForgotPassword = async () => {
         try{
             await forgotPassword(email);
@@ -30,36 +34,49 @@ const Login = ({ onmessage, onClose }) => {
     };
     return(
         <div className='flex-auto'>
-            <h3>Login/Register</h3>
-            {/*Input Area*/}
-            <div className='w-full mt-3 flex justify-center'>
-            <input
-                className='w-1/2'
-                type='email'
-                placeholder='Email'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-                className='w-1/2'
-                type='password'
-                placeholder='password'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            </div>
-            {/*Button Area*/}
-            <div className='flex justify-center'>
-            <button className='w-full p-3 mt-2'
-                onClick={handleLogin}>
-                    Login
-            </button>
+            <h3 className='text-center'>Login/Register</h3>
+            {/* Form (wrap inputs and login for best browser security/auto-fill) */}
+            <form className='w-full mt-3' onSubmit={handleSubmit}>
+                {/*Input Area*/}
+                <div className='w-full flex flex-col items-center gap-2'>
+                    <input
+                        className='w-1/2'
+                        id='email'
+                        name='email'
+                        type='email'
+                        inputMode='email'
+                        autoComplete='email'
+                        autoCapitalize='none'
+                        autoCorrect='off'
+                        placeholder='Email'
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <input
+                        className='w-1/2'
+                        id='password'
+                        name='password'
+                        type='password'
+                        autoComplete='current-password'
+                        autoCapitalize='none'
+                        autoCorrect='off'
+                        placeholder='Password'
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                </div>
+                {/*Button Area*/}
+                <div className='flex justify-center'>
+                    <button className='w-full p-3 mt-2' type='submit'>
+                        Login
+                    </button>
+                </div>
+            </form>
+            <div className='flex mt-3 justify-center'>
+                <button type='button' onClick={handleRegister}>Register these credentials?</button>
             </div>
             <div className='flex mt-3 justify-center'>
-                <button onClick={handleRegister}>Register these credentials?</button>
-            </div>
-            <div className='flex mt-3 justify-center'>
-                <button onClick={handleForgotPassword}>Forgot Password?</button>
+                <button type='button' onClick={handleForgotPassword}>Forgot Password?</button>
             </div>
         </div>
     );
