@@ -20,6 +20,7 @@ export default function RecipeEditScreen() {
   const [ingredients, setIngredients] = useState('');
   const [instructions, setInstructions] = useState('');
   const [revamping, setRevamping] = useState(false);
+  const [aiNotes, setAiNotes] = useState('');
 
   useEffect(() => {
     if (!email) {
@@ -166,6 +167,13 @@ export default function RecipeEditScreen() {
           <View style={styles.aiBox}>
             <FontAwesome5 name="robot" size={18} color="#111827" style={{ marginBottom: 6, alignSelf: 'center' }} />
             <Text style={{ textAlign: 'center', marginBottom: 8 }}>Ai Revamp</Text>
+            <TextInput
+              style={[styles.input, { minHeight: 80, marginBottom: 8 }]}
+              value={aiNotes}
+              onChangeText={setAiNotes}
+              placeholder="Optional: add specific details for the revamp (allowed to be empty)"
+              multiline
+            />
             <TouchableOpacity
               disabled={revamping}
               style={[styles.actionBtn, { alignSelf: 'center', opacity: revamping ? 0.6 : 1 }]}
@@ -174,7 +182,7 @@ export default function RecipeEditScreen() {
                   if (!name.trim()) { Alert.alert('Validation', 'Name cannot be empty.'); return; }
                   setRevamping(true);
                   const content = `(name: ${name})\n${ingredients}\n${instructions}`;
-                  const ai = await aiRevampGemini('recipe', content);
+                  const ai = await aiRevampGemini('recipe', content, aiNotes);
                   const g1 = Array.isArray(ai.group_one) ? ai.group_one : [];
                   const g2 = Array.isArray(ai.group_two) ? ai.group_two : [];
                   setIngredients(g1.join('\n'));

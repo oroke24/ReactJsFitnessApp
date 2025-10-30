@@ -21,13 +21,6 @@ const ExerciseSwipable = ({ doc, handleDelete }) => {
         <Link to={`/exerciseBasic/${doc.name}`} state={{ doc }}>
           <li className="exercise-card-list-item exercise-gradient">
             <strong className="text-xl">{doc.name}</strong>
-            <br />
-            <strong>Muscle Group: </strong>
-            {doc.muscleGroup}
-            <br />
-            <strong>Instructions: </strong>
-            {doc.instructions}
-            <br />
           </li>
         </Link>
       </div>

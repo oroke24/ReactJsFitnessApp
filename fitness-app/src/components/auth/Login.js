@@ -40,7 +40,7 @@ const Login = ({ onmessage, onClose }) => {
                 {/*Input Area*/}
                 <div className='w-full flex flex-col items-center gap-2'>
                     <input
-                        className='w-1/2'
+                        className='w-3/4'
                         id='email'
                         name='email'
                         type='email'
@@ -53,7 +53,7 @@ const Login = ({ onmessage, onClose }) => {
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <input
-                        className='w-1/2'
+                        className='w-3/4'
                         id='password'
                         name='password'
                         type='password'
@@ -67,7 +67,7 @@ const Login = ({ onmessage, onClose }) => {
                 </div>
                 {/*Button Area*/}
                 <div className='flex justify-center'>
-                    <button className='w-full p-3 mt-2' type='submit'>
+                    <button className='w-3/4 p-3 mt-2' type='submit'>
                         Login
                     </button>
                 </div>

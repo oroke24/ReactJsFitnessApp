@@ -1,6 +1,6 @@
 // Mobile-friendly Gemini call using fetch to avoid SDK polyfills.
 // Returns { group_one: string[], group_two: string[] }
-export default async function aiRevamp(type, content) {
+export default async function aiRevamp(type, content, notes = '') {
   const proxy = process.env.EXPO_PUBLIC_AI_PROXY_URL;
   if (!proxy) throw new Error('Missing EXPO_PUBLIC_AI_PROXY_URL');
 
@@ -10,11 +10,11 @@ Given a ${type} card content, split it into two clear sections:
 - group_two: bullet-style lines suitable for the second section (for recipe: Instructions; for exercise: Step-by-step Instructions)
 Return ONLY JSON with keys group_one and group_two as arrays of strings.`;
 
-  const prompt = `${system}\n\nCONTENT:\n${content}`;
+  const prompt = `${system}\n\nCONTENT:\n${content}${notes ? `\n\nUSER_NOTES:\n${notes}` : ''}`;
 
   const url = `${proxy.replace(/\/$/, '')}/revamp`;
   // Send raw content; server builds full prompt
-  const body = { type, content };
+  const body = { type, content, notes };
 
   const res = await fetch(url, {
     method: 'POST',

@@ -19,6 +19,7 @@ const EditRecipe = () => {
     const [ingredientsValue, setIngredientsValue] = useState(doc?.ingredients || '');
     const [instructionsValue, setInstructionsValue] = useState(doc?.instructions || '');
     const [loading, setLoading] = useState(false);
+    const [aiNotesValue, setAiNotesValue] = useState('');
 
     const handleNameChange = (event) => {
         setNameValue(event.target.value);
@@ -56,8 +57,8 @@ const EditRecipe = () => {
             setLoading(true);
             const name = `(name: ${nameValue}) `;
             const content = name + ingredientsValue + instructionsValue;
-            //const aiCard = await aiRevamp('recipe', content);
-            const aiCard = await aiRevampGemini('recipe', content);
+            // pass optional notes
+            const aiCard = await aiRevampGemini('recipe', content, aiNotesValue);
             setIngredientsValue(aiCard?.group_one.join('\n'));
             setInstructionsValue(aiCard?.group_two.join('\n'));
         } catch (error) {
@@ -181,6 +182,13 @@ const EditRecipe = () => {
             <div className="w-max p-2 mt-5 outline rounded-3xl foggy-background">
                 <FaRobot className="w-full text-center color-white text-2xl"/>
                 <div className="w-full mb-5 text-center text-xl color-white">Ai Revamp</div>
+                <textarea
+                    className="w-96 mb-4 p-2 color-white foggy-background rounded"
+                    placeholder="Optional: add specific details for the revamp (allowed to be empty)"
+                    value={aiNotesValue}
+                    onChange={(e) => setAiNotesValue(e.target.value)}
+                    onInput={handleTextAreaResize}
+                />
                 {/**AI Buttons Row */}
                 <div className="flex flex-row justify-evenly">
                     {/*open ai revamp Button */}

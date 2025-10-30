@@ -29,7 +29,7 @@ exports.revamp = onRequest({ region: 'us-central1', memory: '256MiB', timeoutSec
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return res.status(405).end();
 
-  const { type, content } = safeJson(req);
+  const { type, content, notes } = safeJson(req);
   if (!type || !content) return res.status(400).json({ error: 'Missing type or content' });
 
   const key = GEMINI_API_KEY.value() || process.env.GEMINI_API_KEY;
@@ -45,11 +45,12 @@ exports.revamp = onRequest({ region: 'us-central1', memory: '256MiB', timeoutSec
   aiRole += "Format response to be a JSON (only raw JSON data, without any markdown like '``` Json... ```'). It should contain a list of strings named 'group_one', and a list of strings named 'group_two'. Begin each string with a hyphen. For 'group_two' use digits for numbers, 18 word limit per string.";
 
   const userMessage = `Build a card based on this information, feel free to add, modify, or remove as you want: ${content}`;
-  const prompt = `${aiRole}\n\n${userMessage}`;
+  const notesSection = notes ? `\n\nUSER_NOTES:\n${notes}` : '';
+  const prompt = `${aiRole}\n\n${userMessage}${notesSection}`;
 
   // Use a stable, generally-available model alias
   // Switch to Gemini 2.0 Flash model
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${encodeURIComponent(key)}`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(key)}`;
   const body = {
     contents: [
       {

@@ -1,5 +1,5 @@
 // Web-friendly Gemini call via secure serverless proxy to avoid client-side API keys.
-const aiRevampGemini = async (cardType, content) => {
+const aiRevampGemini = async (cardType, content, notes = '') => {
   const base = process.env.REACT_APP_AI_PROXY_URL;
   if (!base) {
     throw new Error('Missing REACT_APP_AI_PROXY_URL');
@@ -9,7 +9,7 @@ const aiRevampGemini = async (cardType, content) => {
   const res = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ type: cardType, content })
+    body: JSON.stringify({ type: cardType, notes, content})
   });
   if (!res.ok) {
     const t = await res.text().catch(() => '');

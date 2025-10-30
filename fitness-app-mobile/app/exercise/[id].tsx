@@ -20,6 +20,7 @@ export default function ExerciseEditScreen() {
   const [muscleGroup, setMuscleGroup] = useState('');
   const [instructions, setInstructions] = useState('');
   const [revamping, setRevamping] = useState(false);
+  const [aiNotes, setAiNotes] = useState('');
 
   useEffect(() => {
     if (!email) {
@@ -162,6 +163,13 @@ export default function ExerciseEditScreen() {
           <View style={styles.aiBox}>
             <FontAwesome5 name="robot" size={18} color="#111827" style={{ marginBottom: 6, alignSelf: 'center' }} />
             <Text style={{ textAlign: 'center', marginBottom: 8 }}>Ai Revamp</Text>
+              <TextInput
+                style={[styles.input, { minHeight: 80, marginBottom: 8 }]}
+                value={aiNotes}
+                onChangeText={setAiNotes}
+                placeholder="Optional: add specific details for the revamp (allowed to be empty)"
+                multiline
+              />
             <TouchableOpacity
               disabled={revamping}
               style={[styles.actionBtn, { alignSelf: 'center', opacity: revamping ? 0.6 : 1 }]}
@@ -169,13 +177,13 @@ export default function ExerciseEditScreen() {
                 try {
                   if (!name.trim()) { Alert.alert('Validation', 'Name cannot be empty.'); return; }
                   setRevamping(true);
-                  const content = `(name: ${name})\n${muscleGroup}\n${instructions}`;
-                  const ai = await aiRevampGemini('exercise', content);
+                    const content = `(name: ${name})\n${muscleGroup}\n${instructions}`;
+                    const ai = await aiRevampGemini('exercise', content, aiNotes);
                   const g1 = Array.isArray(ai.group_one) ? ai.group_one : [];
                   const g2 = Array.isArray(ai.group_two) ? ai.group_two : [];
                   setMuscleGroup(g1.join('\n'));
                   setInstructions(g2.join('\n'));
-                  try { Alert.alert('AI filled', `${g1.length} notes lines, ${g2.length} instruction lines`); } catch {}
+                  try { Alert.alert('AI filled', `${g1.length} muscle group lines, ${g2.length} instruction lines`); } catch {}
                 } catch (e: any) {
                   Alert.alert('AI Revamp failed', e?.message || String(e));
                 } finally {

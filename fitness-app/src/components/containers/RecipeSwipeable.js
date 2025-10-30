@@ -18,8 +18,6 @@ const RecipeSwipable = ({ doc, handleDelete }) => {
                 <Link to={`/recipeBasic/${doc.id}`} state={{ doc }}>
                     <li className="recipe-card-list-item recipe-gradient">
                         <strong className="text-xl">{doc.name}</strong><br />
-                        <strong>Ingredients: </strong>{doc.ingredients}<br />
-                        <strong>Instructions: </strong>{doc.instructions}<br />
                     </li>
                 </Link>
             </div>

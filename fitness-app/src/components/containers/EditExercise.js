@@ -17,6 +17,7 @@ const EditExercise = () => {
     const [muscleGroupValue, setMuscleGroupValue] = useState(doc?.muscleGroup || '');
     const [instructionsValue, setInstructionsValue] = useState(doc?.instructions || '');
     const [loading, setLoading] = useState(false);
+    const [aiNotesValue, setAiNotesValue] = useState('');
 
     const handleNameChange = (event) => {
         setNameValue(event.target.value);
@@ -54,8 +55,8 @@ const EditExercise = () => {
             setLoading(true);
             const name = `(name: ${nameValue}) `;
             const content = name + muscleGroupValue + instructionsValue;
-            //const aiCard = await aiRevamp('recipe', content);
-            const aiCard = await aiRevampGemini('exercise', content);
+            // pass optional notes
+            const aiCard = await aiRevampGemini('exercise', content, aiNotesValue);
             setMuscleGroupValue(aiCard?.group_one.join('\n'));
             setInstructionsValue(aiCard?.group_two.join('\n'));
         } catch (error) {
@@ -198,6 +199,13 @@ const EditExercise = () => {
             <div className="w-max p-2 mt-5 outline rounded-3xl foggy-background">
                 <FaRobot className="w-full text-center color-white text-2xl"/>
                 <div className="w-full mb-5 text-center text-xl color-white">Ai Revamp</div>
+                <textarea
+                    className="w-96 mb-4 color-white p-2 foggy-background rounded"
+                    placeholder="Optional: add specific details for the revamp (allowed to be empty)"
+                    value={aiNotesValue}
+                    onChange={(e) => setAiNotesValue(e.target.value)}
+                    onInput={handleTextAreaResize}
+                />
                 {/**AI Buttons Row */}
                 <div className="flex flex-row justify-evenly">
                     {/*open ai revamp Button */}
