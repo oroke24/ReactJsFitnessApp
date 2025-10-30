@@ -164,7 +164,7 @@ export default function ExerciseEditScreen() {
             <FontAwesome5 name="robot" size={18} color="#111827" style={{ marginBottom: 6, alignSelf: 'center' }} />
             <Text style={{ textAlign: 'center', marginBottom: 8 }}>Ai Revamp</Text>
               <TextInput
-                style={[styles.input, { minHeight: 80, marginBottom: 8 }]}
+                style={[styles.input, { minHeight: 80, marginBottom: 8, backgroundColor: '#333', color: 'white' }]}
                 value={aiNotes}
                 onChangeText={setAiNotes}
                 placeholder="Optional: add specific details for the revamp (allowed to be empty)"
@@ -183,7 +183,7 @@ export default function ExerciseEditScreen() {
                   const g2 = Array.isArray(ai.group_two) ? ai.group_two : [];
                   setMuscleGroup(g1.join('\n'));
                   setInstructions(g2.join('\n'));
-                  try { Alert.alert('AI filled', `${g1.length} muscle group lines, ${g2.length} instruction lines`); } catch {}
+                  try { Alert.alert('AI filled', `${g1.length} notes lines, ${g2.length} instruction lines`); } catch {}
                 } catch (e: any) {
                   Alert.alert('AI Revamp failed', e?.message || String(e));
                 } finally {

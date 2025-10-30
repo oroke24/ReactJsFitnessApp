@@ -196,11 +196,11 @@ const EditExercise = () => {
                 onInput={handleTextAreaResize}>
             </textarea>
             {/**AI revamp section */}
-            <div className="w-max p-2 mt-5 outline rounded-3xl foggy-background">
+            <div className="w-3/4 p-2 mt-5 outline rounded-3xl foggy-background">
                 <FaRobot className="w-full text-center color-white text-2xl"/>
                 <div className="w-full mb-5 text-center text-xl color-white">Ai Revamp</div>
                 <textarea
-                    className="w-96 mb-4 color-white p-2 foggy-background rounded"
+                    className="mb-4 color-white p-2 foggy-background rounded"
                     placeholder="Optional: add specific details for the revamp (allowed to be empty)"
                     value={aiNotesValue}
                     onChange={(e) => setAiNotesValue(e.target.value)}

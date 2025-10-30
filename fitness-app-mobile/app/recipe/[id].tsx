@@ -168,7 +168,7 @@ export default function RecipeEditScreen() {
             <FontAwesome5 name="robot" size={18} color="#111827" style={{ marginBottom: 6, alignSelf: 'center' }} />
             <Text style={{ textAlign: 'center', marginBottom: 8 }}>Ai Revamp</Text>
             <TextInput
-              style={[styles.input, { minHeight: 80, marginBottom: 8 }]}
+              style={[styles.input, { minHeight: 80, marginBottom: 8, backgroundColor: '#333', color: 'white' }]}
               value={aiNotes}
               onChangeText={setAiNotes}
               placeholder="Optional: add specific details for the revamp (allowed to be empty)"
