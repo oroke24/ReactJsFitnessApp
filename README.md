@@ -1,3 +1,6 @@
+## 📜 License
+This project is under a proprietary license — redistribution, modification, or commercial use is not permitted without explicit written permission from the author.
+
 ## ReactJsFitnessApp
 
 A modern fitness and meal tracking web app built with **React**, **Firebase**, and **Material UI**.  
