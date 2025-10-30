@@ -18,6 +18,7 @@ const EditExercise = () => {
     const [instructionsValue, setInstructionsValue] = useState(doc?.instructions || '');
     const [loading, setLoading] = useState(false);
     const [aiNotesValue, setAiNotesValue] = useState('');
+    const [aiOpen, setAiOpen] = useState(false);
 
     const handleNameChange = (event) => {
         setNameValue(event.target.value);
@@ -197,17 +198,25 @@ const EditExercise = () => {
             </textarea>
             {/**AI revamp section */}
             <div className="w-3/4 p-2 mt-5 outline rounded-3xl foggy-background">
-                <FaRobot className="w-full text-center color-white text-2xl"/>
-                <div className="w-full mb-5 text-center text-xl color-white">Ai Revamp</div>
-                <textarea
-                    className="mb-4 color-white p-2 foggy-background rounded"
-                    placeholder="Optional: add specific details for the revamp (allowed to be empty)"
-                    value={aiNotesValue}
-                    onChange={(e) => setAiNotesValue(e.target.value)}
-                    onInput={handleTextAreaResize}
-                />
-                {/**AI Buttons Row */}
-                <div className="flex flex-row justify-evenly">
+                <div className="flex items-center justify-center p-2" onClick={() => setAiOpen(o => !o)} aria-expanded={aiOpen}>
+                    <div className="flex items-center"> 
+                        <FaRobot className="text-2xl color-white mr-3"/>
+                        <div className="text-xl color-white">
+                            Ai Revamp
+                        </div>
+                    </div>
+                </div>
+                {aiOpen && (
+                    <>
+                        <textarea
+                            className="mb-4 color-white p-2 foggy-background rounded"
+                            placeholder="Optional: add specific details for the revamp (allowed to be empty)"
+                            value={aiNotesValue}
+                            onChange={(e) => setAiNotesValue(e.target.value)}
+                            onInput={handleTextAreaResize}
+                        />
+                        {/**AI Buttons Row */}
+                        <div className="flex flex-row justify-evenly">
                     {/*open ai revamp Button */}
                     {/**
                     <button
@@ -237,7 +246,9 @@ const EditExercise = () => {
                             <FaClone className="text-3xl m-2"/>
                         </Link>
                     </button>
-                </div>
+                        </div>
+                    </>
+                )}
             </div>
             <div className="row w-11/12 mt-16 flex justify-evenly">
                 {/*Update Button */}
@@ -252,7 +263,7 @@ const EditExercise = () => {
                             Update this card
                         </button>
                     </Link>
-                    ://else show nothing`
+                    ://else show nothing
                     <></>
                 }
                 {/*Save as new Button */}
